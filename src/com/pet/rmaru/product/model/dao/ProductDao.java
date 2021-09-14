@@ -3,6 +3,7 @@ package com.pet.rmaru.product.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -28,6 +29,8 @@ public class ProductDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			//TODO close 메소드
 		}
 		return productList;
 	}
@@ -55,7 +58,48 @@ public class ProductDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			//TODO close 메소드
 		}
 		return arrayList;
+	}
+//==============================================================================================
+//==============================================================================================
+	// 특정 상품 삭제
+	// 조건 : 상품 번호
+	public int deleteProduct(Connection conn, int pno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from product where pno = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			//TODO close 메소드
+		}
+		return result;
+	}
+//==============================================================================================
+//==============================================================================================
+	// 상품 등록
+	public int insertProduct(Connection conn, Product product) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//TODO pstmt.setInt(parameterIndex, x); 같은 부분 작성 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			//TODO close 메소드
+		}
+		return result;
 	}
 }

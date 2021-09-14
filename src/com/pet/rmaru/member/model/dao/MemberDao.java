@@ -49,4 +49,23 @@ public class MemberDao {
 		}
 		return result;
 	}
+	// 회원삭제
+	// 조건 : ID (ID는 중복이 없으므로)
+	public int deleteMember(Connection conn, String id) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from member where id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			//TODO close() 
+		}
+		return result;
+	}
 }
