@@ -1,4 +1,4 @@
-package com.pet.rmaru.product.model.vo;
+package com.petmaru.admin.model.vo;
 
 public class Product {
 	public Product() {

@@ -1,11 +1,11 @@
-package com.pet.rmaru.member.model.dao;
+package com.petmaru.member.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.pet.rmaru.member.model.vo.Member;
+import com.petrmaru.member.model.vo.Member;
 
 public class MemberDao {
 	// 회원가입 1단계 : ID 중복체크

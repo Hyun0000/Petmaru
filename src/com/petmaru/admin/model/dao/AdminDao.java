@@ -1,4 +1,4 @@
-package com.pet.rmaru.product.model.dao;
+package com.petmaru.admin.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.pet.rmaru.product.model.vo.Product;
+import com.petmaru.admin.model.vo.Product;
 
-public class ProductDao {
+public class AdminDao {
 //==============================================================================================
 //==============================================================================================
 	// 전체 상품 목록 조회

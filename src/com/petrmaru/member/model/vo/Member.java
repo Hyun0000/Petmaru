@@ -1,7 +1,9 @@
-package com.pet.rmaru.member.model.vo;
+package com.petrmaru.member.model.vo;
 
 public class Member {
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 }
+
+

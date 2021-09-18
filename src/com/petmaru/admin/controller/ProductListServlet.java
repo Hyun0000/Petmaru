@@ -1,4 +1,4 @@
-package com.pet.rmaru.product.controller;
+package com.petmaru.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ProductListServlet
  */
-@WebServlet("/ProductListServlet")
+@WebServlet("/ProductList")
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
