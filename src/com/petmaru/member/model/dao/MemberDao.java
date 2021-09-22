@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.petrmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.Member;
 
 public class MemberDao {
 	// 회원가입 1단계 : ID 중복체크

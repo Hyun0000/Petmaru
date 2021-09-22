@@ -39,7 +39,6 @@ public class DBCPTemplate {
 		}
 	}
 //=======================================================================================================================	
-	// PreparedStatement도 여기에 넣을 수 있다. (by 다형성)
 	public static void close(Statement stmt) {
 		try {
 			if (stmt != null && !stmt.isClosed()) {
@@ -53,7 +52,6 @@ public class DBCPTemplate {
 	public static void close(ResultSet rest) {
 		try {
 			if (rest != null && !rest.isClosed()) {
-			// 위의 과정을 거치지 않으면 널포인트Exception을 발생시킨다.
 				rest.close();
 			}
 		} catch (Exception e) {
@@ -61,9 +59,9 @@ public class DBCPTemplate {
 		}
 	}
 //============================================================================================================
-	//commit과 rollBack 또한 Connection을 이용한다.
+	// DB 에서 일어나는 트랜잭션 commit 처리
 	public static void commit(Connection conn) {
-		try { // DB 에서 일어나는 트랜잭션 commit 처리
+		try {
 			if (conn != null && !conn.isClosed())
 				conn.commit();
 		} catch (Exception e) {
@@ -71,8 +69,9 @@ public class DBCPTemplate {
 		}
 	}
 //============================================================================================================
+	// DB 에서 일어나는 트랜잭션 rollBack 처리
 	public static void rollBack(Connection conn) {
-		try { // DB 에서 일어나는 트랜잭션 rollBack 처리
+		try {
 			if (conn != null && !conn.isClosed())
 				conn.rollback();
 		} catch (Exception e) {

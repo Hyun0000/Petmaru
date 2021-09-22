@@ -1,4 +1,4 @@
-package com.petrmaru.member.model.vo;
+package com.petmaru.member.model.vo;
 
 public class Member {
 	public Member() {
