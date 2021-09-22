@@ -1,5 +1,4 @@
-// 상품 후기 조회 Servlet
-package com.petmaru.member.controller;
+package com.petmaru.product.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SearchAfterServelt
+ * Servlet implementation class SearchProductServelt
  */
-@WebServlet("/SearchAfterServelt")
-public class SearchAfterServlet extends HttpServlet {
+@WebServlet("/SearchProductServelt")
+public class SearchProductServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAfterServlet() {
+    public SearchProductServelt() {
         super();
         // TODO Auto-generated constructor stub
     }

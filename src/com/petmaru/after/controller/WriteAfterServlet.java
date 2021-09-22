@@ -1,5 +1,4 @@
-// 구매목록 조회 servlet
-package com.petmaru.member.controller;
+package com.petmaru.after.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BuyListServelt
+ * Servlet implementation class WriteAfterServlet
  */
-@WebServlet("/BuyList")
-public class BuyListServelt extends HttpServlet {
+@WebServlet("/WriteAfterServlet")
+public class WriteAfterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyListServelt() {
+    public WriteAfterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
