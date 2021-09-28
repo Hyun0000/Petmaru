@@ -1,0 +1,39 @@
+@charset "UTF-8";
+section {
+    width: 1300px;
+    margin: 180px auto;
+}
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+img {
+	width: 250px;
+	height: 250px;
+}
+
+img:hover {
+	width: 300px;
+	height: 300px;
+}
+
+.name {
+	display: inline-block;
+	width: 250px;
+	text-overflow: clip;
+	margin-bottom: 10px;
+}
+
+a {
+    display: inline-block;
+    margin-bottom: 50px;
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+	color: black;
+}
