@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.petmaru.product.member.model.service.ProductMemberService;
+import com.petmaru.product.member.model.vo.Product;
+
 /**
  * Servlet implementation class ProducListServelt
  */
@@ -31,26 +34,26 @@ public class ProducListServelt extends HttpServlet {
 		response.setContentType("text/html; charset = UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
 		
-		String bnoStr = request.getParameter("bno");
-		int bno = 0;
-		if (bnoStr == null) { bno = 1; } else { bno = Integer.parseInt(bnoStr);}
-		// bnoStr 값이 이상할시 기본값으로 '1' 설정 
+		String cateGory = request.getParameter("category");
+		
+		// cateGory가 null일시 cateGory 값을 C로 설정
+		if (cateGory == null || cateGory.equals("")) { cateGory = "C"; }
 		
 		// 한 화면에 20개, 한 줄에 5개 상품
 		final int PAGE_SIZE = 20; // 한 페이지에 보여질 상품 개수
 		final int PAGE_LINK = 5; //  한 페이지에 보여질 페이지 링크 (5개씩 보여진다.)  exX) (1 2 3 4 5)
 		
-		// 이거는 request.getParameter("selectPage")로 나중에 바꿔야함
-		int selectPage = 1; // 사용자가 선택한 페이지링크 번호
-		// parseInt()도 해야한다.
+		// 사용자가 선택한 페이지링크 번호
+		String selectPageStr = request.getParameter("page");
+		int selectPage = 0;
+		if (selectPageStr == null) { selectPage = 1; } else { selectPage = Integer.parseInt(selectPageStr);}
 		
 		int startRown = 1 + (selectPage - 1)*PAGE_SIZE; // 처음 rownum
 		int endRown = startRown + PAGE_SIZE - 1; // 마지막 rownum
 		
 		int totalProduct = 0; // 상품 전체 개수(각 카테고리별 개수이다. 상품 통합 개수가 아니라)
-		totalProduct = new ProductMemberService().totalProduct(bno);
+		totalProduct = new ProductMemberService().totalProduct(cateGory);
 		
 		 // 전체 페이지 링크 개수
 		int totalPageLink = totalProduct / PAGE_SIZE;
@@ -62,26 +65,26 @@ public class ProducListServelt extends HttpServlet {
 		 // 가장 오른쪽 페이지 링크
 		int endPageLink = startPageLink + PAGE_LINK - 1;
 		
-		if (selectPage > 1) { out.print(" << "); }
-		if (endPageLink > totalPageLink) { endPageLink = totalPageLink; }
-		for (int i = startPageLink; i <= endPageLink; i++) {
-			out.print(i + ", ");
-		}
-		if (selectPage < totalPageLink) {
-			out.print(" >> ");
-		}
+//		if (selectPage > 1) { out.print(" << "); }
+//		
+//		if (endPageLink > totalPageLink) { endPageLink = totalPageLink; }
 		
+//		for (int i = startPageLink; i <= endPageLink; i++) {
+//			out.print(i + ", ");
+//		}
+//		
+//		if (selectPage < totalPageLink) { out.print(" >> "); }
+//		
 		ArrayList<Product> producClothestList = null;
-		producClothestList = new ProductMemberService().productList(bno, startRown, endRown);
+		producClothestList = new ProductMemberService().productList(cateGory, startRown, endRown);
 		
-		for (Product product : producClothestList) {
-			out.print(product.toStrings() + "<br>");
-		}
-		
-		
-		// 임시로 죽여놈
-//		request.setAttribute("producClothestList", producClothestList);
-//		request.getRequestDispatcher("/WEB-INF/memberproduct/productlist.jsp").forward(request, response);
+		// JSP로 보낼 Data
+		request.setAttribute("totalPageLink", totalPageLink);
+		request.setAttribute("startPageLink", startPageLink);
+		request.setAttribute("endPageLink", endPageLink);
+		request.setAttribute("selectPage", selectPage);
+		request.setAttribute("producClothestList", producClothestList);
+		request.getRequestDispatcher("/WEB-INF/memberproduct/productlist.jsp").forward(request, response);
 	}
 
 	/**

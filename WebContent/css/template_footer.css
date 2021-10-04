@@ -1,1 +1,136 @@
 @charset "UTF-8";
+header {
+    position: relative;
+    width: 1300px;
+    margin: 0 auto;
+    height: 400px;
+}
+
+/* 로그인, 회원가입, 마이페이지 메뉴 */
+#top_login {
+    position: absolute;
+    top: 50px;
+    right: 0;
+}
+
+#top_login li {
+    float: left;
+    padding: 0 10px;
+    font-size: 20px;
+}
+
+#top_login a {
+    color: black;
+    text-decoration: none;
+}
+
+#top_login a:visited {
+    color: black;
+}
+
+/* 로고 & 검색 */
+#logo_search {
+    position: relative;
+    height: 100px;
+    top: 100px;
+}
+
+#logo_search #logo {
+    float: left;
+    font-size: 35px;
+    margin-right: 250px;
+    padding-bottom: 50px;
+}
+
+#logo_search #search {
+    float: right;
+    margin-left: 200px;
+    margin-top: 60px;
+}
+
+#logo_search #search input {
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+#logo_search #search input:focus {
+    outline:none;
+    width: 500px;
+    transition: 1s;
+}
+
+/* 위쪽 라인 */
+#header_line_top {
+    position: relative;
+    border-bottom: 5px solid black;
+    top: 120px;
+    margin: 0 50px;
+}
+
+/* 아래쪽 라인 */
+#header_line_bottom {
+    position: relative;
+    top: 130px;
+    border-radius: 10px;
+    background: grey;
+    margin: 0 50px;
+    height: 15px;
+    clear: both;
+}
+
+/* 아이콘 구역 전체 */
+#icon {
+    position: relative;
+    margin: 5px;
+    height: 100px;
+    /* background-color: green; */
+    /* padding: 0 65px; */
+    top: 130px;
+}
+
+/* 전체 테이블 문자 정렬 */
+#icon td {
+    text-align: center;
+}
+
+/* 아이콘 전체 크기 지정 */
+#icon .material-icons{
+    font-size: 60px;
+}
+
+/* <a>태그 스타일 지정 */
+#icon td a {
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 50px;
+    padding: 0px 20px;
+}
+
+#icon span {
+    display: inline-block;
+}
+
+#icon span.material-icons:hover {
+    color: royalblue;
+    font-size: 70px;
+}
+
+/* 왼쪽 아이콘 5개 */
+#left_icon {
+    margin-right: 100px;
+}
+
+
+/* 오른쪽 아이콘 2개 */
+#right_icon {
+    margin-left: 100px;
+}
+
+header div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
