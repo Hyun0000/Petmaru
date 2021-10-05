@@ -26,12 +26,12 @@
         <div id="icon">
             <table id="left_icon">
                 <tr>
-                    <td><a href="/PetmaruNeo/produclist?category=C"><span class="material-icons">checkroom</span><br><span class="icon_text">Clothes</span></a></td>
-                    <td><a href="/PetmaruNeo/produclist?category=A"><span class="material-icons">pets</span><br><span class="icon_text">Accessory</span></a></td>
-                    <td><a href="/PetmaruNeo/produclist?category=F"><span class="material-icons">restaurant</span><br><span class="icon_text">Food</span></a></td>
-                    <td><a href="/PetmaruNeo/produclist?category=B"><span class="material-icons">food_bank</span><br><span class="icon_text">Bath</span></a></td>
-                    <td><a href="/PetmaruNeo/produclist?category=T"><span class="material-icons">smart_toy</span><br><span class="icon_text">Toy</span></a></td>
-                    <td><a href="/PetmaruNeo/produclist?category=H"><span class="material-icons">house</span><br><span class="icon_text">House</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=C"><span class="material-icons">checkroom</span><br><span class="icon_text">Clothes</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=A"><span class="material-icons">pets</span><br><span class="icon_text">Accessory</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=F"><span class="material-icons">restaurant</span><br><span class="icon_text">Food</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=B"><span class="material-icons">food_bank</span><br><span class="icon_text">Bath</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=T"><span class="material-icons">smart_toy</span><br><span class="icon_text">Toy</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=H"><span class="material-icons">house</span><br><span class="icon_text">House</span></a></td>
                 </tr>
             </table>
 

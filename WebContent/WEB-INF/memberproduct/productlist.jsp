@@ -20,7 +20,7 @@ ArrayList<Product> producClothestList = (ArrayList<Product>)request.getAttribute
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<title>Clothes</title>
+<title>productlist</title>
 </head>
 <body>
 

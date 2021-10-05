@@ -17,22 +17,11 @@ public class ProductMemberDao {
 			Product product = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-//			String sql = "select * from product where product_category = ?";
-//			String sql = "select PRODUCT_NAME, PRODUCT_IMAGE_URL, PRODUCT_PRICE, PRODUCT_CATEGORY from product where product_category = ?";
-			
 			// 페이징용 쿼리
 			String sql  = " SELECT * from(select rownum rown, p.* from(select * from product where PRODUCT_CATEGORY = ? order by PRODUCT_NO ) p) where rown between ? and ?";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
-//				switch (bno) {
-//				case 1: category = "C"; break; // 옷
-//				case 2: category = "A"; break; // 악세서리
-//				case 3: category = "F"; break; // 음식
-//				case 4: category = "B"; break; // 목욕
-//				case 5: category = "T"; break; // 장난감
-//				case 6: category = "H"; break; // 집
-//				}
 				pstmt.setString(1, cateGory);
 				pstmt.setInt(2, startRown);
 				pstmt.setInt(3, endRown);
