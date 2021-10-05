@@ -1,0 +1,58 @@
+@charset "UTF-8";
+#productlist {
+    width: 1300px;
+    margin: 0px auto;
+}
+
+#image {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#image img {
+	width: 250px;
+	height: 250px;
+}
+
+#image img:hover {
+	width: 300px;
+	height: 300px;
+}
+
+#image .name {
+	display: inline-block;
+	width: 250px;
+	text-overflow: clip;
+	margin-bottom: 10px;
+}
+
+#image a {
+    margin-bottom: 50px;
+    text-decoration: none;
+    color: black;
+}
+
+#image a:visited {
+	color: black;
+}
+
+#page {
+	text-align: center;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 20px;
+    margin: 0 400px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+}
+
+#page #pageLink {
+	padding: 0 20px;
+	color: black;
+	text-decoration: none
+}
+
+#page #pageLink:visited {
+	color: black;
+}
