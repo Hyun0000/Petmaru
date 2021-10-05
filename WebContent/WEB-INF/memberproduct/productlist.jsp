@@ -1,15 +1,15 @@
 <%@page import="jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator"%>
-<%@page import="com.petmaru.product.member.model.vo.Product"%>
+<%@page import="com.petmaru.product.member.model.vo.ProductMemberVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-String context_root = request.getContextPath();
+<%
+	String context_root = request.getContextPath();
 int totalPageLink = (int)request.getAttribute("totalPageLink");
 int startPageLink = (int)request.getAttribute("startPageLink");
 int endPageLink = (int)request.getAttribute("endPageLink");
 int selectPage = (int)request.getAttribute("selectPage");
-ArrayList<Product> producClothestList = (ArrayList<Product>)request.getAttribute("producClothestList");
+ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)request.getAttribute("producClothestList");
 %>
 
 <!DOCTYPE html>

@@ -1,4 +1,4 @@
-package com.petmaru.comment.model.vo;
+package com.petmaru.member.write.model.vo;
 
 import java.sql.Date;
 

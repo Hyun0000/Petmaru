@@ -1,4 +1,4 @@
-package com.petmaru.after.controller;
+package com.petmaru.product.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DeleteAfterServlet
+ * Servlet implementation class SearchProductServelt
  */
-@WebServlet("/DeleteAfterServlet")
-public class DeleteAfterServlet extends HttpServlet {
+@WebServlet("/SearchProductServelt")
+public class ProductMemberSearchServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteAfterServlet() {
+    public ProductMemberSearchServelt() {
         super();
         // TODO Auto-generated constructor stub
     }

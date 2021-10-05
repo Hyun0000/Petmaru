@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.petmaru.product.member.model.service.ProductMemberService;
-import com.petmaru.product.member.model.vo.Product;
+import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 /**
  * Servlet implementation class ProducListServelt
  */
 @WebServlet("/produclist")
-public class ProducListServelt extends HttpServlet {
+public class ProductMemberListServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProducListServelt() {
+    public ProductMemberListServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -75,7 +75,7 @@ public class ProducListServelt extends HttpServlet {
 //		
 //		if (selectPage < totalPageLink) { out.print(" >> "); }
 //		
-		ArrayList<Product> producClothestList = null;
+		ArrayList<ProductMemberVo> producClothestList = null;
 		producClothestList = new ProductMemberService().productList(cateGory, startRown, endRown);
 		
 		// JSP로 보낼 Data

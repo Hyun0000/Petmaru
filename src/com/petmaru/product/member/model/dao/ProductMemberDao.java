@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import static com.petmaru.common.DBCPTemplate.*;
-import com.petmaru.product.member.model.vo.Product;
+import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 public class ProductMemberDao {
 	//======================================================================================================
 		// 상품 리스트 조회
-		public ArrayList<Product> productList(Connection conn, String cateGory, int startRown, int endRown) {
+		public ArrayList<ProductMemberVo> productList(Connection conn, String cateGory, int startRown, int endRown) {
 			// 상품명, 사진, 가격
-			ArrayList<Product> producClothestList = null;
-			Product product = null;
+			ArrayList<ProductMemberVo> producClothestList = null;
+			ProductMemberVo product = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			// 페이징용 쿼리
@@ -28,9 +28,9 @@ public class ProductMemberDao {
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
-					producClothestList = new ArrayList<Product>();
+					producClothestList = new ArrayList<ProductMemberVo>();
 					do {
-						product = new Product();
+						product = new ProductMemberVo();
 						product.setProductNo(rs.getInt("PRODUCT_NO"));
 						product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
 						product.setProductName(rs.getString("PRODUCT_NAME"));
@@ -83,8 +83,8 @@ public class ProductMemberDao {
 		// 상품 상세 페이지
 		// 조건 : PRODUCT_NO & PRODUCT_CATEGORY
 		// 가져올 값 : PRODUCT_NAME, PRODUCT_IMAGE_URL, PRODUCT_COM, PRODUCT_PRICE
-		public Product productDetail(Connection conn, int pno, String cateGory) {
-			Product product = null;
+		public ProductMemberVo productDetail(Connection conn, int pno, String cateGory) {
+			ProductMemberVo product = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = "select * from product where PRODUCT_NO = ? and PRODUCT_CATEGORY = ?";
@@ -95,7 +95,7 @@ public class ProductMemberDao {
 				rs = pstmt.executeQuery();
 				
 				if (rs.next()) {
-					product = new Product();
+					product = new ProductMemberVo();
 					product.setProductName(rs.getString("PRODUCT_NAME"));
 					product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
 					product.setCom(rs.getString("PRODUCT_COM"));

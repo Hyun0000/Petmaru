@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.petmaru.product.member.model.service.ProductMemberService;
-import com.petmaru.product.member.model.vo.Product;
+import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 /**
  * Servlet implementation class ProductDetailServlet
  */
 @WebServlet("/ProductDetailServlet")
-public class ProductDetailServlet extends HttpServlet {
+public class ProductMemberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDetailServlet() {
+    public ProductMemberDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class ProductDetailServlet extends HttpServlet {
 			// URL로 넘어오는 값이 이상할 경우 default 값으로 "C"(의상) 설정
 		}
 		
-		Product product = null;
+		ProductMemberVo product = null;
 		product = new ProductMemberService().productDetail(pno, cateGory);
 
 		request.setAttribute("product", product);

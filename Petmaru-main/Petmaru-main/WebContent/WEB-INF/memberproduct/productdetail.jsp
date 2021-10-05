@@ -1,7 +1,11 @@
-<%@page import="com.petmaru.product.member.model.vo.Product"%>
+<%@page import="com.petmaru.product.member.model.vo.ProductMemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% String context_root = request.getContextPath(); %>
-<% Product product = (Product)request.getAttribute("product"); %>
+<%
+	String context_root = request.getContextPath();
+%>
+<%
+	ProductMemberVo product = (ProductMemberVo)request.getAttribute("product");
+%>
 <!DOCTYPE html>
 <html>
 <head>

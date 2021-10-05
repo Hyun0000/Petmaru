@@ -2,7 +2,7 @@ package com.petmaru.product.member.model.vo;
 
 import java.sql.Date;
 
-public class Product {
+public class ProductMemberVo {
 	private int productNo;
 	private char productCategory;
 	private String productName;
@@ -12,7 +12,7 @@ public class Product {
 	private int amount;
 	private Date date;
 	
-	public Product() {
+	public ProductMemberVo() {
 		// TODO Auto-generated constructor stub
 	}
 	

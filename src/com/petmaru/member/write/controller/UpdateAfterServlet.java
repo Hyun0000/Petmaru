@@ -1,4 +1,4 @@
-package com.petmaru.after.controller;
+package com.petmaru.member.write.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class WriteAfterServlet
+ * Servlet implementation class UpdateAfterServlet
  */
-@WebServlet("/WriteAfterServlet")
-public class WriteAfterServlet extends HttpServlet {
+@WebServlet("/UpdateAfterServlet")
+public class UpdateAfterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WriteAfterServlet() {
+    public UpdateAfterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
