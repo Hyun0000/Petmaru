@@ -37,11 +37,11 @@ public class Member {
 		this.member_name = member_name;
 	}
 
-	public String getMember_pwd() {
+	public String getMember_pw() {
 		return member_pwd;
 	}
 
-	public void setMember_pwd(String member_pwd) {
+	public void setMember_pw(String member_pwd) {
 		this.member_pwd = member_pwd;
 	}
 
@@ -90,20 +90,6 @@ public class Member {
 	}
 
 	public void setMember_email(String member_email) {
-		this.member_email = member_email;
-	}
-
-	public Member(String member_id, String member_name, String member_pwd, String member_phone, String member_address,
-			Date member_regdate, char member_gender, int member_point, String member_email) {
-		super();
-		this.member_id = member_id;
-		this.member_name = member_name;
-		this.member_pwd = member_pwd;
-		this.member_phone = member_phone;
-		this.member_address = member_address;
-		this.member_regdate = member_regdate;
-		this.member_gender = member_gender;
-		this.member_point = member_point;
 		this.member_email = member_email;
 	}
 

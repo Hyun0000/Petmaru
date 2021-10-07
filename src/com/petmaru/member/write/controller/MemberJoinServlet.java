@@ -42,11 +42,11 @@ public class MemberJoinServlet extends HttpServlet {
 		char gender = request.getParameter("gender").charAt(0);
 		int point = Integer.parseInt(request.getParameter("point"));
 		String email = request.getParameter("email");
+		
 		PrintWriter out = response.getWriter();
 		
-		
 		// 화면 데이터를 vo에 싣기
-				Member vo = new Member(id,name,pwd,phone,address,null,gender,point,email);
+				Member vo = new Member();
 		//http://localhost:8090/Petmaru/Loginservlet?id=kim9140&pwd=1234
 				 int result = new MemberService().insertMember(vo);
 				 System.out.println(result);

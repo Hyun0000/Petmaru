@@ -1,6 +1,7 @@
 package com.petmaru.product.member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.petmaru.common.DBCPTemplate;
 import com.petmaru.member.model.vo.Member;
@@ -10,9 +11,9 @@ public class MemberService {
 
 	public MemberService() {
 		
-		
-		
 	}
+
+	
 	public int insertMember(Member vo) {
 		int result =-1;
 		int result2 = -1;
@@ -35,6 +36,23 @@ public class MemberService {
 		return result;// 오류발생:-1, 가입성공:1, 가입실패:0, 기존회원있으면:2,가장큰수0xFF
 	}
 	
+	public ArrayList<Member> MemberAllList(int start, int end){
+		ArrayList<Member> volist = null;
+		Connection conn = DBCPTemplate.getConnection();
+		
+		volist = new MemberDao().MemberListAll(conn, start, end);
+		
+		DBCPTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getMemberCount(){
+		int result = 0;
+		Connection conn = DBCPTemplate.getConnection();
+		result = new MemberDao().getMemberCount(conn);
+		DBCPTemplate.close(conn);
+		return result;
+	}
 	
 	public int loginmember(String id, String pwd) { //로그인
 		int result = -1;
@@ -43,5 +61,5 @@ public class MemberService {
 		DBCPTemplate.close(conn);
 		return result;
 	}
-
+	
 }
