@@ -84,7 +84,7 @@ public class ProductMemberListServelt extends HttpServlet {
 		request.setAttribute("endPageLink", endPageLink);
 		request.setAttribute("selectPage", selectPage);
 		request.setAttribute("producClothestList", producClothestList);
-		request.getRequestDispatcher("/WEB-INF/memberproduct/productlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/productmember/productlist.jsp").forward(request, response);
 	}
 
 	/**

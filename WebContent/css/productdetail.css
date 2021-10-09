@@ -4,16 +4,17 @@ section {
     margin: 0px auto;
 }
 
-/* 상품 사진 */
+/* 상품 사진 담는 div 크기 조절*/
 section > #product_img {
     display: block;
     float: left;
     margin-left: 80px;
 }
 
+/* 상품 사진 크기 조절 */
 section > #product_img > img {
-    width: 500px;
-    height: 500px;
+	width: 500px;
+	height: 500px;
 }
 
 /* 상품명, 가격, 버튼을 감싸는 전체 div 크기 설정 */
@@ -58,9 +59,9 @@ section > #product_img > img {
     border: none;
 }
 
-/* 후기보기 버튼 디테일 클릭시 효과 */
+/* 후기보기 버튼 클릭시 효과 */
 #product_write_icon #review_icon button:active {
-	border: 1px solid black;
+    border: 1px solid black;
     background-color: white;
     color: black;
 }
@@ -72,18 +73,21 @@ section > #product_img > img {
 }
 
 /* 구매&장바구니 버튼 디테일 */
-#product_write_icon #icon button {
+#product_write_icon #icon a {
+    display: inline-block;
     width: 200px;
     margin: 0 10px;
     height: 50px;
+    line-height: 50px;
     background-color: black;
     color: white;
     border: none;
+    text-decoration: none;
 }
 
 /* 구매&장바구니 버튼 클릭시 효과 */
-#product_write_icon #icon button:active {
-	border: 1px solid black;
+#product_write_icon #icon a:hover {
+    border: 1px solid black;
     background-color: white;
     color: black;
 }

@@ -1,0 +1,317 @@
+@charset "UTF-8";
+/* section & article 전체 설정 */
+section{
+    width: 1300px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/* 이번엔 각 article의 높이를 정한다. */
+article {
+    height: 500px;
+    margin-top: 20px;
+}
+
+/* 각 구역별 h1 위치 설정 */
+section h1{
+    margin-left: 80px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+/* hr 두께 및 크기, 모양 설정 */
+section hr{
+    border-radius: 10px;
+    background-color: cadetblue;
+    height: 10px;
+}
+/* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 */
+/* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 */
+/* (배송지 정보) 구역 설정 */
+
+/* hr과 table의 간격 조정 */
+#input_box, #consumer_input {
+    margin-top: 20px;
+}
+
+/* input_box 구역 설정 */
+/* table의 부모 div 스타일 지정 */
+#input_box {
+    /* border: 1px solid black; */
+    width: 790px;
+    float: left;
+    box-sizing: border-box;
+    margin-left: 60px;
+}
+
+/* table 크기 및 위치 지정 */
+#input_box table{
+    margin: 0 auto;
+    width: 700px;
+}
+
+/* #delivery_info table td간 간격 설정 */
+#delivery_info table{
+    border-spacing: 35px;
+}
+
+/* 구매자와 동일 체크박스 간격 설정 */
+#delivery_info > #input_box #info_same {
+    margin-right: 10px;
+}
+
+/* #delivery_info table 글자 정렬 설정 */
+.label_td {
+    text-align: center;
+}
+
+/* #delivery_info table input 태그 사이즈 & border 설정 */
+.input_td .inputEle {
+    width: 400px;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+/* #delivery_info table input 태그 클릭시 스타일 지정 */
+.input_td input:focus {
+    outline: none;
+}
+
+/* #delivery_info table textarea 태그 사이즈 고정 */
+#delivery_info #need {
+    resize: none;
+}
+
+/* consumer_input 구역 설정 */
+/* table의 부모 div 스타일 지정 */
+#consumer_input {
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    float: right;
+    width: 300px;
+    margin-right: 150px;
+}
+
+/* table 크기 및 위치 지정 */
+#consumer_input table{
+    margin: 0 auto;
+}
+
+/* #consumer_input table input 태그 사이즈 & border 설정 */
+#consumer_input .consumer_Ele{
+    width: 250px;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+/* #consumer_input table h1 태그 위치 및 글자 정렬 */
+#consumer_input h1{
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* #consumer_input table margin 설정 */
+#consumer_input table {
+    margin-right: 110px;
+}
+
+/* #consumer_input table input 태그 클릭시 스타일 지정 */
+#consumer_input input:focus {
+    outline: none;
+}
+
+/* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 */
+/* product_info article 전체 설정 */
+#product_info {
+    clear: both;
+}
+
+/* image가 들어있는 div 설정 */
+#product_info_img {
+    padding: 50px;
+    margin-left: 50px;
+    width: 400px;
+    float: left;
+}
+
+/* 상품정보가 들어있는 div 설정 */
+#product_info_input{
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    padding: 50px;
+    margin-top: 50px;
+    float: right;
+    width: 700px;
+    height: 400px;
+    box-sizing: border-box;
+}
+
+/* 각각의 상품정보가 들어있는 div display, 크기 설정 */
+#product_info_input div {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 430px;
+    height: 45px;
+    border-bottom: 1px solid black;
+    margin-left: 50px;
+    /* background-color: red; */
+}
+
+/* 상품 이미지 크기 설정 */
+#product_info_img img {
+	width: 400px;
+	height: 400px;
+}
+
+/* 상품정보 table 위치 및 간격, 사이즈 설정 */
+#product_info_input table {
+    box-sizing: border-box;
+    margin: 0 auto;
+    /* 좌우, 위아래 */
+    border-spacing:10px 20px;
+    width: 590px;
+    height: 295px;
+}
+
+/* 상품정보 table의 각 항목 글자 정렬 */
+#product_info_input .product_info_input_span{
+    text-align: center;
+}
+
+/* 상품정보 table의 옵션 선택 항목 */
+#product_info_input td input {
+    width: 430px;
+    height: 45px;
+    margin-left: 50px;
+    border: none;
+    border-bottom: 1px solid black;
+    /* background-color: red; */
+}
+
+/* 상품정보 table의 옵션 선택 항목 클릭시 이벤트 지정*/
+#product_info_input td input:focus {
+    outline: none;
+}
+
+/* 상품정보가 들어간 div의 padding 조정 */
+#product_info_input div {
+	padding: 0px 20px;
+}
+
+
+/* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 */
+/* #pay_info article 전체 위치 설정 */
+#pay_info{
+    clear: both;
+}
+
+/* table 위치 설정 및 td간 사이즈 조정 */
+#pay_info table {
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-spacing: 100px 50px;
+    /* table-layout:fixed; */
+    width: 1100px;
+}
+/* border-spacing --> 이것을 조정하니 맨 왼쪽 td의 사이즈가 조정 됐다.
+    정확히 말하면 조정된건 아니고 더 넓어졌다.
+*/
+
+/* 맨 왼쪽열 글자 위치 설정 및 사이즈 조정 */
+#pay_info .pay_info_title {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+/* 결제 방식 각 div에 flex 지정 */
+#pay_choice {
+    display: flex;
+}
+
+/* 각 결제 방식의 label 사이즈 및 글자 정렬 지정 */
+#pay_choice label {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bolder;
+}
+
+/* 각 결제방식 radio 버튼 안 보이게 설정 */
+#pay_choice input[type=radio] {
+    display: none;
+}
+
+/* 각 결제 방식에 클릭시 효과 지정 */
+#pay_choice input[type=radio]:checked + label {
+    opacity: 0.5;
+}
+
+/* input창 중 현금 영수증 번호 입력칸 */
+#pay_info #cash_receipt_phone {
+    width: 400px;
+    border: none;
+    margin-left: 50px;
+    border-bottom: 1px solid black;
+}
+
+/* input창 중 포인트 입력칸 */
+input#point {
+    width: 400px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+/* input창 중 포인트 입력칸 클릭시 효과지정 */
+input#point:focus {
+    outline: none;
+}
+
+/* input창 중 전체 포인트 사용 체크박스 위치 지정 */
+input#point ~ input {
+    margin-left: 40px;
+}
+
+/* input창 중 전체 포인트 사용 체크박스 위치 지정 */
+input#point ~ label {
+    margin-left: 10px;
+}
+
+/* input창 중 쿠폰칸 */
+select#coupon {
+    width: 400px;
+    height: 30px;
+}
+
+/* 휴대폰번호 입력창 클릭시 효과 지정 */
+#pay_info #cash_receipt_phone:focus {
+    outline: none;
+}
+
+/* 결제 버튼 *//* 결제 버튼 *//* 결제 버튼 *//* 결제 버튼 *//* 결제 버튼 *//* 결제 버튼 *//* 결제 버튼 */
+#payBtn {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    padding: 50px;
+    
+}
+
+#payBtn button {
+    width: 200px;
+    height: 50px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+}
+
+#payBtn button:hover {
+    background-color: red;
+}

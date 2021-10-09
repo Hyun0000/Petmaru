@@ -3,6 +3,8 @@ package com.petmaru.product.member.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 import static com.petmaru.common.DBCPTemplate.*;
+
+import com.petmaru.member.model.vo.Member;
 import com.petmaru.product.member.model.dao.ProductMemberDao;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
@@ -34,5 +36,32 @@ public class ProductMemberService {
 			close(conn);
 			return product;
 		}
-
+	//======================================================================================================
+		// 상품 구매 페이지
+		public ProductMemberVo productbuy(int pno) {
+			// TODO Auto-generated method stub
+			ProductMemberVo product = null;
+			Connection conn = getConnection();
+			product = new ProductMemberDao().buyproduct(conn, pno);
+			close(conn);
+			return product;
+		}
+	//======================================================================================================
+		// 메인 페이지 서브 캐러샐
+		public ArrayList<ProductMemberVo> mainsubcarousel() {
+			ArrayList<ProductMemberVo> mainsubcarousel = null;
+			Connection conn = getConnection();
+			mainsubcarousel = new ProductMemberDao().mainsubcarousel(conn);
+			close(conn);
+			return mainsubcarousel;
+		}
+	//======================================================================================================
+		// 결제 페이지 회원 정보 가져오기(체크박)
+		public Member searchMembrtInfo(String id) {
+			Member member = null;
+			Connection conn = getConnection();
+			member = new ProductMemberDao().searchMembrtInfo(conn, id);
+			close(conn);
+			return member;
+		}
 }

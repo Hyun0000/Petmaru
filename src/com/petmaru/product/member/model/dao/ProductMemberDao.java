@@ -3,9 +3,12 @@ package com.petmaru.product.member.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static com.petmaru.common.DBCPTemplate.*;
+
+import com.petmaru.member.model.vo.Member;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 public class ProductMemberDao {
@@ -55,14 +58,6 @@ public class ProductMemberDao {
 			ResultSet rs = null;
 			String sql = "select count(PRODUCT_NO) from product where PRODUCT_CATEGORY = ?";
 			try {
-//				switch (bno) {
-//				case 1: category = "C"; break; // 옷
-//				case 2: category = "A"; break; // 악세서리
-//				case 3: category = "F"; break; // 음식
-//				case 4: category = "B"; break; // 목욕
-//				case 5: category = "T"; break; // 장난감
-//				case 6: category = "H"; break; // 집
-//				}
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, cateGory);
 				rs = pstmt.executeQuery();
@@ -76,13 +71,12 @@ public class ProductMemberDao {
 				close(rs);
 				close(pstmt);
 			}
-			
 			return result;
 		}
 	//======================================================================================================
 		// 상품 상세 페이지
 		// 조건 : PRODUCT_NO & PRODUCT_CATEGORY
-		// 가져올 값 : PRODUCT_NAME, PRODUCT_IMAGE_URL, PRODUCT_COM, PRODUCT_PRICE
+		// 가져올 값 : PRODUCT_NAME, PRODUCT_IMAGE_URL, PRODUCT_COM, PRODUCT_PRICE, PRODUCT_CATEGORY
 		public ProductMemberVo productDetail(Connection conn, int pno, String cateGory) {
 			ProductMemberVo product = null;
 			PreparedStatement pstmt = null;
@@ -96,6 +90,8 @@ public class ProductMemberDao {
 				
 				if (rs.next()) {
 					product = new ProductMemberVo();
+					product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
+					product.setProductNo(rs.getInt("PRODUCT_NO"));
 					product.setProductName(rs.getString("PRODUCT_NAME"));
 					product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
 					product.setCom(rs.getString("PRODUCT_COM"));
@@ -108,5 +104,86 @@ public class ProductMemberDao {
 				close(pstmt);
 			}
 			return product;
+		}
+	//======================================================================================================
+		// 상품 구매 페이지
+		public ProductMemberVo buyproduct(Connection conn, int pno) {
+			ProductMemberVo product = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from product where PRODUCT_NO = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pno);
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					product = new ProductMemberVo();
+					product.setProductName(rs.getString("PRODUCT_NAME"));
+					product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
+					product.setPrice(rs.getInt("PRODUCT_PRICE"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return product;
+		}
+	//======================================================================================================
+		// 메인 페이지 서브 캐러샐	
+		public ArrayList<ProductMemberVo> mainsubcarousel(Connection conn) {
+			ArrayList<ProductMemberVo> mainsubcarousel = null;
+			ProductMemberVo product = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			String sql = "select * from product";
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				
+				if (rs.next()) {
+					mainsubcarousel = new ArrayList<ProductMemberVo>();
+					do {
+						product = new ProductMemberVo();
+						product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
+						product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
+						mainsubcarousel.add(product);
+					} while (rs.next());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(conn);
+			}
+			return mainsubcarousel;
+		}
+	//======================================================================================================
+		// 결제 페이지 회원 정보 가져오기(체크박스)
+		public Member searchMembrtInfo(Connection conn, String id) {
+			Member member = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where MEMBER_ID = ? ";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				// 주소 번호 이름
+				if (rs.next()) {
+					member = new Member();
+					member.setMemberAdress(rs.getString("MEMBER_ADDRESS"));
+					member.setMemberPhone(rs.getString("MEMBER_PHONE"));
+					member.setMemberName(rs.getString("MEMBER_NAME"));
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println(member);
+			return member;
 		}
 }
