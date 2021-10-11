@@ -76,9 +76,9 @@ public class ProductMemberBuyServlet extends HttpServlet {
 		
 		if (member != null) {
 			System.out.println("데이터 가져옴");
-			map.put("name", member.getMemberName());
-			map.put("address", member.getMemberAdress());
-			map.put("phone", member.getMemberPhone());
+			map.put("name", member.getMember_name());
+			map.put("address", member.getMember_address());
+			map.put("phone", member.getMember_phone());
 			map.put("memberInfo", member);
 			
 			gsonStr = gson.toJson(map);

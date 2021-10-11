@@ -175,9 +175,9 @@ public class ProductMemberDao {
 				// 주소 번호 이름
 				if (rs.next()) {
 					member = new Member();
-					member.setMemberAdress(rs.getString("MEMBER_ADDRESS"));
-					member.setMemberPhone(rs.getString("MEMBER_PHONE"));
-					member.setMemberName(rs.getString("MEMBER_NAME"));
+					member.setMember_address(rs.getString("MEMBER_ADDRESS"));
+					member.setMember_phone(rs.getString("MEMBER_PHONE"));
+					member.setMember_name(rs.getString("MEMBER_NAME"));
 				}
 				
 			} catch (Exception e) {
