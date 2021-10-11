@@ -1,11 +1,11 @@
-package com.petmaru.product.member.model.service;
+package com.petmaru.member.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.petmaru.common.DBCPTemplate;
+import com.petmaru.member.model.dao.MemberDao;
 import com.petmaru.member.model.vo.Member;
-import com.petmaru.product.member.model.dao.MemberDao;
 
 public class MemberService {
 

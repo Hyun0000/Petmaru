@@ -1,4 +1,4 @@
-package com.petmaru.product.member.model.dao;
+package com.petmaru.member.model.dao;
 
 import static com.petmaru.common.DBCPTemplate.close;
 
@@ -115,19 +115,13 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-//			System.out.println("ymkim" + id);
-//			System.out.println("ymkim" + pwd);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-//			System.out.println("ymkim" + 3);
 			rset = pstmt.executeQuery();
-//			System.out.println("ymkim" + 4);
 			if (rset.next()) {
-//				System.out.println("ymkim" + 1);
 				String dbPwd = rset.getString(1);
 				if (pwd.equals(dbPwd)) {
-//					System.out.println("ymkim" + 2);
 					// pwd 도 같음 로그인 성공
 					result = 0;
 				} else {
@@ -136,7 +130,7 @@ public class MemberDao {
 				}
 			} else {
 				// id없음
-				System.out.println("ymkim " + 6);
+				System.out.println("ymkim" + 6);
 				result = 2;
 			}
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.petmaru.member.write.controller;
+package com.petmaru.admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.petmaru.member.model.dao.MemberDao;
+import com.petmaru.member.model.service.MemberService;
 import com.petmaru.member.model.vo.Member;
-import com.petmaru.product.member.model.dao.MemberDao;
-import com.petmaru.product.member.model.service.MemberService;
 
 /**
  * Servlet implementation class MemberList
  */
 @WebServlet("/MemberList")
-public class MemberListServlet extends HttpServlet {
+public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**

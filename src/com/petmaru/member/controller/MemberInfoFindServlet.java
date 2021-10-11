@@ -1,4 +1,4 @@
-package com.petmaru.member.write.controller;
+package com.petmaru.member.controller;
 
 import java.io.IOException;
 
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class info_find
  */
-@WebServlet("/info_find")
-public class info_find extends HttpServlet {
+@WebServlet("/infofind")
+public class MemberInfoFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public info_find() {
+    public MemberInfoFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

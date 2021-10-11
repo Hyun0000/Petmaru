@@ -1,4 +1,4 @@
-package com.petmaru.member.write.controller;
+package com.petmaru.member.controller;
 
 import java.io.IOException;
 
