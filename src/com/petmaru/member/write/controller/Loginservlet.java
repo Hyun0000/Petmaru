@@ -3,6 +3,7 @@ package com.petmaru.member.write.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import com.petmaru.product.member.model.service.MemberService;
 /**
  * Servlet implementation class Loginservlet
  */
-@WebServlet("/Loginservlet")
+@WebServlet("/login")
 public class Loginservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,6 +50,8 @@ public class Loginservlet extends HttpServlet {
 				 }
 				 //Member vo = new Member();
 				// response.getWriter().append(vo.toString());
+				 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/login.jsp");
+				 rd.forward(request, response);
 	}
 
 	/**

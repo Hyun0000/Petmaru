@@ -1,0 +1,85 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/EliceDigitalBaeum_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#loginlogo {
+    /* font-family: 'Jua',sans-serif; */
+    font-style: normal;
+    font-size: 35px;
+    padding-bottom: 50px;
+    margin: 0 50px;
+}
+
+
+#login_top_line {
+    position: relative;
+    top: -40px;
+    border-radius: 10px;
+    background:silver;
+    width: 800px;
+    height: 10px;
+    clear: both;
+     margin-left: 20%; 
+    margin-bottom: 30px;
+    margin: 0 auto;
+}
+#login_section {
+     margin-left: 35%;  
+}
+
+
+#login_table{
+    margin-top: -40px;
+}
+
+
+.input{
+    height: 30px;
+    width:250px;
+    margin: 10px;
+    border-radius: 5px;
+    border-color:silver; 
+    font-size: 25px;
+    font-family: 'HangeulNuri-Bold',sans-serif;
+
+}
+
+.btn{
+    width: 465px;
+	height :60px;
+	border: solid white;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    margin: 3px;
+    font-size: 20px;
+    font-family: 'EliceDigitalBaeum_Bold',sans-serif;
+}
+#loginbtn{
+    background-color: black;
+    color: white;
+}
+#joinbtn{
+    background-color: darkgray;
+    color: white;
+}
+#login_bottom_line{
+    position: relative;
+    border-radius: 10px;
+    background:silver;
+    width: 800px;
+    height: 10px;
+    clear: both;
+    margin-left: 20%;
+    margin-top: 30px;
+    margin: 0 auto;
+}
+#findinfo{
+    margin-top: 10px;
+    font-size: 20px;
+    margin-left: 45%;   
+    text-decoration: none;
+}

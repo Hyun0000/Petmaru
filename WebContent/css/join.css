@@ -1,0 +1,58 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.phone1{
+    height: 30px;
+    width:70px;
+    margin: 10px;
+    border-radius: 10px;
+    border-color:silver; 
+    font-size: 20px;
+
+}
+#join_section{
+    margin-left: 30%; 
+}
+
+.phone2{
+    height: 30px;
+    width: 70px;
+    margin: 10px;
+    border-radius: 5px;
+    border-color:silver; 
+    font-size: 20px;
+
+}
+#add{
+    height: 30px;
+    width:400px;
+    margin: 10px;
+    border-radius: 5px;
+    border-color:silver; 
+    font-size: 25px;
+    font-family: 'HangeulNuri-Bold',sans-serif;
+}
+#id_check{
+        width: 100px;
+        height :40px;
+        font-size: 20px;
+        border: solid white;
+        border-radius: 5px;
+        background-color: silver;
+        cursor: pointer;
+        margin: -150px;
+      font-family: 'SpoqaHanSansNeo-Regular',sans-serif ;
+}
+
+.birth{
+    height: 30px;
+    width: 70px;
+    margin: 10px;
+    border-radius: 5px;
+    border-color:silver; 
+    font-size: 20px;
+}

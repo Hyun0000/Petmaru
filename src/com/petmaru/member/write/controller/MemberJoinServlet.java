@@ -1,21 +1,18 @@
 package com.petmaru.member.write.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmaru.member.model.vo.Member;
-import com.petmaru.product.member.model.service.MemberService;
-
 /**
  * Servlet implementation class MemberJoinServlet
  */
-@WebServlet("/MemberJoinServlet")
+@WebServlet("/memberjoin")
 public class MemberJoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,39 +30,110 @@ public class MemberJoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset-UTF-8");
+//		String id =request.getParameter("id");
+//		String pwd1 = request.getParameter("pwd1");
+//		String pwd2 = request.getParameter("pwd2");
+//		String email = request.getParameter("email");
+//		String name = request.getParameter("name");
+//		String phone1 = request.getParameter("phone1"); 
+//		String phone2 = request.getParameter("phone2");
+//		String phone3 = request.getParameter("phone3");
+//		String address = request.getParameter("add");
+//		char gender = request.getParameter("gender_value").charAt(0);
+//		int point = 0;
+//		String birth1 = request.getParameter("birth1");
+//		String month = request.getParameter("month");
+//		String birth2 = request.getParameter("birth2");	
+//		String pwd = null;
+//
+//		
+//		if(pwd1==pwd2) {
+//			pwd = pwd1;
+//		}
+//		
+//		String phone = phone1 + phone2 + phone3 ;
+//		String birth = birth1 + month + birth2;
+//
+//		// 화면 데이터를 vo에 싣기
+//				Member vo = new Member(id,name,pwd,phone,address,null,gender,point,email);
+//		//http://localhost:8090/Petmaru/Loginservlet?id=kim9140&pwd=1234
+//				 int result = new MemberService().insertMember(vo);
+//				 System.out.println(result);
+//				 if(result ==  1 ) {
+//						System.out.println(id+"님 가입되었습니다. 환영합니다.");
+//						//out.println(id+"님 가입되었습니다. 환영합니다.");
+//					} else if(result == 2) {
+//						System.out.println("기존회원 id가 존재합니다. ");
+//					} else {  // 오류발생:-1,그외 등등, 가입실패:0
+//						System.out.println("예기치 못한 오류 발생. 다시 시도해 주세요. ");
+//					}	
+				 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/memberjoin.jsp");
+				 rd.forward(request, response);
+//		String id =request.getParameter("id");
+//		String name = request.getParameter("name");
+//		String pwd = request.getParameter("pwd");
+//		String phone = request.getParameter("phone");
+//		String address = request.getParameter("address");
+//		char gender = request.getParameter("gender").charAt(0);
+//		int point = 0;
+//		String email = request.getParameter("email");
+//		PrintWriter out = response.getWriter();
 
-		String id =request.getParameter("id");
-		String name = request.getParameter("name");
-		String pwd = request.getParameter("pwd");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
-		char gender = request.getParameter("gender").charAt(0);
-		int point = Integer.parseInt(request.getParameter("point"));
-		String email = request.getParameter("email");
+	
 		
-		PrintWriter out = response.getWriter();
-		
-		// 화면 데이터를 vo에 싣기
-				Member vo = new Member();
-		//http://localhost:8090/Petmaru/Loginservlet?id=kim9140&pwd=1234
-				 int result = new MemberService().insertMember(vo);
-				 System.out.println(result);
-				 if(result ==  1 ) {
-						System.out.println(id+"님 가입되었습니다. 환영합니다.");
-						//out.println(id+"님 가입되었습니다. 환영합니다.");
-					} else if(result == 2) {
-						System.out.println("기존회원 id가 존재합니다. ");
-					} else {  // 오류발생:-1,그외 등등, 가입실패:0
-						System.out.println("예기치 못한 오류 발생. 다시 시도해 주세요. ");
-					}
+//				 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/memberjoin.jsp");
+//				 rd.forward(request, response);
+	
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+//		request.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html;charset=UTF-8");
+//		String id =request.getParameter("id");
+//		String pwd1 = request.getParameter("pwd1");
+//		String pwd2 = request.getParameter("pwd2");
+//		String email = request.getParameter("email");
+//		String name = request.getParameter("name");
+//		String phone1 = request.getParameter("phone1"); 
+//		String phone2 = request.getParameter("phone2");
+//		String phone3 = request.getParameter("phone3");
+//		String address = request.getParameter("add");
+//		char gender = request.getParameter("gender_value").charAt(0);
+//		int point = 0;
+//		String birth1 = request.getParameter("birth1");
+//		String month = request.getParameter("month");
+//		String birth2 = request.getParameter("birth2");	
+//		String pwd = null;
+//
+//		
+//		if(pwd1==pwd2) {
+//			pwd = pwd1;
+//		}
+//		
+//		String phone = phone1 + phone2 + phone3 ;
+//		String birth = birth1 + month + birth2;
+//
+//		// 화면 데이터를 vo에 싣기
+//				Member vo = new Member(id,name,pwd,phone,address,null,gender,point,email);
+//		//http://localhost:8090/Petmaru/Loginservlet?id=kim9140&pwd=1234
+//				 int result = new MemberService().insertMember(vo);
+//				 System.out.println(result);
+//				 if(result ==  1 ) {
+//						System.out.println(id+"님 가입되었습니다. 환영합니다.");
+//						//out.println(id+"님 가입되었습니다. 환영합니다.");
+//					} else if(result == 2) {
+//						System.out.println("기존회원 id가 존재합니다. ");
+//					} else {  // 오류발생:-1,그외 등등, 가입실패:0
+//						System.out.println("예기치 못한 오류 발생. 다시 시도해 주세요. ");
+//					}	
+//				 ServletContext app = this.getServletContext();
+//				 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/memberjoin.jsp");
+//				 rd.forward(request, response);
+				 
 	}
 
 }

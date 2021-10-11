@@ -1,0 +1,42 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'EliceDigitalBaeum_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/EliceDigitalBaeum_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.info_find_line {
+    position: relative;
+    border-radius: 10px;
+    background:silver;
+    width: 600px;
+    height: 5px;
+    clear: both; 
+    right: 150px;
+    margin-bottom: 40px;
+    margin-top: 5px;
+}
+
+.info_section {
+    padding-left: 40%;
+
+    padding-bottom: 100px;
+}
+
+.find_btn{
+    width: 200px;
+	height :50px;
+	border: solid white;
+    border-radius: 10px;
+    background-color:silver;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 20px;
+    font-family: 'EliceDigitalBaeum_Bold',sans-serif;
+    color: snow;
+    margin-left: 50px;
+}
+
+.find_table{
+    margin-top: -50px;
+}
