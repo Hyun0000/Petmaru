@@ -1,32 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <footer>
-    <div id="footer_p1">
-      <p>Follow</p>
+    <div id="footer1">
+      <div id="social">
       <ul>
-        <li><a href="#" target="_blank">Instagram</a></li>
-        <li><a href="#" target="_blank">Kakao 1:1</a></li>
+        <li>
+          <a href="#" target="_blank"><img src="/image/instagram_circular.png" alt=""></a>
+        </li>
+        <li>
+          <a href="#" target="_blank"><img src="/image/twitter_circular.png" alt=""></a>
+        </li>
+        <li>
+          <a href="#" target="_blank"><img src="/image/facebook_circular.png" alt=""></a>
+        </li>
       </ul>
     </div>
 
-    <div id="footer_p2">
-      <p>Customer</p>
+    <div id="phone">
+      1644-9603
+    </div>
+
+    <div id="info">
       <ul>
-        <li>070-4827-0834</li>
-        <li>월-금/ am11:00 ~ pm5:00</li>
-        <li>점심시간 / am 11:30 ~ pm 1:30</li>
-        <li>토요일, 일요일, 공휴일 휴무</li>
+        <li>MON-FRI</li>
+        <li>9:30 - 17:00 (lunch 12:00 - 13:00)</li>
+        <li>contact@bmsmile.com</li>
       </ul>
     </div>
-
-    <div id="footer_p3">
-      <p>기업은행 : 061-081270-01-013 예금주 : (주)트리니언</p>
     </div>
 
-    <div id="footer_p4">
-      <p>info@marlonshop.com</p>
+    <div id="footer2">
+      <p>petmaru</p>
       <ul>
-        <li>(주)트리니언 CEO.김성철 070-4827-0834 경기도 파주시 탄현면 헤이리마을길 82-154</li>
-        <li>사업자등록번호.122-81-90214 통신판매업신고.2017-경기파주-0412호 개인정보관리책임. 김성철</li>
+        <li>Company Name: BMSMILE Co.,Ltd.</li>
+        <li>Business License N0 : 394-81-01000 [사업자정보확인]</li>
+        <li>E-Commerce Registration : 2020-Seoul Gangnam-01687.</li>
+        <li>Address : 4th floor, Teheran-ro 44-gil,</li>
+        <li>Gangnam-gu, Seoul, Republic of Korea / Tel. 1644-9603</li>
+        <li>CEO : Bongsu Park / Personal Info Manager : Dongwook Le</li>
       </ul>
     </div>
   </footer>
