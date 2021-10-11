@@ -1,32 +1,44 @@
 @charset "UTF-8";
-* {margin:0;padding:0;}
 
+footer {
+	width: 1300px;
+	height: 250px;
+	margin: 40px auto;
+	margin-bottom: 10px;
+	padding: 10px;
+	border-top: 1px solid black;
+}
 #footer1 {
-    position: fixed;
+    /* position: fixed; */
     height: 250px;
-    width: 650px;
-    left: 0px;
-    bottom: 0px;
+    width: 500px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 100px;
 }
 
 #footer2 {
-    position: fixed;
+    /* position: fixed; */
     height: 250px;
-    width: 650px;
-    right: 0px;
-    bottom: 0px;
+    width: 500px;
     text-align: right;
+    float: right;
+    margin-right: 100px;
 }
 
 #social {
-    clear: both;
+    /* clear: both; */
 }
+
+#social li {
+	float: left;
+}
+
 
 #social img{
     padding-right: 10px;
     width: 70px;
     height: 70px;
-    float: left;
     margin-bottom: 20px;
 }
 

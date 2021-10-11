@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/productlist.css" />
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_header.css" />
+    <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_footer.css" />
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/login.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -66,5 +67,6 @@
     <div id="findinfo">
         <a href="http://localhost:8090/Petmaru/info_find">아이디/비밀번호 찾기</a>
     </div>
+   <%@ include file="../template_footer.jsp" %>
 </body>
 </html>

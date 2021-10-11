@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 

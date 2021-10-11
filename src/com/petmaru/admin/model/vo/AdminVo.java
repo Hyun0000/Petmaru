@@ -1,6 +1,6 @@
 package com.petmaru.admin.model.vo;
 
-public class Admin {
+public class AdminVo {
 	private String admin_ID;
 	private String admin_pwd;
 	private String admin_Email;

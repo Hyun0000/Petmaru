@@ -18,6 +18,7 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productlist.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <title>productlist</title>
@@ -53,5 +54,6 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 			</c:choose>
 		</div>
 	</section>
+<%@ include file="../template_footer.jsp" %>
 </body>
 </html>
