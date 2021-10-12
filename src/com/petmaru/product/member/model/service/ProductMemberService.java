@@ -58,7 +58,11 @@ public class ProductMemberService {
 			return mainsubcarousel;
 		}
 	//======================================================================================================
+<<<<<<< HEAD
 		// 결제 페이지 회원 정보 가져오기(체크박스)
+=======
+		// 결제 페이지 회원 정보 가져오기(체크박)
+>>>>>>> edf2cedc8b7aaab9778c4383bb8158b6b43b199e
 		public MemberVo searchMembrtInfo(String id) {
 			MemberVo member = null;
 			Connection conn = getConnection();

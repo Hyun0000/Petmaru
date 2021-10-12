@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import static com.petmaru.common.DBCPTemplate.*;
 
-import com.petmaru.member.model.vo.MemberVo;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 public class ProductMemberDao {
@@ -183,41 +182,31 @@ public class ProductMemberDao {
 		}
 	//======================================================================================================
 		// 결제 페이지 회원 정보 가져오기(체크박스)
-		public MemberVo searchMembrtInfo(Connection conn, String id) {
-			MemberVo member = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = "select * from member where MEMBER_ID = ? ";
-//		    MEMBER_ID 		VARCHAR2(500) @		CONSTRAINT MEMBER_ID_PK PRIMARY KEY,
-//		    MEMBER_NAME 		CHAR(20) @			CONSTRAINT MEMBER_NAME_NN NOT NULL,
-//		    MEMBER_PW 		VARCHAR2(500) @		CONSTRAINT MEMBER_PW_NN NOT NULL,
-//		    MEMBER_PHONE 		CHAR(15) 	@		CONSTRAINT MEMBER_PHONE_NN NOT NULL,
-//		    MEMBER_ADDRESS 	VARCHAR2(500) 	@	CONSTRAINT MEMBER_ADDRESS_NN NOT NULL,
-//		    MEMBER_BIRTH 		NUMBER(10) 	@		CONSTRAINT MEMBER_BIRTH_NN NOT NULL,
-//		    MEMBER_EMAIL 		VARCHAR2(300) @		CONSTRAINT MEMBER_EMAIL_UK UNIQUE,
-//		    MEMBER_GENDER 	CHAR(1) 			CONSTRAINT MEMBER_GENDER_CK CHECK(MEMBER_GENDER IN ('M','F')),
-//		    MEMBER_POINT 		NUMBER 				DEFAULT 0,
-//		    MEMBER_REGDATE 	DATE 				DEFAULT SYSDATE
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);
-				rs = pstmt.executeQuery();
-				// 주소 번호 이름
-				if (rs.next()) {
-					member = new MemberVo();
-					member.setMember_point(rs.getInt("MEMBER_POINT"));
-					member.setMember_address(rs.getString("MEMBER_ADDRESS"));
-					member.setMember_phone(rs.getString("MEMBER_PHONE"));
-					member.setMember_name(rs.getString("MEMBER_NAME"));
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			System.out.println(member);
-			return member;
-		}
+//		public MemberVo searchMembrtInfo(Connection conn, String id) {
+//			MemberVo member = null;
+//			PreparedStatement pstmt = null;
+//			ResultSet rs = null;
+//			String sql = "select * from member where MEMBER_ID = ? ";
+//			
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, id);
+//				rs = pstmt.executeQuery();
+//				// 주소 번호 이름
+//				if (rs.next()) {
+//					member = new MemberVo();
+//					member.setMember_point(rs.getInt("MEMBER_POINT"));
+//					member.setMember_address(rs.getString("MEMBER_ADDRESS"));
+//					member.setMember_phone(rs.getString("MEMBER_PHONE"));
+//					member.setMember_name(rs.getString("MEMBER_NAME"));
+//				}
+//				
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			System.out.println(member);
+//			return member;
+//		}
 	//======================================================================================================
 		// 상품 검색
 		public ArrayList<ProductMemberVo> productMemberSearch(Connection conn, String keyword) {
