@@ -28,8 +28,7 @@
 </head>
 <body>
 <%@ include file="../template_header.jsp" %>
-
-    <section>
+       <section>
         <div id="product_img">
             <img src="<%=product.getProductImgUrl() %>">
         </div>
@@ -45,7 +44,6 @@
             </div>
 
             <div id="review_icon">
-				<%-- <a href="<%=context_root%>/productdetail?category=C">후기보기</a> --%>
                 <button type="button" id="reviewBtn">후기보기</button>
             </div>
             
@@ -55,15 +53,36 @@
             </div>
         </div>
     </section>
-    
-	     <section id="review_sec">
-        <div id="review_content">
+
+	<section id="review_sec">
+		<div id="review_content">
             <ul id="review_list">
-				<!-- js dom을 이용해 안의 내용을 채운다. -->
+				<c:forEach var="productMemberReview" items="${productMemberReview}">
+				<c:set var="k" value="${1+k}"></c:set>
+                <li>
+                    <div class="review_img">
+                        <img src="https://via.placeholder.com/200">
+                    </div>
+
+                    <div>
+	                    <!-- 처음에 page load시 1page의 후기들이 보이도록 설정 -->
+                        <p class="review_write_content_same review_write_content_${k}">${productMemberReview.getReviewContent()}</p>
+                            <h5 class="review_title_same review_title_${k}">${productMemberReview.getReviewTitle()}</h5><br><br>
+                    
+                        <p class="review_write_info">
+                            <span class="review_writer_same review_writer_${k}">${productMemberReview.getReviewWriter()}</span>
+                            <span class="review_date_same review_date_${k}">${productMemberReview.getReviewDate()}</span>
+                        </p>
+                        
+                        <a>수정</a>
+                        <a onclick="deleteAlert();" class="apple review_delete_${k}">삭제</a>
+                    </div>
+                </li>
+                </c:forEach>
             </ul>
-        </div>
-        
-    		<div id="page">
+		</div>
+		
+		<div id="page">
 			<c:choose>
 				<c:when test="${selectPage > endPageLink }">마지막 보다 더 큰수</c:when>
 				<c:when test="${selectPage < startPageLink }">처음보다 더 작은수</c:when>
@@ -74,76 +93,87 @@
 				</c:when>
 			</c:choose>
 		</div>
-    </section>
-        <script>
-	        for (var i = "${startPageLink}"; i <= "${endPageLink}"; i++) {
-		        $('.pageLink_' + i).on('click', function() {
-		        	console.log("ajax시작")
-		            $.ajax({
+	</section>
+	<script>
+			// 후기 글을 가져오는 ajax
+ 			for (var i = "${startPageLink}"; i <= "${endPageLink}"; i++) {
+ 				console.log("pagelink 시작");
+				$('.pageLink_' + i).on('click', function() {
+					console.log("ajax시작");
+					$.ajax({
 		                type : "POST",
 		                url : "productdetail",
 		                data : {
 		                	cateGory : "<%=product.getProductCategory()%>",
 		                    reviewpage : $(this).text()
 		                },
-		                dataType : "JSON",
-		                success : function(data) {
+		                dataType : "json",
+		                success : function (data) {
+		                	console.log("success 시작");
 		                	if (data != null) {
-		                			$('#review_list').children().remove();
-			                    for (let i = 0; i < data.reviewInfo.length; i++) {
-			                    	console.log("true 반복문 진입");
-			                    	
-			                        // 각 review가 담기는 li
-			                        var liEle = document.createElement('li');
-			                        liEle.setAttribute('class', "list_" + i);
-			                        document.getElementById('review_list').appendChild(liEle);
-
-			                        // 리뷰 내용, 작성자, 날짜가 들어가는 div
-			                        var divEle = document.createElement('div');
-			                        divEle.setAttribute('class', "content_list_" + i);
-			                        document.querySelector(".list_" + i).appendChild(divEle);
-
-			                        // 리뷰 내용을 담는 p
-			                        var pEle = document.createElement('p');
-			                        pEle.setAttribute('class', "content_box" + i);
-			                        document.querySelector(".content_list_" + i).appendChild(pEle);
-
-			                        // 리뷰 내용이 들어가는 h5
-			                        var hEle = document.createElement('h5');
-			                        hEle.innerText = data.reviewInfo[i].reviewContent;
-			                        hEle.setAttribute('class', "content_" + i);
-			                        document.querySelector(".content_box" + i).appendChild(hEle);
-
-			                        // 작성자, 날짜가 들어가는 p(리뷰 내용을 담는 p와 형제 관계)
-			                        var pEleInfo = document.createElement('p');
-			                        pEleInfo.setAttribute('class', "review_write_info_" + i);
-			                        document.querySelector(".content_list_" + i).appendChild(pEleInfo);
-
-			                        // 작성자가 들어가는 span
-			                        var writerSpanEle = document.createElement('span');
-			                        writerSpanEle.innerText = data.reviewInfo[i].reviewWriter;
-			                        writerSpanEle.setAttribute('class', "review_write_" + i);
-			                        document.querySelector(".review_write_info_" + i).appendChild(writerSpanEle);
-
-			                        // 작성일이 들어가는 span(작성자가 들어가는 span과 형제관계)
-			                        var dateSpanEle = document.createElement('span');
-			                        dateSpanEle.innerText = data.reviewInfo[i].reviewDate;
-			                        dateSpanEle.setAttribute('class', "review_date_" + i);
-			                        document.querySelector(".review_write_info_" + i).appendChild(writerSpanEle);
-
-								}
-		                    } else {
-		                    }
-		                },
-		                error : function(request,status,error) {
+		                		console.log("if 시작");
+		                		for (let i = 0; i < data.reviewInfo.length; i++) {
+		                			console.log(data.reviewInfo.length);
+		                			console.log("for 시작");
+									// 기존의 내용을 지워야 하니 empty() function을 사용
+ 		                			$('.review_title_' + (i + 1)).empty();
+		                			$('.review_write_content_' + (i + 1)).empty();
+		                			$('.review_writer_' + (i + 1)).empty();
+		                			$('.review_date_' + (i + 1)).empty();
+		                			
+		                			$('.review_title_' + (i + 1)).text(data.reviewInfo[i].reviewTitle);
+		                			$('.review_write_content_' + (i + 1)).text(data.reviewInfo[i].reviewContent);
+		                			$('.review_writer_' + (i + 1)).text(data.reviewInfo[i].reviewWriter);
+		                			$('.review_date_' + (i + 1)).text(data.reviewInfo[i].reviewDate);
+		                		}
+							}
+						},
+						error : function(request,status,error) {
 		                	console.log("false")
 		                    alert('후기가 없습니다.');
 		                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		                }
-		            });
-		        });
-	        }
-
+					})
+				})
+			}
+			
+			// 삭제 팝업 띄우는 fnuction
+ 			function deleteAlert() { alert('정말 삭제하시겠습니까?'); }
+			
+			// 후기 글을 삭제하는 ajax
+				console.log("ajax 삭제 for 시작");
+			$('.apple').on('click',function() {
+				console.log("(i + 1) : " + (i + 1));
+				console.log("ajax 삭제 시작");
+				$.ajax({
+	                type : "POST",
+	                url : "writememberdelete",
+	                data : {
+	                	title : $(this).parent().find(".review_title_same").text(),
+	                	writer : $(this).parent().find(".review_writer_same").text()
+	                },
+	                dataType : "json",
+	                success : function (data) {
+	                	console.log("success 진입");
+	                	console.log(data);
+	                	console.log(data.result);
+						if (data.result == 1) {
+							alert('삭제가 왼료되었습니다.');
+							// 새로 고침 이벤트
+							/* window.location.reload(); */
+							window.location.reload();
+						} else {
+							alert('삭제가 실패');
+						}
+					},
+					error : function(request,status,error) {
+	                	console.log("false 진입")
+	                    alert('삭제 실패');
+	                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	                }
+				})
+			})
     </script>
+<%@ include file="../template_footer.jsp" %>
 </body>
 </html>

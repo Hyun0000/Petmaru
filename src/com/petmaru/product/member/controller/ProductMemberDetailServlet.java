@@ -59,7 +59,7 @@ public class ProductMemberDetailServlet extends HttpServlet {
 		
 		// 사용자 선택 리뷰 페이지 링크 번호
 		String selectPageStr = request.getParameter("reviewpage");
-		int selectPage = 0;
+		int selectPage = 1;
 		
 		// selectPageStr가 null 일 때 selectPage을 기본값(1)로 설정 
 		if (selectPageStr == null || selectPageStr.equals("")) { selectPage = 1; } else { selectPage = Integer.parseInt(selectPageStr); }
@@ -67,6 +67,9 @@ public class ProductMemberDetailServlet extends HttpServlet {
 		// rownum 숫자
 		int startRown = 1 + (selectPage - 1) * PAGE_SIZE;
 		int endRown = startRown + PAGE_LINK - 1;
+		
+		ArrayList<WriteMemberReviewVo> productMemberReview = null;
+		productMemberReview = new WriteMemberReviewService().productMemberReview(cateGory, startRown, endRown);
 		
 		// 사용자 선택 페이지 링크 수에 따른 화면에 보여질 페이지 링크 수
 		// 1. 후기 글의 총 개수(각 상품 카테고리 별)
@@ -92,6 +95,7 @@ public class ProductMemberDetailServlet extends HttpServlet {
 		request.setAttribute("endPageLink", endPageLink);
 		request.setAttribute("selectPage", selectPage);
 		request.setAttribute("product", product);
+		request.setAttribute("productMemberReview", productMemberReview);
 		request.getRequestDispatcher("/WEB-INF/productmember/productdetail.jsp").forward(request, response);
 	}
 
@@ -119,7 +123,7 @@ public class ProductMemberDetailServlet extends HttpServlet {
 		// 사용자 선택 리뷰 페이지 링크 번호
 		String selectPageStr = request.getParameter("reviewpage");
 		System.out.println("selectPageStr : " + selectPageStr);
-		int selectPage = 0;
+		int selectPage = 1;
 		
 		// selectPageStr가 null 일 때 selectPage을 기본값(1)로 설정 
 		if (selectPageStr == null || selectPageStr.equals("")) { System.out.println("null이다."); selectPage = 1; }

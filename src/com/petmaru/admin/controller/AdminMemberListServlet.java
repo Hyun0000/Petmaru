@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.petmaru.member.model.dao.MemberDao;
 import com.petmaru.member.model.service.MemberService;
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
 
 /**
  * Servlet implementation class MemberList
  */
-@WebServlet("/MemberList")
+@WebServlet("/memberList")
 public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -70,7 +70,7 @@ public class AdminMemberListServlet extends HttpServlet {
 		if(endPage > pageCount) endPage=pageCount;
 		
 		// DB에서 값 읽어오기
-		ArrayList<Member> volist = new MemberService().MemberAllList(startRnum,endRnum);
+		ArrayList<MemberVo> volist = new MemberService().MemberAllList(startRnum,endRnum);
 		
 		// Data 전달을 위해서 request에 셋
 		request.setAttribute("Membervolist", volist);

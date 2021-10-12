@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
 import com.petmaru.product.member.model.service.ProductMemberService;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
@@ -69,7 +69,7 @@ public class ProductMemberBuyServlet extends HttpServlet {
 		else { id = idStr; }
 		System.out.println("id : " + id);
 		Map<String, Object> map = new HashMap<String, Object>();
-		Member member = null;
+		MemberVo member = null;
 		member = new ProductMemberService().searchMembrtInfo(id);
 		Gson gson = new GsonBuilder().create();
 		String gsonStr = ""; 

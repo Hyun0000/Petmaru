@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.petmaru.common.DBCPTemplate;
 import com.petmaru.member.model.dao.MemberDao;
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
 
 public class MemberService {
 
@@ -14,7 +14,7 @@ public class MemberService {
 	}
 
 	
-	public int insertMember(Member vo) {
+	public int insertMember(MemberVo vo) {
 		int result =-1;
 		int result2 = -1;
 		Connection conn = DBCPTemplate.getConnection();
@@ -36,8 +36,8 @@ public class MemberService {
 		return result;// 오류발생:-1, 가입성공:1, 가입실패:0, 기존회원있으면:2,가장큰수0xFF
 	}
 	
-	public ArrayList<Member> MemberAllList(int start, int end){
-		ArrayList<Member> volist = null;
+	public ArrayList<MemberVo> MemberAllList(int start, int end){
+		ArrayList<MemberVo> volist = null;
 		Connection conn = DBCPTemplate.getConnection();
 		
 		volist = new MemberDao().MemberListAll(conn, start, end);

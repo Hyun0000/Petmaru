@@ -55,5 +55,35 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 		</div>
 	</section>
 <%@ include file="../template_footer.jsp" %>
+<%String a = "aaaa"; %>
+<%= a %>
+<%= a %>
+<%= a %>
+	<script type="text/javascript">
+		$.ajax({
+			key1: "값";
+			url : "/main";
+			data : {
+				a1 : "${startPage}",
+				// 이렇게 사용가능하다.(java에서 선언한 변수를 js에서 사용할 수 있다. 단, 따옴표 사용권장, 안 붙여도 되긴한다.)
+				// 안 붙이면 오류를 발생시킬 가능성이 높다. --> 텅 빈것은 안 된다 "" 만 있는것은 괜찮다. 
+				// 텅 빈것은 문법오류를 발생시킨다.
+				a2 : "값2"
+			},
+			success : function (data) {
+				// 여기에 실려오는 data도 js 영역내에서만 쓸수 있다.
+				// 그 이상을 벗어나서는 사용할 수 없다.
+			}
+		});
+		
+		alert("${startPage}"); // 이렇게도 사용한다.
+		
+		// jsp도 js 안에서 사용가능 (따옴표를 반드시 붙여야한다.)
+		// a에 저장된값이 String이여도 무조건 따옴표를 붙인다.
+		alert("<%= a %>");
+		
+		// js의 변수는 '<%= %>'에 표현식으로 나타낼 수 없다.(택도 없다. el도 마찬가지)
+		// java 차원에서 선언된 변수는 js에서 사용가능. 그러나 그 반대는 불가능
+	</script>
 </body>
 </html>

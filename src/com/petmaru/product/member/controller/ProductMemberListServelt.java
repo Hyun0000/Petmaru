@@ -77,6 +77,7 @@ public class ProductMemberListServelt extends HttpServlet {
 //		
 		ArrayList<ProductMemberVo> producClothestList = null;
 		producClothestList = new ProductMemberService().productList(cateGory, startRown, endRown);
+		System.out.println(producClothestList);
 		
 		// JSP로 보낼 Data
 		request.setAttribute("totalPageLink", totalPageLink);

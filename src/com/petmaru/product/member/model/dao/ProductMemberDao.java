@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static com.petmaru.common.DBCPTemplate.*;
 
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 public class ProductMemberDao {
@@ -35,7 +35,8 @@ public class ProductMemberDao {
 					do {
 						product = new ProductMemberVo();
 						product.setProductNo(rs.getInt("PRODUCT_NO"));
-						product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
+						product.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+						// product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
 						product.setProductName(rs.getString("PRODUCT_NAME"));
 						product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
 						product.setPrice(rs.getInt("PRODUCT_PRICE"));
@@ -90,7 +91,8 @@ public class ProductMemberDao {
 				
 				if (rs.next()) {
 					product = new ProductMemberVo();
-					product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
+					product.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+					// product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
 					product.setProductNo(rs.getInt("PRODUCT_NO"));
 					product.setProductName(rs.getString("PRODUCT_NAME"));
 					product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
@@ -135,20 +137,38 @@ public class ProductMemberDao {
 	//======================================================================================================
 		// 메인 페이지 서브 캐러샐	
 		public ArrayList<ProductMemberVo> mainsubcarousel(Connection conn) {
+			// 난수 생성(1~88 사이의 난수 발생)
+			// System.out.println("0 ~ 100 사이의 난수 1개 발생 : " + (int)(Math.random()*88));
+			
+			final int DISPLAY_ZISE = 12; // 한 캐러셀 당 보여질 상품 개수
+			int allPrice = totalProduct(conn, "C");
+			// 카테고리별 상품 총 개수(카테고리별 상품 개수가 모두 동일하다는 가정하에 "C"를 인자로 넣는다.)
+			
+			int startRown = (int)(Math.random()*(allPrice-DISPLAY_ZISE));
+			int endRown =  startRown + DISPLAY_ZISE - 1;
+			System.out.println("startRown : " + startRown);
+			System.out.println("endRown : " + endRown);
+			
 			ArrayList<ProductMemberVo> mainsubcarousel = null;
 			ProductMemberVo product = null;
-			Statement stmt = null;
+			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String sql = "select * from product";
+
+			
+			String sql = "SELECT p.* from( SELECT PRODUCT_NO, PRODUCT_CATEGORY, PRODUCT_IMAGE_URL, ROW_NUMBER() OVER (PARTITION BY PRODUCT_CATEGORY ORDER BY PRODUCT_NO) AS NUM FROM PRODUCT) p where NUM between ? and ?"; 
 			try {
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(sql);
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRown);
+				pstmt.setInt(2, endRown);
 				
+				rs = pstmt.executeQuery();
 				if (rs.next()) {
 					mainsubcarousel = new ArrayList<ProductMemberVo>();
 					do {
 						product = new ProductMemberVo();
-						product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
+						product.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+						// product.setProductCategory(rs.getString("PRODUCT_CATEGORY").charAt(0));
+						product.setProductNo(rs.getInt("PRODUCT_NO"));
 						product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
 						mainsubcarousel.add(product);
 					} while (rs.next());
@@ -156,17 +176,28 @@ public class ProductMemberDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				close(conn);
+				close(rs);
+				close(pstmt);
 			}
 			return mainsubcarousel;
 		}
 	//======================================================================================================
 		// 결제 페이지 회원 정보 가져오기(체크박스)
-		public Member searchMembrtInfo(Connection conn, String id) {
-			Member member = null;
+		public MemberVo searchMembrtInfo(Connection conn, String id) {
+			MemberVo member = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = "select * from member where MEMBER_ID = ? ";
+//		    MEMBER_ID 		VARCHAR2(500) @		CONSTRAINT MEMBER_ID_PK PRIMARY KEY,
+//		    MEMBER_NAME 		CHAR(20) @			CONSTRAINT MEMBER_NAME_NN NOT NULL,
+//		    MEMBER_PW 		VARCHAR2(500) @		CONSTRAINT MEMBER_PW_NN NOT NULL,
+//		    MEMBER_PHONE 		CHAR(15) 	@		CONSTRAINT MEMBER_PHONE_NN NOT NULL,
+//		    MEMBER_ADDRESS 	VARCHAR2(500) 	@	CONSTRAINT MEMBER_ADDRESS_NN NOT NULL,
+//		    MEMBER_BIRTH 		NUMBER(10) 	@		CONSTRAINT MEMBER_BIRTH_NN NOT NULL,
+//		    MEMBER_EMAIL 		VARCHAR2(300) @		CONSTRAINT MEMBER_EMAIL_UK UNIQUE,
+//		    MEMBER_GENDER 	CHAR(1) 			CONSTRAINT MEMBER_GENDER_CK CHECK(MEMBER_GENDER IN ('M','F')),
+//		    MEMBER_POINT 		NUMBER 				DEFAULT 0,
+//		    MEMBER_REGDATE 	DATE 				DEFAULT SYSDATE
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -174,7 +205,8 @@ public class ProductMemberDao {
 				rs = pstmt.executeQuery();
 				// 주소 번호 이름
 				if (rs.next()) {
-					member = new Member();
+					member = new MemberVo();
+					member.setMember_point(rs.getInt("MEMBER_POINT"));
 					member.setMember_address(rs.getString("MEMBER_ADDRESS"));
 					member.setMember_phone(rs.getString("MEMBER_PHONE"));
 					member.setMember_name(rs.getString("MEMBER_NAME"));
@@ -185,5 +217,37 @@ public class ProductMemberDao {
 			}
 			System.out.println(member);
 			return member;
+		}
+	//======================================================================================================
+		// 상품 검색
+		public ArrayList<ProductMemberVo> productMemberSearch(Connection conn, String keyword) {
+			ArrayList<ProductMemberVo> productMemberSearch = null;
+			ProductMemberVo product = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			// PreparedStatement는 like의 (%?%) 부분을 쉼표처리하기가 까다로워 Statement를 사용한다.
+			String sql = "SELECT PRODUCT_CATEGORY, PRODUCT_NO, PRODUCT_IMAGE_URL,PRODUCT_NAME, PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_TAG LIKE '%" + keyword + "%' OR PRODUCT_NAME LIKE '%" + keyword + "%'"; 
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				if (rs.next()) {
+					productMemberSearch = new ArrayList<ProductMemberVo>();
+					do {
+						product = new ProductMemberVo();
+						product.setProductCategory(rs.getString("PRODUCT_CATEGORY"));
+						product.setProductNo(rs.getInt("PRODUCT_NO"));
+						product.setProductImgUrl(rs.getString("PRODUCT_IMAGE_URL"));
+						product.setProductName(rs.getString("PRODUCT_NAME"));
+						product.setPrice(rs.getInt("PRODUCT_PRICE"));
+						productMemberSearch.add(product);
+					} while (rs.next());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(stmt);
+			}
+			return productMemberSearch;
 		}
 }
