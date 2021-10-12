@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static com.petmaru.common.DBCPTemplate.*;
 
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
 public class ProductMemberDao {
@@ -162,8 +162,8 @@ public class ProductMemberDao {
 		}
 	//======================================================================================================
 		// 결제 페이지 회원 정보 가져오기(체크박스)
-		public Member searchMembrtInfo(Connection conn, String id) {
-			Member member = null;
+		public MemberVo searchMembrtInfo(Connection conn, String id) {
+			MemberVo member = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = "select * from member where MEMBER_ID = ? ";
@@ -174,7 +174,7 @@ public class ProductMemberDao {
 				rs = pstmt.executeQuery();
 				// 주소 번호 이름
 				if (rs.next()) {
-					member = new Member();
+					member = new MemberVo();
 					member.setMember_address(rs.getString("MEMBER_ADDRESS"));
 					member.setMember_phone(rs.getString("MEMBER_PHONE"));
 					member.setMember_name(rs.getString("MEMBER_NAME"));

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import static com.petmaru.common.DBCPTemplate.*;
 
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
 import com.petmaru.product.member.model.dao.ProductMemberDao;
 import com.petmaru.product.member.model.vo.ProductMemberVo;
 
@@ -57,8 +57,8 @@ public class ProductMemberService {
 		}
 	//======================================================================================================
 		// 결제 페이지 회원 정보 가져오기(체크박)
-		public Member searchMembrtInfo(String id) {
-			Member member = null;
+		public MemberVo searchMembrtInfo(String id) {
+			MemberVo member = null;
 			Connection conn = getConnection();
 			member = new ProductMemberDao().searchMembrtInfo(conn, id);
 			close(conn);

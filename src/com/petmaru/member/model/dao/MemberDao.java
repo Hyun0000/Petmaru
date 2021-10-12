@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.petmaru.common.DBCPTemplate;
-import com.petmaru.member.model.vo.Member;
+import com.petmaru.member.model.vo.MemberVo;
+
 
 public class MemberDao {
 
@@ -16,8 +17,8 @@ public class MemberDao {
 
 	}
 
-	public ArrayList<Member> MemberListAll(Connection conn ,int start, int end) {
-		ArrayList<Member> volist = null;
+	public ArrayList<MemberVo> MemberListAll(Connection conn ,int start, int end) {
+		ArrayList<MemberVo> volist = null;
 
 		String sql = "select Member_id,Member_name,Member_gender,Member_regdate from (select Rownum r, t1.* from (select * from member order by member_regdate desc) t1 ) where r between ? and ?";
 		PreparedStatement pstmt = null;
@@ -28,13 +29,13 @@ public class MemberDao {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
-			volist = new ArrayList<Member>();
+			volist = new ArrayList<MemberVo>();
 			if (rset.next()) {
 				do {
-					Member vo = new Member();
+					MemberVo vo = new MemberVo();
 					vo.setMember_id(rset.getString("Member_id"));
 					vo.setMember_name(rset.getString("Member_name"));
-					vo.setMember_gender(rset.getString("Member_gender").charAt(0));
+					vo.setMember_gender(rset.getString("Member_gender"));
 					vo.setMember_regdate(rset.getDate("Member_regdate"));
 //					vo.setMember_phone(rset.getString("member_phone"));
 //					vo.setMember_pw(rset.getString("Member_pw"));
@@ -80,7 +81,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public int insertMember(Connection conn, Member vo) { // 회원가입
+	public int insertMember(Connection conn, MemberVo vo) { // 회원가입
 		int result = -1;
 		String sqlInsert = "INSERT INTO" + " MEMBER" + " VALUES (?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
 		PreparedStatement pstmt = null;
@@ -90,7 +91,7 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sqlInsert);
 			pstmt.setString(1, vo.getMember_id());
 			pstmt.setString(2, vo.getMember_name());
-			pstmt.setString(3, vo.getMember_pw());
+			pstmt.setString(3, vo.getMember_pwd());
 			pstmt.setString(4, vo.getMember_phone());
 			pstmt.setString(5, vo.getMember_address());
 			pstmt.setString(6, String.valueOf(vo.getMember_gender()));
@@ -142,7 +143,7 @@ public class MemberDao {
 	}
 
 	// 중복확인
-	public int checkDuplicatedMember(Connection conn, Member vo) {
+	public int checkDuplicatedMember(Connection conn, MemberVo vo) {
 		int result = -1;
 		String sql = "select member_id 	from member where member_id=?";
 		PreparedStatement pstmt = null;

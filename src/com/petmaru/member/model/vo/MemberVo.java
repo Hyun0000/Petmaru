@@ -2,7 +2,7 @@ package com.petmaru.member.model.vo;
 
 import java.sql.Date;
 
-public class Member {
+public class MemberVo {
 	private String member_id;
 	private String member_name;
 	private String member_pwd;
@@ -93,7 +93,7 @@ public class Member {
 		this.member_email = member_email;
 	}
 
-	public Member(String member_id, String member_name, String member_pwd, String member_phone, String member_address,
+	public MemberVo(String member_id, String member_name, String member_pwd, String member_phone, String member_address,
 			Date member_regdate, String member_gender, int member_point, String member_email) {
 		super();
 		this.member_id = member_id;
@@ -106,7 +106,7 @@ public class Member {
 		this.member_point = member_point;
 		this.member_email = member_email;
 	}
-	public Member(String member_id, String member_name, String member_pwd, String member_phone, String member_address,
+	public MemberVo(String member_id, String member_name, String member_pwd, String member_phone, String member_address,
 			 String gender, int member_point, String member_email) {
 		super();
 		this.member_id = member_id;
@@ -120,7 +120,7 @@ public class Member {
 	}
 
 
-	public Member() {
+	public MemberVo() {
 		// TODO Auto-generated constructor stub
 	}
 
