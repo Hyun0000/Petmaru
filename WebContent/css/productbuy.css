@@ -1,23 +1,24 @@
 @charset "UTF-8";
 /* section & article 전체 설정 */
-section{
+#pay_box{
     width: 1300px;
     margin: 0 auto;
     margin-top: 20px;
+    font-size: 1.3rem;
 }
 
 /* 이번엔 각 article의 높이를 정한다. */
 article {
-    height: 500px;
+    /* height: 500px; */
     margin-top: 20px;
 }
 
 /* 각 구역별 h1 위치 설정 */
-section h1{
+#pay_box h1{
     margin-left: 80px;
     margin-bottom: 30px;
     margin-top: 20px;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 /* hr 두께 및 크기, 모양 설정 */
@@ -64,6 +65,7 @@ section hr{
 /* #delivery_info table 글자 정렬 설정 */
 .label_td {
     text-align: center;
+    width: 100px;
 }
 
 /* #delivery_info table input 태그 사이즈 & border 설정 */
@@ -79,9 +81,10 @@ section hr{
     outline: none;
 }
 
-/* #delivery_info table textarea 태그 사이즈 고정 */
-#delivery_info #need {
+/* textarea 태그 사이즈 고정 */
+#delivery_info #need_textarea {
     resize: none;
+    box-sizing: border-box;
 }
 
 /* consumer_input 구역 설정 */
@@ -105,6 +108,7 @@ section hr{
     height: 25px;
     border: none;
     border-bottom: 1px solid black;
+    margin-top: 15px;
 }
 
 /* #consumer_input table h1 태그 위치 및 글자 정렬 */
@@ -157,7 +161,11 @@ section hr{
     height: 45px;
     border-bottom: 1px solid black;
     margin-left: 50px;
+    line-height: 45px;
     /* background-color: red; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* 상품 이미지 크기 설정 */
@@ -211,8 +219,8 @@ section hr{
 /* table 위치 설정 및 td간 사이즈 조정 */
 #pay_info table {
     margin: 0 auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; */
     border-spacing: 100px 50px;
     /* table-layout:fixed; */
     width: 1100px;
@@ -231,6 +239,7 @@ section hr{
 /* 결제 방식 각 div에 flex 지정 */
 #pay_choice {
     display: flex;
+    font: ;
 }
 
 /* 각 결제 방식의 label 사이즈 및 글자 정렬 지정 */
@@ -299,7 +308,7 @@ select#coupon {
     height: 50px;
     line-height: 50px;
     text-align: center;
-    padding: 50px;
+    /* padding: 50px; */
     
 }
 

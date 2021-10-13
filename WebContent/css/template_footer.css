@@ -6,10 +6,9 @@ footer {
 	margin: 40px auto;
 	margin-bottom: 10px;
 	padding: 10px;
-	border-top: 1px solid black;
+	border-top: 3px solid black;
 }
 #footer1 {
-    /* position: fixed; */
     height: 250px;
     width: 500px;
     float: left;
@@ -18,7 +17,6 @@ footer {
 }
 
 #footer2 {
-    /* position: fixed; */
     height: 250px;
     width: 500px;
     text-align: right;
@@ -38,7 +36,7 @@ footer {
     margin-bottom: 20px;
 }
 
-#phone {
+#footer1 #phone {
     clear: left;
     font-size: 40px;
     margin-bottom: 20px;

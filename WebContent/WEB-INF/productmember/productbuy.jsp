@@ -9,17 +9,19 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productbuy.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="<%=context_root %>/js/productdetail.js" ></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>Insert title here</title>
+<script src="<%=context_root %>/js/template_header.js"></script>
+<title>Petmaru</title>
 </head>
 <body>
 <%@ include file="../template_header.jsp" %>
-    <section>
+    <section id="pay_box">
         <article id="delivery_info">
             <h1>배송지 정보</h1>
             <hr id="delivery_info_hr">
@@ -37,16 +39,27 @@
                     </tr>
                     <tr>
                         <td class="label_td"><label for="phone">번호</label></td>
-                        <td class="input_td"><input type="text" id="phone" name="phone" class="inputEle" placeholder="번호를 입력해주세요"></td>
+                        <td class="input_td"><input type="text" id="phone" name="phone" class="inputEle" placeholder="(-) 포함해 번호를 입력해주세요"></td>
                     </tr>
                     <tr>
                         <td class="label_td"><label for="name">이름</label></td>
                         <td class="input_td"><input type="text" id="name" name="name" class="inputEle" placeholder="이름를 입력해주세요"></td>
                     </tr>
-                    <tr><!-- 요청사항은 select로? -->
+                    <tr>
                         <!-- 글자수 제한은 js로 두기 -->
                         <td class="label_td"><label for="need">요청사항</label></td>
-                        <td class="input_td"><textarea name="need" id="need" cols="60" rows="5" ></textarea></td>
+                        <td class="input_td">
+                            <select name="need" id="need_select" style="width: 400px; height: 25px;" onchange="typeFunc(this);">
+                                <option style="display: none;"></option>
+                                <option value="need_one">문앞에 두고 가주세요</option>
+                                <option value="need_two">오기전에 전화주세요</option>
+                                <option value="need_three">문워크로 와주세요</option>
+                                <option value="need_four">앞구르기로 와주세요</option>
+                                <option value="need_five">오지마세요</option>
+                                <option value="typing" id="change_textarea">직접입력</option>
+                            </select>
+                        <textarea name="need" id="need_textarea" cols="60" rows="5" style="width: 400px; display: none;"></textarea>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -146,7 +159,7 @@
                     <tr>
                         <td class="pay_info_title">포인트</td>
                         <td>
-                            <input type="text" name="point" id="point" placeholder="현재 포인트">
+                            <input type="text" name="point" id="point" placeholder="숫자만 입력해 주세요">
                             <input type="checkbox" id="use_whole_point">
                             <label for="use_whole_point">전체 포인트 사용</label>
                         </td>
@@ -170,19 +183,19 @@
                             <label for="cash_receipt_y">발행</label>
                             <input type="radio" name="cash_receipt" value="cash_receipt_y" id="cash_receipt_y">
                             <label for="cash_receipt_n">미발행</label>
-                            <input type="radio" name="cash_receipt" value="cash_receipt_n" id="cash_receipt_n">
-                            <input type="text" name="cash_receipt_phone" id="cash_receipt_phone" placeholder="번호 입력" display: none;">
+                            <input type="radio" name="cash_receipt" value="cash_receipt_n" id="cash_receipt_n" checked>
+                            <input type="text" name="cash_receipt_phone" id="cash_receipt_phone" placeholder="(-) 포함해 번호를 입력해주세요">
                         </td>
                     </tr>
                 </table>
             </div>
 
             <div id="payBtn">
-                <button type="button">결제</button>
+                <button type="button" id="pay_btn">결제</button>
             </div>
         </article>
     </section>
-    
+    <%@ include file="../template_footer.jsp" %>
        <script>
 	       document.getElementById('cash_receipt_y').onclick = function() {
 	           document.getElementById('cash_receipt_phone').style.display = 'inline-block';
@@ -192,6 +205,12 @@
 	       }
 	       
 	       $('#info_same').on('click', function () {
+	    		// 배송지 정보 입력칸에 토글 방식 적용
+	    	   if ($('#address').val() != "") {
+	    		   $('#address').val("");
+	    		   $('#phone').val("");
+	    		   $('#name').val("");
+			} else {
 	    		   console.log("ajax시작");
 	    	   $.ajax({
 	    		   type : "POST",
@@ -202,31 +221,181 @@
 	    		   dataType : "json",
 	    		   success : function (data) {
 	    			   // 현재 data는 아래와 같은 상태이다.
-	    			   // data = {
-   								// "memberInfo":{"memberName":"이직걸",
-  									// "memberPhone":"010-0000-0001",
-									// "memberAdress":"서울시 용산구 001번지",
-  						   			// "memberBirth":0,
-  						   			// "memberGender":"\u0000",
-  						   			// 	"memberPoint":0},
-				   					// "address":"서울시 용산구 001번지",
-					   				// "phone":"010-0000-0001",
-					   				// "name":"이직걸"
-				   				//}
-	    			 	  console.log('success 진입')
+/* 	    				  data = {"memberInfo":{"memberName":"이직걸",
+	    				   			  "memberPhone":"010-0000-0001",
+	    				   			  "memberAdress":"서울시 용산구 001번지",
+	    				   			  "memberBirth":0,
+	    				   			  "memberGender":"\u0000",
+	    				   			  "memberPoint":1000}}
+	    			 	  console.log('success 진입') */
 					if (data != null) {
 						console.log('데이터 가져옴');
-						$('#address').val(data.memberInfo.memberAdress);
-						$('#phone').val(data.memberInfo.memberPhone);
-						$('#name').val(data.memberInfo.memberName);
+						$('#address').val($.trim(data.memberInfo.memberAdress));
+						$('#phone').val($.trim(data.memberInfo.memberPhone));
+						$('#name').val($.trim(data.memberInfo.memberName));
 						console.log('입력 성공');
 					}
 				},
 					error : function () {
 						alert('데이터 못 가져옴');
 					}
-    	   })
+    		   })
+			}
 		})
+		
+		//============================================================================
+		// '전체 포인트 사용' 체크박스를 누르면 현재 회원의 포인트 전액이 자동 입력
+       $('#use_whole_point').on('click', function () {
+    	   // 전체 포인트 사용 체크박스에 토글 방식 적용
+    	   if ($('#point').val() != "") {
+    		   $('#point').val("");
+		} else {
+	   		   console.log("ajax시작");
+	   	   $.ajax({
+	   		   type : "POST",
+	   		   url : "productbuy",
+	   		   data : {
+	   			   id : "user01"
+	   		   },
+	   		   dataType : "json",
+	   		   success : function (data) {
+	   			 	  console.log('success 진입')
+				if (data != null) {
+					console.log('데이터 가져옴');
+					$('#point').val(data.memberInfo.memberPoint);
+					console.log('입력 성공');
+				}
+			},
+				error : function () {
+					alert('데이터 못 가져옴');
+				}
+	  	   })
+		}  
+	})
+		//============================================================================
+		// '현금영수증' 발행 radio를 누르면 현재 회원의 번호가 자동 입력
+	       $('#cash_receipt_y').on('click', function () {
+	   		   console.log("ajax시작");
+	   	   $.ajax({
+	   		   type : "POST",
+	   		   url : "productbuy",
+	   		   data : {
+	   			   id : "user01"
+	   		   },
+	   		   dataType : "json",
+	   		   success : function (data) {
+	   			 	  console.log('success 진입')
+				if (data != null) {
+					console.log('데이터 가져옴');
+					$('#cash_receipt_phone').val($.trim(data.memberInfo.memberPhone));
+					console.log('입력 성공');
+				}
+			},
+				error : function () {
+					alert('데이터 못 가져옴');
+				}
+	  	   })
+		})
+		//============================================================================
+		//============================================================================
+		//============================================================================
+		// 유효성 검사
+		
+        // 요청사항을 textarea로 변경하는 event
+        // css로 위치 수정 필요
+        var textareaEle = document.getElementById('need_textarea');
+        var selectEle = document.getElementById('need_select');
+
+
+        function typeFunc(e) {
+            if (e.value == "typing") {
+                textareaEle.style.display = "block";
+                // selectEle.style.display = "none";
+            } else {
+                textareaEle.style.display = "none";
+                selectEle.style.display = "block";
+            }
+        }
+
+        // 유효성 체크 이벤트 등록
+        document.getElementById('pay_btn').onclick = payFunction;
+
+        //==============================배송지 정보 부분==============================
+        function payFunction() {
+            // nullCheck function
+            function nullCheckC(e) {
+                if (e.value == "") {
+                    alert('빈칸을 입력해주세요');
+                    // e의 모습 예시 --> document.getElementById('address')
+                }
+            }
+
+            // (1). 공백 검사
+            // 1. 주소
+            var addressEle = document.getElementById('address');
+            // 2. 번호
+            var phoneEle = document.getElementById('phone');
+            // 3. 이름
+            var nameEle = document.getElementById('name');
+            
+            nullCheckC(addressEle);
+            nullCheckC(phoneEle);
+            nullCheckC(nameEle);
+            
+            // 4. 요청사항(textarea)
+            // textarea가 활성화 될때만 공백 체크
+            if (textareaEle.style.display == "block") {
+                var needEle = document.getElementById('need_textarea');
+                nullCheckC(needEle);
+            }
+
+            // (2). 정규식 검사
+            // 1. 번호
+            let phoneRegExp = /^01[0-9]-[0-9]{4}-[0-9]{4}$/;
+            if (!phoneRegExp.test(phoneEle.value)) {
+                alert('핸드폰 번호를 올바르게 입력해주세요');
+            }
+
+            // 2. 이름
+            var nameRegExp = /^[가-힣a-zA-Z]{2,10}$/;
+            if (!nameRegExp.test(nameEle.value)) {
+                alert('이름을 올바르게 입력해주세요');
+            }
+        //==============================결제 및 포인트 정보 부분==============================
+            // (1). 포인트칸에 숫자만 입력되게(기호도 일절없이 오직 숫자만)
+            var pointEle = document.getElementById('point');
+            var pointRegExp = /^[0-9]*$/g;
+            // g --> 글로벌 : 전체에서 정규식 만족을 확인한다.
+            // * --> 글자수 무제한
+            if (!pointRegExp.test(pointEle.value)) {
+                alert('포인트 금액을 정확히 입력해주세요');
+            }
+
+            // (2). 현금영수증 번호 입력 정규식 검사
+            // 현금 영수증 번호 입력칸이 보이면 정규식 체크 진행
+
+            let pointPhoneEleValue = pointPhoneEle.value; // 현금 영수증 번호 입력칸의 value
+            if (pointPhoneEle.style.display == 'inline-block') {
+                if (!phoneRegExp.test(pointPhoneEleValue)) {
+                    alert('핸드폰 번호를 올바르게 입력해주세요');
+                }
+            }
+        //=======================모든 유효성 검사 통과, 결제 성공 알림창======================
+            alert('결제 성공');
+        }
+
+        // 현금 영수증 번호 입력칸 토글 이벤트
+        // 기본은 번호 입력칸 none
+        let pointPhoneEle = document.getElementById('cash_receipt_phone'); // 현금 영수증 번호 입력칸
+
+        pointPhoneEle.style.display = 'none';
+
+        document.getElementById('cash_receipt_y').onclick = function() {
+            pointPhoneEle.style.display = 'inline-block';
+        }
+        document.getElementById('cash_receipt_n').onclick = function() {
+            pointPhoneEle.style.display = 'none';
+        }
        </script>
 </body>
 </html>

@@ -17,16 +17,18 @@
 <meta charset="UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productdetail.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <script type="text/javascript" src="<%=context_root %>/js/productdetail.js" ></script>
+<script src="<%=context_root %>/js/template_header.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>Insert title here</title>
-<title>Insert title here</title>
+<title>Petmaru</title>
 </head>
 <body>
+
 <%@ include file="../template_header.jsp" %>
        <section>
         <div id="product_img">
@@ -43,44 +45,45 @@
                 <h2><%=product.getPrice() %>원</h2>
             </div>
 
-            <div id="review_icon">
-                <button type="button" id="reviewBtn">후기보기</button>
-            </div>
-            
             <div id="icon">
                 <a href="<%=context_root%>/productbuy?pno=<%=product.getProductNo() %>" id="purchase">BUY</a>
                 <a href="#" id="cart">CART</a>
             </div>
         </div>
     </section>
-
+    
 	<section id="review_sec">
-		<div id="review_content">
-            <ul id="review_list">
-				<c:forEach var="productMemberReview" items="${productMemberReview}">
-				<c:set var="k" value="${1+k}"></c:set>
-                <li>
-                    <div class="review_img">
-                        <img src="https://via.placeholder.com/200">
-                    </div>
-
-                    <div>
-	                    <!-- 처음에 page load시 1page의 후기들이 보이도록 설정 -->
-                        <p class="review_write_content_same review_write_content_${k}">${productMemberReview.getReviewContent()}</p>
-                            <h5 class="review_title_same review_title_${k}">${productMemberReview.getReviewTitle()}</h5><br><br>
-                    
-                        <p class="review_write_info">
-                            <span class="review_writer_same review_writer_${k}">${productMemberReview.getReviewWriter()}</span>
-                            <span class="review_date_same review_date_${k}">${productMemberReview.getReviewDate()}</span>
-                        </p>
-                        
-                        <a>수정</a>
-                        <a onclick="deleteAlert();" class="apple review_delete_${k}">삭제</a>
-                    </div>
-                </li>
-                </c:forEach>
-            </ul>
-		</div>
+       <div id="review_top_line"><h1>Review</h1></div>
+       
+			<div id="review_content">
+	            <ul id="review_list">
+					<c:forEach var="productMemberReview" items="${productMemberReview}">
+					<c:set var="k" value="${1+k}"></c:set>
+	                <li>
+	                    <div class="review_img">
+	                        <img src="https://via.placeholder.com/200">
+	                    </div>
+	
+	                    <div id="review_box">
+		                    <!-- 처음에 page load시 1page의 후기들이 보이도록 설정 -->
+	                        <h5 class="review_title_same review_title_${k}">${productMemberReview.reviewTitle}</h5><br>
+	                        <p class="review_write_content_same review_write_content_${k}">${productMemberReview.reviewContent}</p><br>
+	                    
+	                        <div class="review_write_info">
+	                        	<div class="review_writer_date">
+		                            <span class="review_writer_same review_writer_${k}">${productMemberReview.reviewWriter}</span>
+		                            <span class="review_date_same review_date_${k}">${productMemberReview.reviewDate}</span>
+	                            </div>
+	                            <div class="btns">
+		                            <a>수정</a>
+		                            <a onclick="deleteAlert();" class="apple review_delete_${k}">삭제</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </li>
+	                </c:forEach>
+	            </ul>
+			</div>
 		
 		<div id="page">
 			<c:choose>
@@ -94,6 +97,7 @@
 			</c:choose>
 		</div>
 	</section>
+	<%@ include file="../template_footer.jsp" %>
 	<script>
 			// 후기 글을 가져오는 ajax
  			for (var i = "${startPageLink}"; i <= "${endPageLink}"; i++) {
@@ -143,14 +147,16 @@
 			// 후기 글을 삭제하는 ajax
 				console.log("ajax 삭제 for 시작");
 			$('.apple').on('click',function() {
-				console.log("(i + 1) : " + (i + 1));
 				console.log("ajax 삭제 시작");
+				console.log($(this).parents('#grape'));
+				console.log($(this).parent().parent());
+				console.log($(this).parent().parent().parent());
 				$.ajax({
 	                type : "POST",
 	                url : "writememberdelete",
 	                data : {
-	                	title : $(this).parent().find(".review_title_same").text(),
-	                	writer : $(this).parent().find(".review_writer_same").text()
+	                	title : $(this).parents('#review_box').find(".review_title_same").text(),
+	                	writer : $(this).parents('#review_box').find(".review_writer_same").text()
 	                },
 	                dataType : "json",
 	                success : function (data) {
@@ -174,6 +180,5 @@
 				})
 			})
     </script>
-<%@ include file="../template_footer.jsp" %>
 </body>
 </html>

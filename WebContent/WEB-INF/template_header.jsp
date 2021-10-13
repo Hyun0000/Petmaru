@@ -2,8 +2,8 @@
     <header>
         <div id="top_login">
             <ul>
-                <li><a href="http://127.0.0.1:5500/petmaru/login.html">로그인</a></li>
-                <li><a href="http://127.0.0.1:5500/petmaru/join.html">회원가입</a></li>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
                 <li><a href="#">마이페이지</a></li>
             </ul>
         </div>
@@ -14,9 +14,8 @@
             </div>
 
             <div id="search">
-                <form action="#" method="GET">
-                    <!-- <div class="material-icons">search</div> -->
-                    <input type="text" name="keyword">
+                <form id="keyward_submit">
+                    <input type="text" name="keyword" id="keyword" onkeydown="return pressEnter();">
                 </form>
             </div>
         </div>
