@@ -20,4 +20,12 @@
 	  <url-pattern>*.swf</url-pattern>
 	  <url-pattern>*.gif</url-pattern>
   </servlet-mapping>
+  <filter>
+  	<filter-name>PetmaruFilter</filter-name>
+  	<filter-class>common.filter.PetmaruFilter</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>PetmaruFilter</filter-name>
+	<url-pattern>/</url-pattern>
+  </filter-mapping>
 </web-app>

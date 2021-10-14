@@ -43,8 +43,8 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBCPTemplate.close(pstmt);
 			DBCPTemplate.close(rset);
+			DBCPTemplate.close(pstmt);
 		}
 		return list;
 	}
@@ -192,32 +192,29 @@ public class MemberDao {
 
 	public int loginmember(Connection conn, String id, String pwd) { // 로그인
 		int result = -1;
-		String sql = "select MEMBER_ID from MEMBER where MEMBER_ID=? and MEMBER_PW =?";
+		String sql = "select MEMBER_PW from MEMBER where MEMBER_ID=? and MEMBER_PW =?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-//			System.out.println("ymkim" + id);
-//			System.out.println("ymkim" + pwd);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-//			System.out.println("ymkim" + 3);
 			rset = pstmt.executeQuery();
-//			System.out.println("ymkim" + 4);
+			System.out.println("dao id : " + id);
+			System.out.println("dao pwd : " + pwd);
+			
 			if (rset.next()) {
-//				System.out.println("ymkim" + 1);
+				System.out.println("정보 가져오기 성공");
 				String dbPwd = rset.getString(1);
 				if (pwd.equals(dbPwd)) {
-//					System.out.println("ymkim" + 2);
-					// pwd 도 같음 로그인 성공
-					result = 0;
-				} else {
-					// pwd 가 틀림
+					System.out.println("로그인 성공");
 					result = 1;
+				} else { // pwd 가 틀림
+					System.out.println("로그인 실패");
+					result = 0;
 				}
 			} else {
-				// id없음
-				System.out.println("ymkim " + 6);
+				System.out.println("해당하는 id가 없다.");
 				result = 2;
 			}
 		} catch (Exception e) {

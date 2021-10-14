@@ -17,7 +17,7 @@ import com.petmaru.member.model.vo.MemberVo;
 /**
  * Servlet implementation class AdminPageServlet
  */
-@WebServlet(name = "MemberList", urlPatterns = { "/MemberList" })
+@WebServlet("/MemberList")
 public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,18 +33,23 @@ public class AdminMemberListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset = UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
-		HttpSession session = request.getSession(false);
-		MemberVo m = (MemberVo)session.getAttribute("member");
+		// HttpSession session = request.getSession(false);
+		MemberVo m = (MemberVo)request.getSession().getAttribute("memberLoginInfo");
+	// MemberVo m = (MemberVo)session.getAttribute("memberLoginInfo");
+//		System.out.println(m);
 		String memberId = m.getMember_id();
+		System.out.println(memberId);
 		
 		if(memberId.equals("admin")) {
 			MemberService service = new MemberService();
 			ArrayList<MemberVo> list = service.selectList();
 			
 			request.setAttribute("members", list);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Member/MemberList.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/MemberList.jsp");
 			rd.forward(request, response);
 		}
 		

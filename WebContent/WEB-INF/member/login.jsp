@@ -35,12 +35,12 @@
             <table id="login_table">
                 <tr>
                     <td style="font-size: 25px;">아이디</td>
-                    <td><input type="text" id="id" class="input"></td>
+                    <td><input type="text" id="id" class="input" name="id"></td>
                 </tr>
                 
                 <tr>
                     <td style="font-size: 25px;">비밀번호</td>
-                    <td> <input type="password" id="pwd" class="input"></td>
+                    <td> <input type="password" id="pwd" class="input" name="pwd"></td>
                 </tr>
                 
                 <br><br>

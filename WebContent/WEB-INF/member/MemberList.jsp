@@ -19,8 +19,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="/WEB-INF/template_header.jsp"%>
-	<%@ include file="/WEB-INF/template_footer.jsp"%>
+	<%@ include file="../template_header.jsp"%>
+	
 	
 	
 	<section>
@@ -60,6 +60,6 @@
 	</div>
 	</section>
 	
-	
+	<%@ include file="../template_footer.jsp"%>
 </body>
 </html>

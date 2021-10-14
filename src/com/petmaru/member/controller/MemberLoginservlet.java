@@ -45,9 +45,11 @@ public class MemberLoginservlet extends HttpServlet {
 		String id =request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		PrintWriter out = response.getWriter();
+		System.out.println("id : " + id);
+		System.out.println("pwd : " + pwd);
 		
 		//http://localhost:8090/Petmaru/Loginservlet?id=kim9140&pwd=1234
-		// return : 0 - id,pwd 일치,  1- id만일치,  2- id없음, -1 오류발생
+		// return : 1 - id,pwd 일치 / 0- id만일치 /  2- id없음 / -1 오류발생
 				 int result = new MemberService().loginmember(id, pwd);
 				 
 				 if(result == 1) {
@@ -59,7 +61,7 @@ public class MemberLoginservlet extends HttpServlet {
 				 }
 				 //Member vo = new Member();
 				// response.getWriter().append(vo.toString());
-				 request.getRequestDispatcher("/WEB-INF/member/login.jsp").forward(request, response);
+				 request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 
 }
