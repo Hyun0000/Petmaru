@@ -23,8 +23,8 @@
     <header>
         <div id="top_login">
             <ul>
-                <li><a href="http://127.0.0.1:5500/petmaru/login.html">로그인</a></li>
-                <li><a href="http://127.0.0.1:5500/petmaru/join.html">회원가입</a></li>
+                <li><a href="http://localhost:8090/Petmaru/login">로그인</a></li>
+                <li><a href="http://localhost:8090/Petmaru/memberjoin">회원가입</a></li>
                 <li><a href="#">마이페이지</a></li>
             </ul>
         </div>
@@ -86,41 +86,41 @@
             <table id="login_table">
                 <tr>
                     <td style="font-size: 25px;">아이디</td>
-                    <td><input type="text" id="id" class="input"></td>
+                    <td><input type="text" name = "id" id="id" class="input"></td>
                     <td><input type="button" value="중복확인" id="id_check"></td>
 
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">비밀번호</td>
-                    <td> <input type="password" id="pwd1" class="input"></td>
+                    <td> <input type="password" name="pwd1" id="pwd1" class="input"></td>
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">비밀번호 확인</td>
-                    <td> <input type="password" id="pwd2" class="input"></td>
+                    <td> <input type="password" id="pwd2" name= "pwd2" class="input"></td>
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">이메일</td>
-                    <td> <input type="text" id="email" class="input"></td>
+                    <td> <input type="text" id="email" name="email" class="input"></td>
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">이름</td>
-                    <td> <input type="text" id="name" class="input"></td>
+                    <td> <input type="text" id="name" name ="name" class="input"></td>
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">휴대전화</td>
-                    <td><select name="phone1" class="phone1" id="phone1">
+                    <td><select name="phone1" class="phone1" name="phone1" id="phone1">
                             <option value="010">010</option>
                             <option value="011">011</option>
                             <option value="016">016</option>
                             <option value="017">017</option>
                             <option value="018">018</option>
                             <option value="019">019</option>
-                        </select> <input type="text" id="phone2" class="phone2">-<input type="text" id="phone3"
+                        </select> <input type="text" id="phone2" name="phone2" class="phone2">-<input type="text" name = "phone3" id="phone3"
                             class="phone2"> </td>
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">주소</td>
-                    <td> <input type="text" id="add" class="input"></td>
+                    <td> <input type="text" id="add" name="add" class="input"></td>
                 </tr>
                 <tr>
                     <td style="font-size: 25px;">성별</td>
@@ -149,7 +149,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" sytle="text-align:center">
-                        <input type="button" onclick="joinbtn_click();" value="회원가입" class="btn" id="joinbtn">
+                        <input type="submit" onclick="joinbtn_click();" value="회원가입" class="btn" id="joinbtn">
                     </td>
                 </tr>
             </table>
@@ -172,13 +172,12 @@
             var birth1 = document.getElementById("birth1").value;
             var month = document.getElementById("month").value;
             var birth2 = document.getElementById("birth2").value;
-            var gender_value = ''; 
             
     
             //성별체크 
             for(var i = 0; i<gender.length ;i++){
                 if(gender[i].checked){
-                    gender_value = gender[i].value; 
+                    gender = gender[i].value; 
                 }
             }
            // console.log(phone1);
@@ -188,7 +187,18 @@
             if(pwd1 != pwd2) {
                 alert("동일하게 입력해주세요");
                 return false;
-            } 
+            }
+            var phone2check= /^[0-9]{3,4}$/;
+            if( !phone2check.test(phone2) ){
+                alert("3-4 자리 유효 조건에 맞게 입력해주세요");
+                return false;
+            }
+            var phone3check= /^[0-9]{4}$/;
+            if( !phone3check.test(phone3) ){
+                alert("4 자리 유효 조건에 맞게 입력해주세요");
+                return false;
+            }
+            alert("회원가입 완료");
 
         }
      

@@ -99,4 +99,12 @@ public class MemberService {
 		return result;
 	}
 	
+	public String findId(String name, String email) { //아이디찾기
+		String result = null;
+		Connection conn = DBCPTemplate.getConnection();		
+		result = new MemberDao().findId(conn, name, email);
+		DBCPTemplate.close(conn);
+		return result;
+	
+	}
 }

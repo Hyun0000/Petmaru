@@ -44,7 +44,6 @@ public class MemberLoginservlet extends HttpServlet {
 		
 		String id =request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		PrintWriter out = response.getWriter();
 		System.out.println("id : " + id);
 		System.out.println("pwd : " + pwd);
 		
@@ -56,12 +55,12 @@ public class MemberLoginservlet extends HttpServlet {
 					 request.getSession().setAttribute("memberLoginInfo", id);
 					 System.out.println(id + "로그인 성공했다");
 				 }else {
-					 out.println(result);
-					 out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
+					System.out.println(result);
+					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
 				 }
 				 //Member vo = new Member();
 				// response.getWriter().append(vo.toString());
-				 request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+				 request.getRequestDispatcher("/WEB-INF/member/login.jsp").forward(request, response);
 	}
 
 }

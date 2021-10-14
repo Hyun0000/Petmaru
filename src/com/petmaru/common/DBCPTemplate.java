@@ -16,8 +16,8 @@ public class DBCPTemplate {
 		try {
 			Context firstSearch = new InitialContext();
 			Context secondSearch = (Context)firstSearch.lookup("java:comp/env");
-			DataSource ds = (DataSource)secondSearch.lookup("jdbc/petmaruLocal");
-//			DataSource ds = (DataSource)secondSearch.lookup("jdbc/petmaruDclass");
+//			DataSource ds = (DataSource)secondSearch.lookup("jdbc/petmaruLocal");
+			DataSource ds = (DataSource)secondSearch.lookup("jdbc/petmaruDclass");
 			conn = ds.getConnection();
 			if (conn != null) {
 				System.out.println("연결성공");

@@ -65,7 +65,7 @@
     <br><br>
     <div id=login_bottom_line></div>
     <div id="findinfo">
-        <a href="http://localhost:8090/Petmaru/info_find">아이디/비밀번호 찾기</a>
+        <a href="http://localhost:8090/Petmaru/infofind">아이디/비밀번호 찾기</a>
     </div>
    <%@ include file="../template_footer.jsp" %>
 </body>
