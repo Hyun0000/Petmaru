@@ -1,0 +1,28 @@
+@charset "UTF-8";
+* {margin:0;padding:0;}
+
+#mainad {
+    width: 1300px;
+}
+
+#mainad a, img{
+    width: 500px;
+    margin-left: 100px;
+}
+
+#mainad_text{
+    float: right;
+    height: 300px;
+    width: 500px;
+    margin-right: 25px;
+    padding-top: 90px;
+}
+
+#mainad_text h1{
+    padding-bottom: 30px;
+}
+
+#mainad_text p {
+    color: #7e7e7e;
+    font-size: 20px;
+}
