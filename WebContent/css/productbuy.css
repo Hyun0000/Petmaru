@@ -4,7 +4,7 @@
     width: 1300px;
     margin: 0 auto;
     margin-top: 20px;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 }
 
 /* 이번엔 각 article의 높이를 정한다. */
@@ -46,6 +46,11 @@ section hr{
     margin-left: 60px;
 }
 
+/* 배송지 정보칸 폰트 사이즈 조정 */
+#input_box input {
+	font-size: 1.2rem
+}
+
 /* table 크기 및 위치 지정 */
 #input_box table{
     margin: 0 auto;
@@ -74,6 +79,7 @@ section hr{
     height: 25px;
     border: none;
     border-bottom: 1px solid black;
+    padding-left: 10px;
 }
 
 /* #delivery_info table input 태그 클릭시 스타일 지정 */
@@ -85,6 +91,7 @@ section hr{
 #delivery_info #need_textarea {
     resize: none;
     box-sizing: border-box;
+    padding: 5px;
 }
 
 /* consumer_input 구역 설정 */
@@ -104,11 +111,14 @@ section hr{
 
 /* #consumer_input table input 태그 사이즈 & border 설정 */
 #consumer_input .consumer_Ele{
+	font-size: 1.2rem;
     width: 250px;
     height: 25px;
+    line-height: 25px;
     border: none;
     border-bottom: 1px solid black;
     margin-top: 15px;
+    text-align: center;
 }
 
 /* #consumer_input table h1 태그 위치 및 글자 정렬 */
@@ -275,6 +285,8 @@ input#point {
     height: 30px;
     border: none;
     border-bottom: 1px solid black;
+    padding-left: 10px;
+    font-size: 1.3rem;
 }
 
 /* input창 중 포인트 입력칸 클릭시 효과지정 */

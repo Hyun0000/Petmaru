@@ -17,9 +17,7 @@ public class WriteMemberReviewDao {
 			WriteMemberReviewVo writeMemberReviewVo = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String sql = "SELECT * FROM ( select ROWNUM ROWN, R.* from REVIEW R where REVIEW_PRODUCT_CATEGORY = ? order by REVIEW_NO) WHERE ROWN BETWEEN ? AND ?";
-			
-//			SELECT * FROM ( select ROWNUM ROWN, R.* from REVIEW R where REVIEW_PRODUCT_CATEGORY = 'H') WHERE ROWN BETWEEN 1 AND 15 ;
+			String sql = "SELECT * FROM ( select ROWNUM ROWN, R.* from (select * from REVIEW where REVIEW_PRODUCT_CATEGORY = ? order by REVIEW_NO desc) R) WHERE ROWN BETWEEN ? AND ?";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -37,6 +35,7 @@ public class WriteMemberReviewDao {
 						writeMemberReviewVo.setReviewContent(rs.getString("REVIEW_CONTENT"));
 						writeMemberReviewVo.setReviewWriter(rs.getString("REVIEW_WRITER"));
 						writeMemberReviewVo.setReviewDate(rs.getString("REVIEW_DATE"));
+						writeMemberReviewVo.setReviewImageUrl(rs.getString("REVIEW_IMAGE_URL"));
 						productMemberReview.add(writeMemberReviewVo);
 					} while (rs.next());
 				}
@@ -97,18 +96,25 @@ public class WriteMemberReviewDao {
 		}
 	//====================================================================================================
 		// 리뷰 글 수정(ajax)
-		public int writeMemberUpdate(Connection conn, String title, String content, String id) {
+		public int writeMemberUpdate(Connection conn, String title, String id, String upTitle, String content) {
 			int result = 0;
 			PreparedStatement pstmt = null;
-			String sql = "";
+			String sql = "update REVIEW set REVIEW_TITLE = ?, REVIEW_CONTENT = ? where REVIEW_WRITER = ? and REVIEW_TITLE = ?";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, upTitle);
+				pstmt.setString(2, content);
+				pstmt.setString(3, id);
+				pstmt.setString(4, title);
+				
+				result = pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				close(pstmt);
 			}
+			System.out.println("result : " + result);
 			return result;
 		}
 	//====================================================================================================

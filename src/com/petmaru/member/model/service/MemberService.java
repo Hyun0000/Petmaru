@@ -107,4 +107,14 @@ public class MemberService {
 		return result;
 	
 	}
+	
+	//===============================================================================================	
+		// 로그인 성공시 회원 정보 전체 session 저장
+		public MemberVo memberSession(String id) {
+			MemberVo memberVo = null;
+			Connection conn = DBCPTemplate.getConnection();
+			memberVo = new MemberDao().loginmember(conn, id);
+			DBCPTemplate.close(conn);
+			return memberVo;
+		}
 }

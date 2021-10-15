@@ -15,7 +15,7 @@ import com.petmaru.product.member.model.vo.ProductMemberVo;
 /**
  * Servlet implementation class ProductMemberMainPageSubCarouselServlet
  */
-@WebServlet("/mainpagesubcarousel")
+@WebServlet("/mainpage")
 public class ProductMemberMainPageSubCarouselServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,8 +39,8 @@ public class ProductMemberMainPageSubCarouselServlet extends HttpServlet {
 		mainsubcarousel = new ProductMemberService().mainsubcarousel();
 	
 		// 72개 가져왔나 확인
-		int i = 1;
-		for (ProductMemberVo productMemberVo : mainsubcarousel) { System.out.println(i + " : " + productMemberVo.getProductImgUrl()); i++; }
+		// int i = 1;
+		// for (ProductMemberVo productMemberVo : mainsubcarousel) { System.out.println(i + " : " + productMemberVo.getProductImgUrl()); i++; }
 		
 		request.setAttribute("mainsubcarousel", mainsubcarousel);
 		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);

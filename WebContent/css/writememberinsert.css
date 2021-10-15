@@ -1,0 +1,132 @@
+@charset "UTF-8";
+/* review 전체 div 크기 및 위치 지정 */
+#review_insert_box {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+/* review table 크기 및 위치 지정 */
+#review_insert_table {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 950px;
+    border-spacing: 20px 20px;
+    /* border-collapse: collapse; 적용하면 border-spacing 적용이 안 된다.(선이 달라 붙으니까)*/
+}
+
+/* 전체 td 스타일 지정 */
+#review_insert_table td {
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+/* 첫번째 div 스타일 지정 */
+.first_div {
+    width: 30%;
+    line-height: 50px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+/* 첫번째 div의 내용 스타일 지정 */
+.first_div p {
+    font-weight: bolder;
+}
+
+/* 첫번째 div 중 사진 영역 스타일 지정 */
+tr:first-child .first_div{
+    background-color: white;
+}
+
+/* 두 번째 div 스타일 지정 */
+.second_div {
+    width: 850px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+/* 상품명 스타일 지정 */
+.second_div #product_name {
+    margin-left: 20px;
+    height: 40px;
+    line-height: 40px;
+}
+
+/* 제목 <input> 스타일 지정 */
+.second_div #title {
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    line-height: 50px;
+    border: none;
+}
+
+/* 제목 <input> 클릭시 효과 지정 */
+#title:focus {
+    outline: none;
+}
+
+/* 후기 내용 부분 <textarea> 스타일 지정 */
+textarea#contnet {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    box-sizing: border-box;
+    padding: 20px;
+    border: none;
+}
+
+/* <textarea> 클릭시 효과 지정 */
+textarea:focus {
+    outline: none;
+}
+
+/* 파일 업로드 div 스타일 지정 */
+#file_div{
+    width: 500px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+/* 파일 업로드 <label> 스타일 지정 */
+#file_label {
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+/* 등록하기 버튼 div 스타일 지정 */
+#review_insert_div {
+    text-align: center;
+    margin: 20px auto;
+    width: 500px;
+}
+
+/* 등록하기 버튼 스타일 지정 */
+#review_insert_btn {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+}
+
+/* 등록하기 버튼 클릭시 지정 */
+#review_insert_btn:active {
+    background-color: white;
+    color: black;
+}
+
+/* border-spacing --> 좌우 위아래 */
+/* 같은 형제 요소여야 z-index가 적용된다. 부모&자식 관계에 있으니 되지 않았다. */

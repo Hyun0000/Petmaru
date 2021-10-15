@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productbuy.css"/>
@@ -73,14 +75,14 @@
                     <tr>
                         <td>
                             <label for="buyer_name">이름</label>
-                            <input type="text" id="buyer_name" name="buyer_name" class="consumer_Ele">
+                            <input type="text" id="buyer_name" name="buyer_name" class="consumer_Ele" value="${fn:trim(memberSessionName)}">
                         </td>
                     </tr>
 
                     <tr>
                         <td>
                             <label for="buyer_phone">번호</label>
-                            <input type="text" id="buyer_phone" name="buyer_phone" class="consumer_Ele">
+                            <input type="text" id="buyer_phone" name="buyer_phone" class="consumer_Ele" value="${fn:trim(memberSessionPhone)}">
                         </td>
                     </tr>
                 </table>
@@ -216,7 +218,7 @@
 	    		   type : "POST",
 	    		   url : "productbuy",
 	    		   data : {
-	    			   id : "user01"
+	    			   id : "${memberLoginInfo}"
 	    		   },
 	    		   dataType : "json",
 	    		   success : function (data) {
@@ -230,14 +232,14 @@
 	    			 	  console.log('success 진입') */
 					if (data != null) {
 						console.log('데이터 가져옴');
-						$('#address').val($.trim(data.memberInfo.memberAdress));
-						$('#phone').val($.trim(data.memberInfo.memberPhone));
-						$('#name').val($.trim(data.memberInfo.memberName));
+						$('#address').val($.trim(data.memberInfo.member_address));
+						$('#phone').val($.trim(data.memberInfo.member_phone));
+						$('#name').val($.trim(data.memberInfo.member_name));
 						console.log('입력 성공');
 					}
 				},
 					error : function () {
-						alert('데이터 못 가져옴');
+						alert('먼저 로그인을 해주세요');
 					}
     		   })
 			}
@@ -255,14 +257,14 @@
 	   		   type : "POST",
 	   		   url : "productbuy",
 	   		   data : {
-	   			   id : "user01"
+	   			   id : "${memberLoginInfo}"
 	   		   },
 	   		   dataType : "json",
 	   		   success : function (data) {
 	   			 	  console.log('success 진입')
 				if (data != null) {
 					console.log('데이터 가져옴');
-					$('#point').val(data.memberInfo.memberPoint);
+					$('#point').val(data.memberInfo.member_point);
 					console.log('입력 성공');
 				}
 			},
@@ -280,14 +282,14 @@
 	   		   type : "POST",
 	   		   url : "productbuy",
 	   		   data : {
-	   			   id : "user01"
+	   			   id : "${memberLoginInfo}"
 	   		   },
 	   		   dataType : "json",
 	   		   success : function (data) {
 	   			 	  console.log('success 진입')
 				if (data != null) {
 					console.log('데이터 가져옴');
-					$('#cash_receipt_phone').val($.trim(data.memberInfo.memberPhone));
+					$('#cash_receipt_phone').val($.trim(data.memberInfo.member_phone));
 					console.log('입력 성공');
 				}
 			},
@@ -396,6 +398,15 @@
         document.getElementById('cash_receipt_n').onclick = function() {
             pointPhoneEle.style.display = 'none';
         }
+        //=====================================================================
+       	// 로그아웃 시 [구매자 정보] 입력값 삭제
+       	let idEle = document.getElementById('buyer_name');
+       	let phoneEle = document.getElementById('buyer_phone');
+       	
+       	if (${empty memberLoginInfo}) {
+       		idEle.value = "";
+       		phoneEle.value = "";
+		}
        </script>
 </body>
 </html>

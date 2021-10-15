@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +8,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/productlist.css" />
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_header.css" />
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_footer.css" />
@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/Petmaru/css/login.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>memberlogin</title>
 </head>
 
@@ -29,7 +30,7 @@
     
     <div id=login_top_line></div>
     
-    <form action="/Petmaru/login" method="POST" id="loginform">
+    <form action="/Petmaru/login.do" method="POST" id="loginform">
         <div id="login_section">
         
             <table id="login_table">

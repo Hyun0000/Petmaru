@@ -1,0 +1,105 @@
+@charset "UTF-8";
+/* 배경 검정색 설정(투명) */
+#update_box {
+	display: none;
+    position: fixed;
+    z-index: 1;
+    background-color: rgb(0,0,0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+/* 전체 table 스타일 및 위치 지정 */
+#update_table {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #373737;
+    border-spacing: 10px 10px;
+    border-radius: 10px;
+    height: 500px;
+    border: none;
+}
+
+/* 1열 사이즈 및 스타일 지정 */
+.title_td {
+    text-align: center;
+    width: 200px;
+    font-size: 1.2rem;
+    background-color: #e0e0e0;
+    color: black;
+    padding: 10px;
+}
+
+/* 2열 사이즈 및 스타일 지정 */
+.content_td {
+    background-color: #e0e0e0;
+}
+
+/* 제목 입력창 <input> 스타일 및 크기 지정 */
+#update_title {
+    width: 620px;
+    height: 30px;
+    padding: 5px;
+    border: none;
+    padding-left: 10px;
+}
+
+#update_title:focus {
+	outline: none;
+}
+
+/* <textarea> 스타일 지정 */
+textarea#update_content{
+    resize: none;
+    padding: 10px;
+    border: none;
+    height: 300px;
+    border: 2.5px solid black;
+}
+
+/* <textarea> 담긴 td 스타일 지정 */
+#textarea_td {
+    padding: 10px;
+}
+
+/* 파일 업로드 <input>의 label 스타일 지정 */
+#update_photo_label {
+    margin-left: 20px;
+    padding: 5px 20px;
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    line-height: 45.6px;
+    background-color: black;
+    color: white;
+}
+
+/* 후기 수정 버튼 담긴 td 스타일 지정 */
+#btn_td{
+    text-align: center;
+    height: 50px;
+    background-color: #e0e0e0;
+    padding: 5px;
+}
+
+/* 후기 수정 버튼 스타일 및 크기 지정 */
+#update_btn{
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+
+/* 후기 수정 버튼 클릭시 스타일 지정 */
+#update_btn:active {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}

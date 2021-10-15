@@ -281,4 +281,49 @@ public class MemberDao {
 		}
 		return id;
 	}
+	//===============================================================================================	
+		// 로그인 성공시 회원 정보 전체 session 저장
+		// @WebServlet("/login.do")
+		public MemberVo loginmember(Connection conn, String id) {
+			MemberVo memberVo = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where MEMBER_ID = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					memberVo = new MemberVo();
+//				    MEMBER_ID VARCHAR2(500) CONSTRAINT MEMBER_ID_PK PRIMARY KEY,
+//				    MEMBER_NAME CHAR(20) CONSTRAINT MEMBER_NAME_NN NOT NULL,
+//				    MEMBER_PW VARCHAR2(500) CONSTRAINT MEMBER_PW_NN NOT NULL,
+//				    MEMBER_PHONE CHAR(15) CONSTRAINT MEMBER_PHONE_NN NOT NULL,
+//				    MEMBER_ADDRESS VARCHAR2(500) CONSTRAINT MEMBER_ADDRESS_NN NOT NULL,
+//				    MEMBER_EMAIL VARCHAR2(300) CONSTRAINT MEMBER_EMAIL_UK UNIQUE,
+//				    MEMBER_GENDER CHAR(1) CONSTRAINT MEMBER_GENDER_CK CHECK(MEMBER_GENDER IN ('M','F')),
+//				    MEMBER_POINT NUMBER DEFAULT 0,
+//				    MEMBER_REGDATE DATE DEFAULT SYSDATE
+					memberVo.setMember_id(rs.getString("MEMBER_ID"));
+					memberVo.setMember_name(rs.getString("MEMBER_NAME"));
+					memberVo.setMember_pwd(rs.getString("MEMBER_PW"));
+					memberVo.setMember_phone(rs.getString("MEMBER_PHONE"));
+					memberVo.setMember_address(rs.getString("MEMBER_ADDRESS"));
+					memberVo.setMember_email(rs.getString("MEMBER_EMAIL"));
+					memberVo.setMember_gender(rs.getString("MEMBER_GENDER"));
+					memberVo.setMember_point(rs.getInt("MEMBER_POINT"));
+					memberVo.setMember_regdate(rs.getDate("MEMBER_REGDATE"));
+					System.out.println("멤버 정보 가져오기 & 담기 성공");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return memberVo;
+		}
+	//======
 }

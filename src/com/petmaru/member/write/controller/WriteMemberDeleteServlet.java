@@ -27,11 +27,9 @@ public class WriteMemberDeleteServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// WRITER & TITLE을 조건으로 받는다.
 		response.setContentType("text/html; charset = UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -75,5 +73,4 @@ public class WriteMemberDeleteServlet extends HttpServlet {
 		out.flush();
 		out.close();
     }
-
 }

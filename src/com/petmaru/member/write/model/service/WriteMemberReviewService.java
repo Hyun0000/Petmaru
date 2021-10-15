@@ -36,10 +36,10 @@ public class WriteMemberReviewService {
 		}
 	//====================================================================================================
 		// 리뷰 글 수정(ajax)
-		public int writeMemberUpdate(String title, String content, String id) {
+		public int writeMemberUpdate(String title, String id, String upTitle, String content) {
 			int result = 0;
 			Connection conn = getConnection();
-			result = new WriteMemberReviewDao().writeMemberUpdate(conn, title, content, id);
+			result = new WriteMemberReviewDao().writeMemberUpdate(conn, title, id, upTitle, content);
 			close(conn);
 			return result;
 		}

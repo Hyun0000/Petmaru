@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.petmaru.member.model.service.MemberService;
+import com.petmaru.member.model.vo.MemberVo;
 
 /**
  * Servlet implementation class Loginservlet
  */
-@WebServlet("/login")
+@WebServlet("/login.do")
 public class MemberLoginservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,8 +53,19 @@ public class MemberLoginservlet extends HttpServlet {
 				 int result = new MemberService().loginmember(id, pwd);
 				 
 				 if(result == 1) {
-					 request.getSession().setAttribute("memberLoginInfo", id);
-					 System.out.println(id + "로그인 성공했다");
+					// 로그인 성공시 회원 정보 전체 session 저장
+					MemberVo memberVo = null;
+					memberVo = new MemberService().memberSession(id);
+					
+					request.getSession().setAttribute("memberLoginInfo", id);
+					request.getSession().setAttribute("memberVo", memberVo);
+					request.getSession().setAttribute("memberSessionName", memberVo.getMember_name());
+					request.getSession().setAttribute("memberSessionPhone", memberVo.getMember_phone());
+					
+					System.out.println("memberSession : " + memberVo);
+					System.out.println("memberSessionName : " + memberVo.getMember_name());
+					System.out.println("memberSessionPhone : " + memberVo.getMember_phone());
+					System.out.println(id + "로그인 성공했다");
 				 }else {
 					System.out.println(result);
 					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
