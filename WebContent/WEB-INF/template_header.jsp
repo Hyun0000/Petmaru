@@ -24,7 +24,7 @@
 
         <div id="icon">
             <table id="left_icon">
-                <tr>
+                <tr style = cursor:pointer;>
                     <td><a href="/Petmaru/produclist?category=C"><span class="material-icons">checkroom</span><br><span class="icon_text">Clothes</span></a></td>
                     <td><a href="/Petmaru/produclist?category=A"><span class="material-icons">pets</span><br><span class="icon_text">Accessory</span></a></td>
                     <td><a href="/Petmaru/produclist?category=F"><span class="material-icons">restaurant</span><br><span class="icon_text">Food</span></a></td>
@@ -35,7 +35,7 @@
             </table>
 
             <table id="right_icon">
-                <tr>
+                <tr style = cursor:pointer;>
                     <td><a href="#"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
                     <td><a href="#"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
                 </tr>

@@ -120,6 +120,7 @@ public class MemberJoinServlet extends HttpServlet {
 						//out.println(id+"님 가입되었습니다. 환영합니다.");
 					} else if(result == 2) {
 						System.out.println("기존회원 id가 존재합니다. ");
+						request.setAttribute("check", "");
 					} else {  // 오류발생:-1,그외 등등, 가입실패:0
 						System.out.println("예기치 못한 오류 발생. 다시 시도해 주세요. ");
 					}	

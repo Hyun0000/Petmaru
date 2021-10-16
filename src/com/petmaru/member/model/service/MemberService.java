@@ -108,6 +108,14 @@ public class MemberService {
 	
 	}
 	
+	public String findPwd(String id, String email) { //비밀번호찾기
+		String result = null;
+		Connection conn = DBCPTemplate.getConnection();		
+		result = new MemberDao().findPwd(conn, id, email);
+		DBCPTemplate.close(conn);
+		return result;
+	
+	}
 	//===============================================================================================	
 		// 로그인 성공시 회원 정보 전체 session 저장
 		public MemberVo memberSession(String id) {

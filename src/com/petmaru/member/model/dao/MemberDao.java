@@ -254,7 +254,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public String findId(Connection conn, String name, String email) { // 로그인
+	public String findId(Connection conn, String name, String email) { // 아이디찾기
 		int result = -1;
 		String id = null;
 		String sql = "select MEMBER_ID from MEMBER where MEMBER_NAME=? and MEMBER_Email =?";
@@ -280,6 +280,34 @@ public class MemberDao {
 			DBCPTemplate.close(rset);
 		}
 		return id;
+	}
+	
+	public String findPwd(Connection conn, String id, String email) { //비밀번호찾기
+		int result = -1;
+		String pwd = null;
+		String sql = "select MEMBER_Pw from MEMBER where MEMBER_ID=? and MEMBER_Email =?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+			System.out.println("dao name : " + id);
+			System.out.println("dao : " + email);
+
+			if (rset.next()) {
+				System.out.println("비번찾음: " + rset.getString("member_Pw"));
+				pwd = rset.getString("member_Pw");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBCPTemplate.close(pstmt);
+			DBCPTemplate.close(rset);
+		}
+		return pwd;
 	}
 	//===============================================================================================	
 		// 로그인 성공시 회원 정보 전체 session 저장

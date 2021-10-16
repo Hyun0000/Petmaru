@@ -30,7 +30,8 @@ public class MemberInfoFindServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	doPost(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/info_find.jsp");
+		 rd.forward(request, response);
 	}
 
 	/**
@@ -44,17 +45,34 @@ public class MemberInfoFindServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
-		System.out.println("뽑아온 데이터" + id+ name);
+		System.out.println("아이디 찾기 뽑아온 데이터" + email+ name);
+		System.out.println("비번찾기 뽑아온 데이터" + id+ email);
 		MemberService service = new MemberService();
-		String findid = service.findId(name, email);
 		
-		if(findid !=null) {
-			System.out.println("서블릿 찾아온 아디:" + findid);
-		} else
-		{
-			System.out.println("없음!");
+		
+		if(id==null) {
+			String findid = service.findId(name, email);
+		
+			if(findid !=null) {
+				System.out.println("서블릿 찾아온 아디:" + findid);
+				request.setAttribute("searchId", findid);
+			} else
+			{
+				System.out.println("아디없음!");
+				request.setAttribute("searchId", "");
+			}
 		}
-		
+		if(name==null) {
+			String findpwd = service.findPwd(id, email);
+			if(findpwd !=null) {
+				System.out.println("서블릿 찾아온 비번:" + findpwd);
+				request.setAttribute("searchPwd", findpwd);
+			} else
+		{
+				System.out.println("비번없음!");
+				request.setAttribute("searchPwd", "");
+			}
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/info_find.jsp");
 		 rd.forward(request, response);
 	}
