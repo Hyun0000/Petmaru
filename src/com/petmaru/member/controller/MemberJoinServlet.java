@@ -31,7 +31,9 @@ public class MemberJoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-doPost(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/memberjoin.jsp");
+		rd.forward(request, response);
+		
 //		String id =request.getParameter("id");
 //		String pwd1 = request.getParameter("pwd1");
 //		String pwd2 = request.getParameter("pwd2");
@@ -81,9 +83,6 @@ doPost(request, response);
 
 	
 		
-//				 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/memberjoin.jsp");
-//				 rd.forward(request, response);
-	
 
 	}
 

@@ -2,8 +2,8 @@
     <header>
         <div id="top_login">
             <ul>
-                <li><a href="http://localhost:8090/Petmaru/loginview">로그인</a></li>
-                <li><a href="http://localhost:8090/Petmaru/memberjoin">회원가입</a></li>
+                <li><a href="/Petmaru/loginview">로그인</a></li>
+                <li><a href="/Petmaru/memberjoin">회원가입</a></li>
                 <li><a href="#">마이페이지</a></li>
             </ul>
         </div>
