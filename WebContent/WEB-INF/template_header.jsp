@@ -1,13 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+import= "com.petmaru.member.model.vo.*"%>
+ <% MemberVo m = (MemberVo)session.getAttribute("memberVo"); %> 
     <header>
         <div id="top_login">
+        <%if (m == null){ %> 
             <ul>
                 <li><a href="/Petmaru/loginview">로그인</a></li>
                 <li><a href="/Petmaru/memberjoin">회원가입</a></li>
-                <li><a href="#">마이페이지</a></li>
+        <% } else { %> 
+                <li><a href="/Petmaru/mypageupdate"><%=m.getMember_name()%>님의 마이페이지</a></li>
+                <li><a href="/Petmaru/MemberLogout">로그아웃</a></li>
             </ul>
+<% } %> 
         </div>
-
         <div id="logo_search">
             <div id="logo">
                 <h1>Petmaru</h1>
@@ -44,3 +49,4 @@
 
         <div id="header_line_bottom"></div>
     </header>
+

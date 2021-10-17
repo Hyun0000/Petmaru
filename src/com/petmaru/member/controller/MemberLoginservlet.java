@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.petmaru.member.model.service.MemberService;
 import com.petmaru.member.model.vo.MemberVo;
 
@@ -41,6 +43,7 @@ public class MemberLoginservlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset-UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		JSONObject json = new JSONObject();
 		
 		
 		String id =request.getParameter("id");
@@ -61,6 +64,8 @@ public class MemberLoginservlet extends HttpServlet {
 					request.getSession().setAttribute("memberVo", memberVo);
 					request.getSession().setAttribute("memberSessionName", memberVo.getMember_name());
 					request.getSession().setAttribute("memberSessionPhone", memberVo.getMember_phone());
+					json.put("result","ok");
+					json.put("name", memberVo);
 					
 					System.out.println("memberSession : " + memberVo);
 					System.out.println("memberSessionName : " + memberVo.getMember_name());
@@ -69,7 +74,9 @@ public class MemberLoginservlet extends HttpServlet {
 				 }else {
 					System.out.println(result);
 					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
+					json.put("result","fail");
 				 }
+				 System.out.println("json: " + json.toJSONString());
 				 //Member vo = new Member();
 				// response.getWriter().append(vo.toString());
 				 request.getRequestDispatcher("/WEB-INF/member/login.jsp").forward(request, response);
