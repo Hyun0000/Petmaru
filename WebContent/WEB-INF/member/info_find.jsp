@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-    <%
-    String idChecks = (String)request.getAttribute("findid");
-    %>
-=======
     <% String id = (String)request.getAttribute("searchId");
     String pwd = (String)request.getAttribute("searchPwd"); %>   
->>>>>>> 133e9598139b1055b247049ccaf300899024735b
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +17,7 @@
     </head>
     
     <body>
-<%=idChecks %>
-<script type="text/javascript">
-alert("<%=idChecks%>");
-</script>    
+    
     
        <%@include file ="/WEB-INF/template_header.jsp" %>
         <br>
@@ -35,8 +26,7 @@ alert("<%=idChecks%>");
             <h2 style=text-align:center;>아이디/비밀번호 찾기</h2>
         </div>
         <div id=login_top_line></div>
-        <!-- <form action="infofind" method="POST" id="idfind_form" name = "findID"> -->
-        <form id = "findID">
+        <form action="infofind" method="POST" id="idfind_form" name = "findID">
             <div id="id_find_section" class="info_section">
                 
                 <h2 >아이디 찾기</h2>
@@ -87,23 +77,6 @@ alert("<%=idChecks%>");
         <div id=login_bottom_line></div>
         
                 <script>
-<<<<<<< HEAD
-                
-    var num = 1;
-	function searchId() {
-		if (num == 1) {
-        var f = document.getElementById('findID');  
-		f.action = "infofind";
-		f.method = "post";
-		f.submit();
-		num++;
-		} else {
-			alert("<%=idChecks%>");
-		}
-		 
-	}
-	
-=======
                 var f = document.findID;
                 var f2 = document.findPwd;
                 function searchId(){        	
@@ -157,7 +130,6 @@ alert("<%=idChecks%>");
          			alert("정보가 없습니다."); 
          		}
          		
->>>>>>> 133e9598139b1055b247049ccaf300899024735b
         </script>
         </body>
 </html>
