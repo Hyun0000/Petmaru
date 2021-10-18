@@ -54,7 +54,7 @@
                 
                 <tr>
                     <td colspan="2" sytle="text-align:center">
-                        <input type="button"  value="회원가입" onclick="location.href = 'http://localhost:8090/Petmaru/memberjoin';" class="btn" id="joinbtn">
+                        <input type="button"  value="회원가입" onclick="location.href = '/Petmaru/memberjoin';" class="btn" id="joinbtn">
                         
                     </td>
                 </tr>
@@ -66,7 +66,7 @@
     <br><br>
     <div id=login_bottom_line></div>
     <div id="findinfo">
-        <a href="http://localhost:8090/Petmaru/infofind">아이디/비밀번호 찾기</a>
+        <a href="/Petmaru/infofind">아이디/비밀번호 찾기</a>
     </div>
    <%@ include file="../template_footer.jsp" %>
 </body>

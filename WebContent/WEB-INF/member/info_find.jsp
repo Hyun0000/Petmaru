@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
     <%
     String idChecks = (String)request.getAttribute("findid");
     %>
+=======
+    <% String id = (String)request.getAttribute("searchId");
+    String pwd = (String)request.getAttribute("searchPwd"); %>   
+>>>>>>> 133e9598139b1055b247049ccaf300899024735b
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +60,7 @@ alert("<%=idChecks%>");
             </div>
         </form>
 
-        <form action="infofind" method="POST" id="idfind_form">
+        <form action="infofind" method="POST" id="idfind_form" name = "findPwd">
             <div id="pwd_find_section" class="info_section">
                 
                 <h2>비밀번호 찾기</h2>
@@ -72,7 +77,7 @@ alert("<%=idChecks%>");
                     <br><br>
                     <tr>
                         <td colspan="2" sytle="text-align:center">
-                            <input type="submit" value="찾기" class="find_btn" id="pwdfind_btn">
+                            <input type="button" value="찾기" class="find_btn" id="pwdfind_btn" onclick="searchpwd()">
                         </td>
                     </tr>
                 </table>
@@ -82,6 +87,7 @@ alert("<%=idChecks%>");
         <div id=login_bottom_line></div>
         
                 <script>
+<<<<<<< HEAD
                 
     var num = 1;
 	function searchId() {
@@ -97,6 +103,61 @@ alert("<%=idChecks%>");
 		 
 	}
 	
+=======
+                var f = document.findID;
+                var f2 = document.findPwd;
+                function searchId(){        	
+                 	console.log(f);
+                 	console.log(f.name.value);
+                 	console.log(f.email.value);
+         			if(f.name.value==""){
+         				alert("이름을 입력해주세요.");
+         				f.id.focus();
+         				return false;
+         			}
+         			else if(f.email.value ==""){
+         				alert("이메일 입력해주세요");
+         				f.email.focus();
+         				return false;
+         			}
+         	        f.submit(); 
+         	 		
+         	 	}
+                
+         		var searchedId = "<%=id%>";
+         		if(searchedId != "" && searchedId != "null"){
+         			alert("아이디: "+ "<%=id%>"); 
+         		}
+         		else if(searchedId ==""){
+         			alert("정보가 없습니다."); 
+         		}
+         		function searchpwd(){        	
+                 	console.log(f2);
+                 	console.log(f2.id.value);
+                 	console.log(f2.email.value);
+         			if(f2.id.value==""){
+         				alert("아이디를 입력해주세요.");
+         				f2.id.focus();
+         				return false;
+         			}
+         			else if(f2.email.value ==""){
+         				alert("이메일 입력해주세요");
+         				f2.email.focus();
+         				return false;
+         			}
+         	        f2.submit(); 
+         	 		
+         	 	}
+         		
+        		var searchedPwd = "<%=pwd%>";
+         		if(searchedPwd != "" && searchedPwd != "null"){
+         			alert("비밀번호: " +"<%=pwd%>");
+         			}
+         		else if(searchedPwd ==""){
+         			alert("정보가 없습니다."); 
+         		}
+         		
+>>>>>>> 133e9598139b1055b247049ccaf300899024735b
         </script>
         </body>
 </html>

@@ -1,13 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+import= "com.petmaru.member.model.vo.*"%>
+ <% MemberVo m = (MemberVo)session.getAttribute("memberVo"); %> 
     <header>
         <div id="top_login">
+        <%if (m == null){ %> 
             <ul>
-                <li><a href="http://localhost:8090/Petmaru/loginview">로그인</a></li>
-                <li><a href="http://localhost:8090/Petmaru/memberjoin">회원가입</a></li>
-                <li><a href="#">마이페이지</a></li>
+                <li><a href="/Petmaru/loginview">로그인</a></li>
+                <li><a href="/Petmaru/memberjoin">회원가입</a></li>
+        <% } else { %> 
+                <li><a href="/Petmaru/mypageupdate"><%=m.getMember_name()%>님의 마이페이지</a></li>
+                <li><a href="/Petmaru/MemberLogout">로그아웃</a></li>
             </ul>
+<% } %> 
         </div>
-
         <div id="logo_search">
             <div id="logo">
                 <h1><a href="/Petmaru/mainpage">Petmaru</a></h1>
@@ -24,7 +29,7 @@
 
         <div id="icon">
             <table id="left_icon">
-                <tr>
+                <tr style = cursor:pointer;>
                     <td><a href="/Petmaru/produclist?category=C"><span class="material-icons">checkroom</span><br><span class="icon_text">Clothes</span></a></td>
                     <td><a href="/Petmaru/produclist?category=A"><span class="material-icons">pets</span><br><span class="icon_text">Accessory</span></a></td>
                     <td><a href="/Petmaru/produclist?category=F"><span class="material-icons">restaurant</span><br><span class="icon_text">Food</span></a></td>
@@ -35,7 +40,7 @@
             </table>
 
             <table id="right_icon">
-                <tr>
+                <tr style = cursor:pointer;>
                     <td><a href="#"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
                     <td><a href="#"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
                 </tr>
@@ -44,3 +49,4 @@
 
         <div id="header_line_bottom"></div>
     </header>
+
