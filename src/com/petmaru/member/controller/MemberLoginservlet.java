@@ -71,15 +71,19 @@ public class MemberLoginservlet extends HttpServlet {
 					System.out.println("memberSessionName : " + memberVo.getMember_name());
 					System.out.println("memberSessionPhone : " + memberVo.getMember_phone());
 					System.out.println(id + "로그인 성공했다");
+					 request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 				 }else {
 					System.out.println(result);
 					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
+					request.setAttribute("login","");
+					System.out.println("login: 없음");
 					json.put("result","fail");
+					request.getRequestDispatcher("/WEB-INF/member/login.jsp").forward(request, response);
 				 }
-				 System.out.println("json: " + json.toJSONString());
+				// System.out.println("json: " + json.toJSONString());
 				 //Member vo = new Member();
 				// response.getWriter().append(vo.toString());
-				 request.getRequestDispatcher("/WEB-INF/member/login.jsp").forward(request, response);
+				 
 	}
 
 }

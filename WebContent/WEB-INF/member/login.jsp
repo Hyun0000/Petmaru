@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String logininfo = (String)request.getAttribute("login");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
     
     <div id=login_top_line></div>
     
-    <form action="/Petmaru/login.do" method="POST" id="loginform">
+    <form action="/Petmaru/login.do" method="post" id="loginform">
         <div id="login_section">
         
             <table id="login_table">
@@ -70,4 +71,11 @@
     </div>
    <%@ include file="../template_footer.jsp" %>
 </body>
+<script type="text/javascript">
+var logininfo = "<%=logininfo%>";
+if(logininfo==""){
+	console.log("1");
+	alert("정보를 올바르게 입력하세요");
+	}
+	</script>
 </html>
