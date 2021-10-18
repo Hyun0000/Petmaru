@@ -19,6 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=context_root %>/js/template_header.js"></script>
 <title>Petmaru</title>
+</head>
 <body>
 
 <%@ include file="../template_header.jsp" %>

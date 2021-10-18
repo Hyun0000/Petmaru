@@ -65,6 +65,9 @@ public class ProductMemberListServelt extends HttpServlet {
 		 // 가장 오른쪽 페이지 링크
 		int endPageLink = startPageLink + PAGE_LINK - 1;
 		
+		// 전체 페이지 링크수 보다 마지막 페이지 링크수가 더 크면 해당 링크수를 전체 페이지 링크수로 수정
+		if (endPageLink > totalPageLink) { endPageLink = totalPageLink; }
+		
 //		if (selectPage > 1) { out.print(" << "); }
 //		
 //		if (endPageLink > totalPageLink) { endPageLink = totalPageLink; }
@@ -77,7 +80,6 @@ public class ProductMemberListServelt extends HttpServlet {
 //		
 		ArrayList<ProductMemberVo> producClothestList = null;
 		producClothestList = new ProductMemberService().productList(cateGory, startRown, endRown);
-		System.out.println(producClothestList);
 		
 		// JSP로 보낼 Data
 		request.setAttribute("totalPageLink", totalPageLink);
@@ -95,5 +97,4 @@ public class ProductMemberListServelt extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

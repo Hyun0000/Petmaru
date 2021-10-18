@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    String idChecks = (String)request.getAttribute("findid");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +18,10 @@
     </head>
     
     <body>
-    
+<%=idChecks %>
+<script type="text/javascript">
+alert("<%=idChecks%>");
+</script>    
     
        <%@include file ="/WEB-INF/template_header.jsp" %>
         <br>
@@ -24,7 +30,8 @@
             <h2 style=text-align:center;>아이디/비밀번호 찾기</h2>
         </div>
         <div id=login_top_line></div>
-        <form action="infofind" method="POST" id="idfind_form" name = "findID">
+        <!-- <form action="infofind" method="POST" id="idfind_form" name = "findID"> -->
+        <form id = "findID">
             <div id="id_find_section" class="info_section">
                 
                 <h2 >아이디 찾기</h2>
@@ -75,25 +82,21 @@
         <div id=login_bottom_line></div>
         
                 <script>
-            var id = null;
-        function searchId(){
-            var name1 = document.getElementById("name").value;
-            var email1 = document.getElementById("email").value;
-          	
-            	var f = document.findID;         	
-				if(f.id.value==""){
-					alert("이름을 입력해주세요.");
-					f.id.focus();
-					return false;
-				}
-				else if(f.email.value ==""){
-					alert("이메일 입력해주세요");
-					f.email.focus();
-					return false;
-				}
-				f.submit(); 
-			}
-
+                
+    var num = 1;
+	function searchId() {
+		if (num == 1) {
+        var f = document.getElementById('findID');  
+		f.action = "infofind";
+		f.method = "post";
+		f.submit();
+		num++;
+		} else {
+			alert("<%=idChecks%>");
+		}
+		 
+	}
+	
         </script>
         </body>
 </html>

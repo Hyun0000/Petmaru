@@ -45,6 +45,7 @@ public class WriteMemberReviewDao {
 				close(rs);
 				close(pstmt);
 			}
+			System.out.println("dao : " + productMemberReview);
 			return productMemberReview;
 		}
 	//====================================================================================================
@@ -118,6 +119,44 @@ public class WriteMemberReviewDao {
 			return result;
 		}
 	//====================================================================================================
+		// 리뷰 글 등록
+		public int writememberinsert(Connection conn, String category, int pno, String title, String content, String writer, String url) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = "INSERT INTO REVIEW VALUES (REVIEW_SEQUENCE.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?, 'Y', ?)";
+//		    REVIEW_NO NUMBER CONSTRAINT REVIEW_NO_PK PRIMARY KEY,
+			
+//		    REVIEW_PRODUCT_CATEGORY CHAR(1) CONSTRAINT REVIEW_PRODUCT_CATEGORY_CK CHECK(REVIEW_PRODUCT_CATEGORY IN ('C', 'A', 'T', 'H', 'B', 'F')),
+			
+//		    REVIEW_PRODUCT_NO NUMBER CONSTRAINT REVIEW_PRODUCT_NO_FK REFERENCES PRODUCT(PRODUCT_NO),
+			
+//		   	REVIEW_TITLE VARCHAR2(300) CONSTRAINT REVIEW_TITLE_NN NOT NULL,
+			
+//		    REVIEW_CONTENT VARCHAR2(2000) CONSTRAINT REVIEW_CONTENT_NN NOT NULL,
+			
+//			REVIEW_DATE TIMESTAMP DEFAULT SYSDATE,
+			
+//			REVIEW_WRITER VARCHAR2(500) CONSTRAINT REVIEW_WRITER_FK REFERENCES MEMBER(MEMBER_ID),
+			
+//		    REVIEW_BUY CHAR(1) CONSTRAINT REVIEW_BUY_CK CHECK(REVIEW_BUY IN('Y','N')),
+//		    REVIEW_IMAGE_URL VARCHAR2(500) CONSTRAINT REVIEW_IMAGE_URL_UK UNIQUE
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+				pstmt.setInt(2, pno);
+				pstmt.setString(3, title);
+				pstmt.setString(4, content);
+				pstmt.setString(5, writer);
+				pstmt.setString(6, url);
+				
+				result = pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
 	//====================================================================================================
 	//====================================================================================================
 	//====================================================================================================

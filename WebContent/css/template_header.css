@@ -42,6 +42,14 @@ header {
     padding-bottom: 50px;
 }
 
+#logo_search #logo a {
+	text-decoration: none;
+}
+
+#logo_search #logo a:visited {
+	color: black;
+}
+
 #logo_search #search {
     float: right;
     margin-left: 200px;

@@ -30,6 +30,15 @@ public class ProductMemberService {
 			return result;
 		}
 	//======================================================================================================
+		// 후기 작성 버튼 SHOW, HIDE
+		public String reviewInsertBtnShow(int pno, String id) {
+			String payYN = null;
+			Connection conn = getConnection();
+			payYN = new ProductMemberDao().reviewInsertBtnShow(conn, pno, id);
+			close(conn);
+			return payYN;
+		}
+	//======================================================================================================
 		// 상품 상세 페이지
 		public ProductMemberVo productDetail(int pno, String cateGory) {
 			ProductMemberVo product = null;

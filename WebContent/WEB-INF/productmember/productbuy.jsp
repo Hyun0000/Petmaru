@@ -16,7 +16,6 @@
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<script type="text/javascript" src="<%=context_root %>/js/productdetail.js" ></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<%=context_root %>/js/template_header.js"></script>
 <title>Petmaru</title>
@@ -204,6 +203,7 @@
 	       }
 	       document.getElementById('cash_receipt_n').onclick = function() {
 	           document.getElementById('cash_receipt_phone').style.display = 'none';
+	           document.getElementById('cash_receipt_phone').value = "";
 	       }
 	       
 	       $('#info_same').on('click', function () {
@@ -240,6 +240,7 @@
 				},
 					error : function () {
 						alert('먼저 로그인을 해주세요');
+						document.getElementById("info_same").checked = false;
 					}
     		   })
 			}
@@ -269,7 +270,8 @@
 				}
 			},
 				error : function () {
-					alert('데이터 못 가져옴');
+					alert('로그인을 해야 포인트 정보를 가져올 수 있습니다.');
+					document.getElementById("use_whole_point").checked = false;
 				}
 	  	   })
 		}  
@@ -295,6 +297,9 @@
 			},
 				error : function () {
 					alert('데이터 못 가져옴');
+					document.getElementById("cash_receipt_y").checked = false;
+					document.getElementById("cash_receipt_n").checked = true;
+					document.getElementById('cash_receipt_phone').style.display = 'none';
 				}
 	  	   })
 		})
@@ -324,9 +329,13 @@
 
         //==============================배송지 정보 부분==============================
         function payFunction() {
+        	// 결제 완료 팝업창 변수
+        	let payBool = true;
+        	
             // nullCheck function
             function nullCheckC(e) {
                 if (e.value == "") {
+                	payBool = false;
                     alert('빈칸을 입력해주세요');
                     // e의 모습 예시 --> document.getElementById('address')
                 }
@@ -355,12 +364,14 @@
             // 1. 번호
             let phoneRegExp = /^01[0-9]-[0-9]{4}-[0-9]{4}$/;
             if (!phoneRegExp.test(phoneEle.value)) {
+            	payBool = false;
                 alert('핸드폰 번호를 올바르게 입력해주세요');
             }
 
             // 2. 이름
             var nameRegExp = /^[가-힣a-zA-Z]{2,10}$/;
             if (!nameRegExp.test(nameEle.value)) {
+            	payBool = false;
                 alert('이름을 올바르게 입력해주세요');
             }
         //==============================결제 및 포인트 정보 부분==============================
@@ -370,6 +381,7 @@
             // g --> 글로벌 : 전체에서 정규식 만족을 확인한다.
             // * --> 글자수 무제한
             if (!pointRegExp.test(pointEle.value)) {
+            	payBool = false;
                 alert('포인트 금액을 정확히 입력해주세요');
             }
 
@@ -379,25 +391,28 @@
             let pointPhoneEleValue = pointPhoneEle.value; // 현금 영수증 번호 입력칸의 value
             if (pointPhoneEle.style.display == 'inline-block') {
                 if (!phoneRegExp.test(pointPhoneEleValue)) {
+                	payBool = false;
                     alert('핸드폰 번호를 올바르게 입력해주세요');
                 }
             }
         //=======================모든 유효성 검사 통과, 결제 성공 알림창======================
-            alert('결제 성공');
+        	if (payBool === true) {
+	            alert('결제 성공');
+			}
         }
 
         // 현금 영수증 번호 입력칸 토글 이벤트
         // 기본은 번호 입력칸 none
         let pointPhoneEle = document.getElementById('cash_receipt_phone'); // 현금 영수증 번호 입력칸
 
-        pointPhoneEle.style.display = 'none';
+         /* pointPhoneEle.style.display = 'none';
 
-        document.getElementById('cash_receipt_y').onclick = function() {
+        document.getElementById('cash_receipt_y').checked = function() {
             pointPhoneEle.style.display = 'inline-block';
         }
-        document.getElementById('cash_receipt_n').onclick = function() {
+        document.getElementById('cash_receipt_n').checked = function() {
             pointPhoneEle.style.display = 'none';
-        }
+        } */
         //=====================================================================
        	// 로그아웃 시 [구매자 정보] 입력값 삭제
        	let idEle = document.getElementById('buyer_name');

@@ -182,6 +182,32 @@ public class ProductMemberDao {
 			return mainsubcarousel;
 		}
 	//======================================================================================================
+		// 후기 작성 버튼 SHOW, HIDE
+		public String reviewInsertBtnShow(Connection conn, int pno, String id) {
+			String payYN = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT ORDER_PAY FROM ORDERS WHERE ORDER_PRODUCT_PNO = ? AND ORDER_MEMBER_ID = ?";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pno);
+				pstmt.setString(2, id);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					payYN = rs.getString(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			// 아예 주문한 경우가 없는 경우 payYN가 null이 되는 것을 방지
+			if (payYN == null) { payYN = "해당 회원은 해당 물품을 주문 하지 않았습니다."; }
+			return payYN;
+		}
+	//======================================================================================================
 		// 결제 페이지 회원 정보 가져오기(체크박스)
 		public MemberVo searchMembrtInfo(Connection conn, String id) {
 			MemberVo member = null;

@@ -44,6 +44,14 @@ public class WriteMemberReviewService {
 			return result;
 		}
 	//====================================================================================================
+		// 리뷰 글 등록
+		public int writememberinsert(String category, int pno, String title, String content, String writer, String url) {
+			int result = 0;
+			Connection conn = getConnection();
+			result = new WriteMemberReviewDao().writememberinsert(conn, category, pno, title, content, writer, url);
+			close(conn);
+			return result;
+		}
 	//====================================================================================================
 	//====================================================================================================
 	//====================================================================================================

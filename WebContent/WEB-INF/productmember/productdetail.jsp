@@ -18,12 +18,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productdetail.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/writememberupdate.css"/>
-<script type="text/javascript" src="<%=context_root %>/js/productdetail.js" ></script>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productdetail.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <script src="<%=context_root %>/js/template_header.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Petmaru</title>
@@ -44,7 +43,14 @@
 
             <div id="price">
                 <h2><%=product.getPrice() %>원</h2>
-                <button type="button">후기 작성</button>
+                <c:if test="${payYN == 'Y'}">
+	                <!-- 특정 조건이 맞아야 후기 작성 버튼이 보이도록 수정 필요 -->
+	                <!-- JSON을 이용해 data 전송 -->
+	                <form id="insertForm">
+	                <input type="hidden" id="test" name="test">
+	                <button id="insertA">후기작성</button>
+	              	</form>
+              	</c:if>
             </div>
 
             <div id="icon">
@@ -56,36 +62,38 @@
     
 	<section id="review_sec">
        <div id="review_top_line"><h1>Review</h1></div>
-       
 		<div id="review_content">
 	         <ul id="review_list">
-					<c:forEach var="productMemberReview" items="${productMemberReview}">
-					<c:set var="k" value="${1+k}"></c:set>
-	                <li class="review_li_same review_li_${k}">
-	                    <div class="review_img_same review_img_${k}">
-	                        <img src="${productMemberReview.reviewImageUrl}" class="img_same img_same_${k}">
-	                    </div>
-	
-	                    <div id="review_box">
-		                    <!-- 처음에 page load시 1page의 후기들이 보이도록 설정 -->
-	                        <h5 class="review_title_same review_title_${k}">${productMemberReview.reviewTitle}</h5><br>
-	                        <p class="review_write_content_same review_write_content_${k}">${productMemberReview.reviewContent}</p><br>
-	                    
-	                        <div class="review_write_info">
-	                        	<div class="review_writer_date">
-		                            <span class="review_writer_same review_writer_${k}">${productMemberReview.reviewWriter}</span>
-		                            <span class="review_date_same review_date_${k}">${productMemberReview.reviewDate}</span>
-	                            </div>
-	                            <div class="btns">
-	                            	<!-- 로그인한 회원의 id와 후기 작성자의 id가 일치할때만 수정 삭제 버튼이 보인다. -->
-		                            <c:if test="${memberLoginInfo == productMemberReview.reviewWriter}">
-			                            <a class="review_update_same review_update_${k}">수정</a>
-			                            <a onclick="deleteAlert();" class="review_delete_same review_delete_${k}">삭제</a>
-		                            </c:if>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </li>
+				<c:forEach var="productMemberReview" items="${productMemberReview}">
+						<c:set var="k" value="${1+k}"></c:set>
+		                <li class="review_li_same review_li_${k}">
+		                    <div class="review_img_same review_img_${k}">
+		                        <img src="${productMemberReview.reviewImageUrl}" class="img_same img_same_${k}">
+		                    </div>
+		
+		                    <div id="review_box">
+			                    <!-- 처음에 page load시 1page의 후기들이 보이도록 설정 -->
+		                        <h5 class="review_title_same review_title_${k}">${productMemberReview.reviewTitle}</h5><br>
+		                        <p class="review_write_content_same review_write_content_${k}">${productMemberReview.reviewContent}</p><br>
+		                    
+		                        <div class="review_write_info">
+		                        	<div class="review_writer_date">
+			                            <span class="review_writer_same review_writer_${k}">${productMemberReview.reviewWriter}</span>
+			                            <span class="review_date_same review_date_${k}">${productMemberReview.reviewDate}</span>
+		                            </div>
+		                            <div class="btns btns_${k}" style="display: none;">
+		                            	<!-- 로그인한 회원의 id와 후기 작성자의 id가 일치할때만 수정 삭제 버튼이 보인다.  style="display: none;"-->
+			                            <%-- <c:if test="${memberLoginInfo == productMemberReview.reviewWriter}"> --%>
+			                            <%-- <c:if test="${!empty memberLoginInfo}"> --%>
+			                            	<button class="review_update_same review_update_${k}">수정</button>
+			                            	<button class="review_delete_same review_delete_${k}">삭제</button>
+				                            <%-- <a class="review_update_same review_update_${k}">수정</a> --%>
+				                            <%-- <a onclick="deleteAlert();" class="review_delete_same review_delete_${k}">삭제</a> --%>
+			                            <%-- </c:if> --%>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </li>
 	                </c:forEach>
 	            </ul>
 		</div>
@@ -96,7 +104,9 @@
 				<c:when test="${selectPage < startPageLink }">리뷰가 존재하지 않습니다.</c:when>
 				<c:when test="${selectPage != 0 }">
 					<c:forEach begin="${startPageLink}" end="${endPageLink}" step="1" var="i">
-						<a class="pageLink_same pageLink_${i}">${i}</a>
+						<%-- <a class="pageLink_same pageLink_${i}">${i}</a> --%>
+						<button class="pageLink_same pageLink_${i}">${i}</button>
+						<%-- <a href="/PetmaruNeo/productdetail?reviewpage=${i}" class="pageLink_same pageLink_${i}">${i}</a> --%>
 					</c:forEach>
 				</c:when>
 			</c:choose>
@@ -135,15 +145,15 @@
                </table>
          </div>
 	<script>
-			
-			// 후기 글을 가져오는 ajax
+		//=====================================================================================================
+		// 후기 글을 가져오는 ajax
  			for (var i = "${startPageLink}"; i <= "${endPageLink}"; i++) {
  				console.log("pagelink 시작");
 				$('.pageLink_' + i).on('click', function() {
 					console.log("ajax시작");
 					$.ajax({
 		                type : "POST",
-		                url : "productdetail",
+		                url : "writememberreviewview",
 		                data : {
 		                	cateGory : "<%=product.getProductCategory()%>",
 		                    reviewpage : $(this).text()
@@ -153,11 +163,10 @@
 		                	console.log("success 시작");
 		                	if (data != null) {
 		                		console.log("if 시작");
-									// 기존의 내용을 지워야 하니 empty() function을 사용
-		                			$('.review_title_same').empty();
-		                			$('.review_write_content_same').empty();
-		                			$('.review_writer_same').empty();
-		                			$('.review_date_same').empty();
+	                				// 삭제 & 수정 버튼에 적용된 스타일 숨기기
+		                			$('.btns').css('display', 'none');
+		                			// <ul id="review_list"> 아래의 모든 내용만 삭제(태그는 그대로 유지)
+									$('#review_list').find().empty();
 		                			// 이미지 속성 제거
 		                			$('.img_same').removeAttr("src");
 		                		for (let i = 0; i < data.reviewInfo.length; i++) {
@@ -166,8 +175,14 @@
 		                			$('.img_same_' + (i + 1)).attr("src", data.reviewInfo[i].reviewImageUrl);
 		                			$('.review_title_' + (i + 1)).text(data.reviewInfo[i].reviewTitle);
 		                			$('.review_write_content_' + (i + 1)).text(data.reviewInfo[i].reviewContent);
-		                			$('.review_writer_' + (i + 1)).text(data.reviewInfo[i].reviewWriter);
 		                			$('.review_date_' + (i + 1)).text(data.reviewInfo[i].reviewDate);
+		                			$('.review_writer_' + (i + 1)).text(data.reviewInfo[i].reviewWriter);
+		                			
+		           					if ("${memberLoginInfo}" == $('.review_writer_' + (i + 1)).text()) {
+		           	   					$('.btns_' + (i + 1)).css('display', 'block');
+		           						$('.review_update_same').text('수정');
+		           						$('.review_delete_same').text('삭제');
+		           					}
 		                		}
 							}
 						},
@@ -179,13 +194,14 @@
 					})
 				})
 			}
-			
-			// 삭제 팝업 띄우는 fnuction
- 			function deleteAlert() { alert('정말 삭제하시겠습니까?'); }
-			
-			// 후기 글을 삭제하는 ajax
+		//=====================================================================================================
+		// 후기 글을 삭제하는 ajax
 			console.log("ajax 삭제 for 시작");
 			$('.review_delete_same').on('click',function() {
+				console.log(this);
+				// 삭제 여부를 묻는 팝업
+				let deleteBool = confirm('정말 삭제하시겠습니까?');
+				if (deleteBool == true) {
 				console.log("ajax 삭제 시작");
 				$.ajax({
 	                type : "POST",
@@ -200,6 +216,7 @@
 	                	console.log(data);
 	                	console.log(data.result);
 						if (data.result == 1) {
+							console.log(this);
 							alert('삭제가 왼료되었습니다.');
 							window.location.reload();
 							// 새로 고침 이벤트
@@ -208,27 +225,67 @@
 						}
 					},
 					error : function(request,status,error) {
-	                	console.log("false 진입")
+	                	console.log("false 진입");
 	                    alert('삭제 실패');
 	                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	                }
-				})
+					})
+				}
 			})
-			// ======================================================================
-			// update 팝업 이벤트 및 수정
+		// ======================================================================
+		// update 팝업 이벤트 및 수정
 			let updateTitle = document.getElementById('update_title');
 			let updateContent = document.getElementById('update_content');
 			let updateBox = document.getElementById('update_box');
 			
-			document.querySelector('.review_update_same').addEventListener('click', function () {
+			var liEle = document.getElementsByClassName('review_li_same');
+			for (var i = 0; i < liEle.length; i++) {
+  					
+			document.querySelector('.review_update_' + (i + 1)).addEventListener('click', function () {
+				console.log(this);
 				updateTitle.value = $(this).parents('#review_box').find(".review_title_same").text();
 				updateContent.value = $(this).parents('#review_box').find(".review_write_content_same").text();
 				updateBox.style.display = "block";
+				
+				// 팝업 컨트롤용 변수
+		        let popNumTitle = 1;
+
+		        document.getElementById('update_title').onclick = function () {
+		            if (popNumTitle == 1) {
+		                alert('제목은 1~20자 사이로만 입력해주세요(공백포함)');
+		                popNumTitle++;
+		            }
+		        }
+
+				// 팝업 컨트롤용 변수
+		        let popNumContent = 1;
+
+		        document.getElementById('update_content').onclick = function () {
+		            if (popNumContent == 1) {
+		                alert('내용은 1글자 이상 입력해주세요(공백포함)');
+		                popNumContent++;
+		            } 
+		        }
 				
 				// ajax용 기존 후기글 제목
 				var originTitle = $(this).parents('#review_box').find(".review_title_same").text();
 				
 				$('#update_btn').on('click', function () {
+			        // 제목 & 내용 글자 수 유효성 검사
+			        // 후기 수정 버튼(제출) 이벤트 등록
+		            // 1. 제목(1~20자 사이만 입력가능, 공백포함)
+		            var textEle = document.getElementById('update_title');
+
+		            // 2. 내용(최소 1글자 입력, 공백포함)
+		            var textAreaEle = document.getElementById('update_content');
+
+		            if (textEle.value.length > 20 || textEle.value.length == 0) {
+		                alert('제목의 글자수를 맞춰서 입력해주세요');
+						return false;
+		            } else if(textAreaEle.value.length == 0) {
+		                alert('내용은 최소 1글자 이상 입력해주세요');
+						return false;
+		            }
 					console.log("update 시작");
 					$.ajax({
 						type : "post",
@@ -244,8 +301,9 @@
 							console.log("success 시작");
 							if (data.result == 1) {
 								alert('수정을 완료했습니다.');
-								window.location.reload();
-								// document.getElementById('update_box').style.display = "none";
+								document.getElementById('update_box').style.display = "none";
+								location.reload();
+								// window.location.reload();
 							} else {
 								alert('수정이 되지 않았습니다.');
 							}
@@ -258,10 +316,9 @@
 					})
 				})
 			})
-
-			
-   			// ======================================================================
-	        // update 창 닫는 이벤트
+   				}
+		// ======================================================================
+        // update 창 닫는 이벤트
 	        var modal = document.getElementById('update_box');
 	        window.onclick = function(event) {
                 if (event.target == modal) {
@@ -271,6 +328,38 @@
 					}
 	            }
 	        }
+		// ======================================================================
+		// 처음 페이지 로드 했을 때 삭제 / 수정 보이게 하기
+			window.onload = function () {
+   				var liEle = document.getElementsByClassName('review_li_same');
+   				for (var i = 0; i < liEle.length; i++) {
+   					if ("${memberLoginInfo}" == $('.review_writer_' + (i + 1)).text()) {
+   	   					$('.btns_' + (i + 1)).css('display', 'block');
+   					}	
+				}
+			}
+		// ======================================================================
+		// 후기 작성용 data 전달 by JSON
+        document.getElementById('insertA').onclick = function() {
+            var insertFrm = document.getElementById('insertForm');
+
+            let jsData = {
+                category : "<%=product.getProductCategory() %>",
+                pno : "<%=product.getProductNo() %>",
+                url : "<%=product.getProductImgUrl() %>",
+               	pname : "<%=product.getProductName() %>"
+            }
+            
+            let jsonData = JSON.stringify(jsData);
+
+            $('#test').val(jsonData);
+            console.log(JSON.stringify(jsData));
+
+            insertFrm.method = "post";
+            insertFrm.action = "writememberinsertview";
+            insertFrm.submit();
+        }
+		// ======================================================================
     </script>
 </body>
 </html>

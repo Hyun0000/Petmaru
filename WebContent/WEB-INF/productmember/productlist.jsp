@@ -33,7 +33,7 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 					<c:forEach var="product" items="${producClothestList}">
 						<c:set var="category" value="${product.getProductCategory()}"></c:set>
 						<!-- c:set : 페이지 링크에 카테고리 값을 넣어주기 위한 변수 설정 -->
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
 							<img src="${product.getProductImgUrl()}">
 							<br><span class="name">${product.getProductName()}</span>
 							<br><span class="price">${product.getPrice()}원</span>

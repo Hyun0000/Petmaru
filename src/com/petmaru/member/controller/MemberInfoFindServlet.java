@@ -45,8 +45,10 @@ public class MemberInfoFindServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		System.out.println("뽑아온 데이터" + id+ name);
+		System.out.println("email" + email);
 		MemberService service = new MemberService();
 		String findid = service.findId(name, email);
+		System.out.println("아디:" + findid);
 		
 		if(findid !=null) {
 			System.out.println("서블릿 찾아온 아디:" + findid);
@@ -55,8 +57,7 @@ public class MemberInfoFindServlet extends HttpServlet {
 			System.out.println("없음!");
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/info_find.jsp");
-		 rd.forward(request, response);
+		request.setAttribute("findid", findid);
+		request.getRequestDispatcher("/WEB-INF/member/info_find.jsp").forward(request, response);
 	}
-
 }

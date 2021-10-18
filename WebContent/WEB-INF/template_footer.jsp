@@ -17,7 +17,7 @@
 	      <ul>
 	        <li>MON-FRI</li>
 	        <li>9:30 - 17:00 (lunch 12:00 - 13:00)</li>
-	        <li>contact@bmsmile.com</li>
+	        <li>petmaru@bmsmile.com</li>
 	      </ul>
 	    </div>
     </div>

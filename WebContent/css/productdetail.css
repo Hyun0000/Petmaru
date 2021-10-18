@@ -43,9 +43,35 @@ section > #product_img > img {
 
 /* 가격 위치 */
 #product_write_icon #price{
+	text-align: right;
     position: absolute;
-    top: 250px;
-    right: 50px;
+    top: 250px; right: 50px;
+    margin: 0px 5px;
+}
+
+/* 후기 등록 버튼 스타일 및 위치 지정 */
+/* #product_write_icon #insertBtn{
+	width: 100px; height: 50px;
+    background-color: black;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+    margin-top: 50px;
+} */
+
+/* 후기 등록 버튼의 링크 스타일 및 위치 지정 */
+#product_write_icon #insertA {
+	text-align: center;
+	display: block;
+	width: 100px; height: 50px;
+	line-height: 50px;
+    background-color: black;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+    margin-top: 20px;
+	text-decoration: none;
+	color: white;
 }
 
 /* 구매&장바구니 버튼 위치 */
@@ -58,8 +84,8 @@ section > #product_img > img {
 #product_write_icon #icon a {
     display: inline-block;
     width: 200px;
-    margin: 0 10px;
     height: 50px;
+    margin: 0 10px;
     line-height: 50px;
     background-color: black;
     color: white;
@@ -73,7 +99,6 @@ section > #product_img > img {
     background-color: white;
     color: black;
 }
-
 /* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 */
 /* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 */
 /* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 */
@@ -142,13 +167,22 @@ section > #product_img > img {
 	float: left;
 }
 
-/* 삭제 &수정 버튼 스티일 및 위치 지정 */
+/* 삭제 &수정 버튼 담는 div 스티일 및 위치 지정 */
 .review_write_info .btns {
 	float: right;
 }
 
-.review_write_info .btns a {
-	padding-left: 10px;
+/* 삭제 &수정 버튼 스타일 지정 */
+.btns > button {
+	border: 2px solid black;
+	width: 50px;
+	height: 30px;
+	background-color: white;
+}
+
+.btns > button:hover {
+	background-color: black;
+	color: white;
 }
 
 /* 리뷰 구역 구분 경계선 */
@@ -173,6 +207,13 @@ section > #product_img > img {
     font-size: 1.2rem;
 }
 
-#page a {
+#page button {
 	margin: 0 10px;
+	border: none;
+	font-size: 1.4rem;
+	background-color: white;
+}
+
+#page button:hover {
+	text-decoration: underline;
 }

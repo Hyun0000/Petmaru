@@ -65,9 +65,10 @@ public class ProductMemberBuyServlet extends HttpServlet {
 		
 		String idStr = request.getParameter("id");
 		String id = "";
-		if (idStr == null || idStr.equals("")) { id = "user01"; }
+		if (idStr == null || idStr.equals("")) { System.out.println("id가 제대로 전달되지 않았습니다."); }
 		else { id = idStr; }
 		System.out.println("id : " + id);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVo member = null;
 		member = new ProductMemberService().searchMembrtInfo(id);
@@ -79,6 +80,7 @@ public class ProductMemberBuyServlet extends HttpServlet {
 			map.put("name", member.getMember_name());
 			map.put("address", member.getMember_address());
 			map.put("phone", member.getMember_phone());
+			map.put("point", member.getMember_point());
 			map.put("memberInfo", member);
 			
 			gsonStr = gson.toJson(map);
