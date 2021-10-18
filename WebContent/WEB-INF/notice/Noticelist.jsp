@@ -2,20 +2,27 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% String context_root = request.getContextPath(); %>	
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
 <meta charset="UTF-8">
-<title>JSP게시판만들기</title>
-<link href="css/list.css" type="text/css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
+<title>공지사항</title>
+<%@ include file="../template_header.jsp" %>
+
 
 </head>
 <body>
 	<div>
-		<h3>글 검색 폼</h3>
+		<h3>공지사항</h3>
 		<form>
 			<fieldset>
 				<legend>글 검색 필드</legend>
@@ -57,37 +64,47 @@
 				<%-- <%}%> --%>
 			</tbody>
 		</table>
-	</div>
-
-	<div>
-		<c:set var="page" value="${(param.p==null)? 1: param.p}" />
+		</div>
+		<c:set var="page" value="${(param.p==null)?1:param.p}" />
 		<c:set var="startNum" value="${page-(page-1)%5}" />
-		<c:set var="lastNum"
-			value="${ fn:substringBefore(Math.ceil(count/10), '.')  }" />
+		<c:set var="lastNum" value="${fn:substringBefore(Math.ceil(count/10),'.')}" />
+		<div class = "indexer margin-top align-right">
+		
+		 <div class="indexer margin-top align-right">
+		 <h3 class = "hidden">현재페이지</h3>
+		 <div><span class = "text-orange text-strong">${(empty param.p)?1:param.p }</span>/${lastNum }page</div>
+		</div>
+		<div class = "margin-top align-center pager">
+		
+	</div>
 
 
 		<c:if test="${startNum > 1}">
 			<a class="btn btn-prev" href="?p=${startNum-1}&t=&q=">이전</a>
 		</c:if>
 		<c:if test="${startNum <= 1}">
-			<span onclick="alert('이전 페이지가 없습니다.');">이전</span>
+			<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>
 		</c:if>
-
+		
+		</div>
+		
 			<ul class="-list- center">
 				<c:forEach var="i" begin="0" end="4">
-					<li><a class = "-text- orange bold" href = "?p=${startNum+i}&f=&q=">${startNum+i}</a>
+				<c:if test="${(startNum+i) <= lastNum}">
+					<li><a class = "-text- ${(page==(startNum+i))?'orange':''} bold" href = "?p=${startNum+i}&f=&q=">${startNum+i}</a>
+				</c:if>
 				</c:forEach>
 			</ul>
-
 		<div>
-			<c:if test="${startNum+5 < lastNum}">
+			<c:if test="${startNum+4<lastNum}">
 				<a href="?p=${startNum+5}&t=&q=" class="btn btn-next">다음</a>
 			</c:if>
-			<c:if test="${startNum+5 >= lastNum}">
+			<c:if test="${startNum+4>=lastNum}">
 				<span class="btn btn-next" onclick="alert('다음 페이지가 없습니다.');">다음</span>
 			</c:if>
 		</div>
-	</div>
+
 
 </body>
+	<%@ include file="../template_footer.jsp" %>
 </html>

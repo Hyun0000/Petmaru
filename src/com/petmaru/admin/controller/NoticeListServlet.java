@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.petmaru.notice.dao.NoticeDao;
+import com.petmaru.notice.service.NoticeService;
 import com.petmaru.notice.vo.NoticeVo;
 
 
@@ -66,10 +67,12 @@ public class NoticeListServlet extends HttpServlet {
 		if(page_ != null && !page_.equals(""))
 			page = Integer.parseInt(page_);				
 		
-		NoticeDao dao = new NoticeDao(); 
-		ArrayList<NoticeVo> list= dao.getNoticeList(field, query, page);
+		NoticeService service = new NoticeService(); 
+		ArrayList<NoticeVo> list= service.getNoticeList(field, query, page);
+		int count = service.getNoticeCount(field, query);
 		
 		request.setAttribute("list", list);
+		request.setAttribute("count", count);
 		request.getRequestDispatcher("/WEB-INF/notice/Noticelist.jsp").forward(request, response);	
     }
 	/**

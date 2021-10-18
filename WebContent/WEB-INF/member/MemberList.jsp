@@ -71,6 +71,29 @@
 
 			</tr>
 		</c:forEach>
+		
+				<c:if test="${startNum > 1}">
+			<a class="btn btn-prev" href="?p=${startNum-1}&t=&q=">이전</a>
+		</c:if>
+		<c:if test="${startNum <= 1}">
+			<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>
+		</c:if>
+		
+			<ul class="-list- center">
+				<c:forEach var="i" begin="0" end="4">
+				<c:if test="${(startNum+i) <= lastNum}">
+					<li><a class = "-text- ${(page==(startNum+i))?'orange':''} bold" href = "?p=${startNum+i}&f=&q=">${startNum+i}</a>
+				</c:if>
+				</c:forEach>
+			</ul>
+		<div>
+			<c:if test="${startNum+4<lastNum}">
+				<a href="?p=${startNum+5}&t=&q=" class="btn btn-next">다음</a>
+			</c:if>
+			<c:if test="${startNum+4>=lastNum}">
+				<span class="btn btn-next" onclick="alert('다음 페이지가 없습니다.');">다음</span>
+			</c:if>
+		</div>
 	</table>
 	<%@ include file="../template_footer.jsp" %>
 </body>

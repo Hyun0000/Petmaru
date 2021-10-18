@@ -77,9 +77,9 @@ public class NoticeDao {
 		
 		int count = 0;
 		
-		String sql = "SELECT COUNT(Notice_id) COUNT FROM (" + 
+		String sql = "SELECT COUNT(id) COUNT FROM (" + 
 				"    SELECT ROWNUM NUM, NOTICE.* " + 
-				"    FROM NOTICE  WHERE "+field+" LIKE ? ORDER BY Notice_REGDATE DESC " + 				
+				"    FROM NOTICE WHERE "+field+" LIKE ? ORDER BY REGDATE DESC " + 				
 				"    ) " ;
 		
 		Connection conn = DBCPTemplate.getConnection();
@@ -90,7 +90,9 @@ public class NoticeDao {
 		    pstmt = conn.prepareStatement(sql);
 		    pstmt.setString(1,"%"+query+"%");		   
 			rs = pstmt.executeQuery();
-			rs.getInt("count");
+			
+			if(rs.next())
+			count =rs.getInt("count");
 		
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.petmaru.notice.dao.NoticeDao;
+import com.petmaru.notice.service.NoticeService;
 import com.petmaru.notice.vo.NoticeVo;
 
 
@@ -41,8 +42,8 @@ public class NoticeDetailController extends HttpServlet {
 //	}
 		int id = Integer.parseInt(request.getParameter("id")); 
 		
-		NoticeDao dao = new NoticeDao();
-		NoticeVo notice = dao.getNotice(id);
+		NoticeService service = new NoticeService();
+		NoticeVo notice = service.getNotice(id);
 		request.setAttribute("n",notice);
 
 		request.getRequestDispatcher("WEB-INF/notice/NoticeDetail.jsp").forward(request, response);
