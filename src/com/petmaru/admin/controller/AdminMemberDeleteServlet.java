@@ -17,7 +17,7 @@ import com.petmaru.member.model.service.MemberService;
 /**
  * Servlet implementation class DeleteServlet
  */
-@WebServlet(name = "Delete", urlPatterns = { "/delete" })
+@WebServlet("/deleteMember")
 public class AdminMemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,20 +32,17 @@ public class AdminMemberDeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.setCharacterEncoding("utf-8");
-
-		//2.변수저장
-		String memberId = request.getParameter("memberId");
 		
-		//3.비지니스 로직
-		MemberService service = new MemberService();
-
-		int result = service.deleteMember(memberId);
+		String member_id = request.getParameter("member_id");
+		MemberService service = new MemberService();	
 		
+		 service.deleteMember(member_id);
+		
+	
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

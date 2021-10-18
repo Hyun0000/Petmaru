@@ -1,65 +1,77 @@
-<%@page import="com.petmaru.member.model.vo.MemberVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%
-	String context_root = request.getContextPath();
-%>   
-    <%
-    ArrayList<MemberVo> members = (ArrayList<MemberVo>)request.getAttribute("memberList");
-    %>
+       <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+       <%	String context_root = request.getContextPath(); %>
+       
+    <!--    
+    
+    ArrayList<Member> members = (ArrayList<Member>)request.getAttribute("memberList");
+    
+    -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productdetail.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/MemberList.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="../template_header.jsp"%>
-	
-	
-	
-	<section>
-		<div id = "search">
-			<form action="/searchKeyword">
-				<select name="type" id = "ListCheck"class="form-control">
-					<option value ="memberId">아이디</option>
-					<option value ="memberName">이름</option>
+<section>
+<%@ include file="../template_header.jsp" %>
+		<div style="margin:0 auto;width:500px; text-align:center;">
+			<form action="/searchKeyword" method="post">
+				<select name="type" class="form-control" style="display: inline-block; width:100px;
+				height:30px; font-size:0.8em;">
+				
+					<c:if test="${empty type }">			<!-- null check! -> empty -->
+						<option value ="member_id">아이디</option>
+						<option value ="member_name">이름</option>
+					</c:if>
+					
+					<c:if test="${not empty type && type=='member_name'}">			<!-- null check! -> empty -->
+						<option value ="member_id">아이디</option>
+						<option value ="member_name" selected="selected">이름</option>
+					</c:if>
+					
+					<c:if test="${not empty type && type=='member_id'}">			<!-- null check! -> empty -->
+						<option value ="member_id" selected="selected">아이디</option>
+						<option value ="member_name">이름</option>
+					</c:if>
 				</select>
-				<input type="text" id ="lookup "class="form-control" name="keyword">
+				
+				<input type="text" class="form-control" style="display:inline-block; width:200px;
+				height:30px; font-size:0.8em;" name="keyword" value="${keyword }">
 				<button type="submit" class="btn btn-outline-secondary btn-sm">조회</button>
 			</form>
 		
 		</div>
-	<div id = table>
-	<table class="table">
+		</section>
+	<table class="table table-hover" style="text-alingn:center; margin: 0 auto; color: black;">
+	
 		<tr>
 			<th>아이디</th><th>이름</th><th>성별</th>
-			<th>이메일</th><th>전화번호</th><th>탈퇴</th>
+			<th>전화번호</th><th>적립금</th><th>탈퇴</th>
 		</tr>
-		<%for(MemberVo listMember : members){%>
-			<form action="/MemberList" method="post">
-			<tr>
-				<td><%=listMember.getMember_id()%></td>
-				<td><%=listMember.getMember_name()%></td>
-				<td><%=listMember.getMember_gender() %></td>
-				<td><%=listMember.getMember_email() %></td>
-				<td><%=listMember.getMember_phone() %></td>
-				<td><button type="button" class="btn btn-outline-info btn sm" 
-				onclick="location.href='/delete?memberId=<%=listMember.getMember_id()%>'">탈퇴</button></td>
-			</tr>
-			</form>
-		<%}%>	
+
+		<c:forEach items="${members }" var="m" varStatus="i">
 		
-			
+			<tr>	
+				<td>${m.member_id }</td>
+				<td>${m.member_name }</td>
+				<td>${m.member_gender }</td>
+				<td>${m.member_phone }</td>
+				<td>${m.member_point }</td>
+				
+				<td id = "submit"><button class="btn btn-outline-info btn-sm" onclick="location.href='/deleteMember?member_id=${m.member_id}'">탈퇴</button></td>
+
+			</tr>
+		</c:forEach>
 	</table>
-	</div>
-	</section>
-	
-	<%@ include file="../template_footer.jsp"%>
+	<%@ include file="../template_footer.jsp" %>
 </body>
 </html>

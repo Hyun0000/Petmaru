@@ -36,12 +36,38 @@ public class MemberService {
 		return result;// 오류발생:-1, 가입성공:1, 가입실패:0, 기존회원있으면:2,가장큰수0xFF
 	}
 	
-	//회원목록 출력
-	public ArrayList<MemberVo> selectList(){
+	// 회원목록 출력
+	public ArrayList<MemberVo> selectList(int start, int end) {
 		Connection conn = DBCPTemplate.getConnection();
 		MemberDao dao = new MemberDao();
-		ArrayList<MemberVo> list = dao.selectList(conn);
-		
+		ArrayList<MemberVo> list = dao.selectList(conn, start, end);
+
+		return list;
+	}
+
+	public int getBoardCount() {
+		int result = 0;
+		Connection conn = DBCPTemplate.getConnection();
+		result = new MemberDao().getBoardCount(conn);
+		DBCPTemplate.close(conn);
+		return result;
+	}
+
+	// 회원정보 검색
+	public ArrayList<MemberVo> searchKeyword(String type, String keyword) {
+
+		Connection conn = DBCPTemplate.getConnection();
+		ArrayList<MemberVo> list = null;
+		MemberDao dao = new MemberDao();
+		switch (type) {
+		case "Member_id":
+			list = dao.searchKeywordId(conn, keyword);
+			break;
+		case "Member_name":
+			list = dao.searchKeywordName(conn, keyword);
+			break;
+		}
+		DBCPTemplate.close(conn);
 		return list;
 	}
     //회원탈퇴
@@ -57,37 +83,7 @@ public class MemberService {
 		}
 		DBCPTemplate.close(conn);
 		
-		
 		return result;
-	}
-	
-    //회원정보 변경
-	public int updateMember(MemberVo m) {
-		Connection conn = DBCPTemplate.getConnection();
-		MemberDao dao = new MemberDao();
-		int result = dao.updateMember(conn, m);
-		
-		if(result > 0) {
-			DBCPTemplate.commit(conn);
-		}else {
-			DBCPTemplate.rollBack(conn);
-		}
-		DBCPTemplate.close(conn);
-		
-		return result;
-	}
-	
-    //회원정보 검색
-	public ArrayList<MemberVo> searchKeyword(String type, String keyword){
-		Connection conn = DBCPTemplate.getConnection();
-		ArrayList<MemberVo> list = null;
-		MemberDao dao = new MemberDao();
-		switch(type) {
-		case "memberId" : list = dao.searchKeywordId(conn,keyword); break;
-		case "memberName" : list = dao.searchKeywordName(conn,keyword); break;
-		}
-		DBCPTemplate.close(conn);
-		return list;
 	}
 	
 	

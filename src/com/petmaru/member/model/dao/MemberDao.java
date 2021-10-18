@@ -15,109 +15,113 @@ public class MemberDao {
 
 	}
 
-	public ArrayList<MemberVo> selectList(Connection conn) {
+	public ArrayList<MemberVo> selectList(Connection conn, int start, int end) {
 
+		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
 		MemberVo m = null;
-		String query = "select * from member";
+		String sql = "select * from (select Rownum r, t1.* from (select * from member order by member_id desc) t1 ) where r between ? and ?";
+//		String sql = "select member_id,member_name,member_gender,member_phone,member_regdate,member_point from member";
 
 		try {
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				m = new MemberVo();
-				m.setMember_id(rset.getString("member_id"));
+				m.setMember_id(rset.getString("member_id")); 
 				m.setMember_name(rset.getString("member_name"));
-				m.setMember_pwd(rset.getString("member_pwd"));
-				m.setMember_phone(rset.getString("Member_phone"));
-				m.setMember_address(rset.getString("Member_address"));
-				m.setMember_regdate(rset.getDate("Member_regdate"));
-				m.setMember_gender(rset.getString("Member_gender"));
-				m.setMember_point(rset.getInt("Member_point"));
-				m.setMember_email(rset.getString("Member_email"));
-
+				m.setMember_gender(rset.getString("member_gender"));
+				m.setMember_phone(rset.getString("member_phone"));
+				m.setMember_point(rset.getInt("member_point"));				
 				list.add(m);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBCPTemplate.close(rset);
-			DBCPTemplate.close(pstmt);
+			close(pstmt);
+			close(rset);
 		}
 		return list;
 	}
-
-	// 관리자가 회원전체 출력시 아이디로 검색
-	public ArrayList<MemberVo> searchKeywordId(Connection conn, String keyword) {
+	public int getBoardCount(Connection conn) {
+		int result = 0;
+		String sql = "select count(member_id) from member";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from member where member_id=?";
-		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, keyword);
+			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				MemberVo m = new MemberVo();
-				m.setMember_id(rset.getString("member_id"));
-				m.setMember_name(rset.getString("member_name"));
-				m.setMember_pwd(rset.getString("member_pwd"));
-				m.setMember_phone(rset.getString("Member_phone"));
-				m.setMember_address(rset.getString("Member_address"));
-				m.setMember_regdate(rset.getDate("Member_regdate"));
-				m.setMember_gender(rset.getString("Member_gender"));
-				m.setMember_point(rset.getInt("Member_point"));
-				m.setMember_email(rset.getString("Member_email"));
-				list.add(m);
+			if (rset.next()) {
+				result = rset.getInt(1);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBCPTemplate.close(pstmt);
 			DBCPTemplate.close(rset);
+			DBCPTemplate.close(pstmt);
 		}
-		return list;
+		return result;
 	}
-
-	// 관리자가 회원전체 출력시 이름으로 검색
-	public ArrayList<MemberVo> searchKeywordName(Connection conn, String keyword) {
-
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String query = "select * from member where member_name like (?)"; // ( ) 없어도 상관없음!!
-		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "%" + keyword + "%");
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				MemberVo m = new MemberVo();
-
-				m.setMember_id(rset.getString("member_id"));
-				m.setMember_name(rset.getString("member_name"));
-				m.setMember_pwd(rset.getString("member_pwd"));
-				m.setMember_phone(rset.getString("Member_phone"));
-				m.setMember_address(rset.getString("Member_address"));
-				m.setMember_regdate(rset.getDate("Member_regdate"));
-				m.setMember_gender(rset.getString("Member_gender"));
-				m.setMember_point(rset.getInt("Member_point"));
-				m.setMember_email(rset.getString("Member_email"));
-
-				list.add(m);
+	//관리자가 회원전체 출력시 아이디로 검색
+		public ArrayList<MemberVo> searchKeywordId(Connection conn, String keyword) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String query = "select * from member where member_id=?";
+			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, keyword);
+				rset = pstmt.executeQuery();
+				while (rset.next()) {
+					MemberVo m = new MemberVo();
+					m.setMember_id(rset.getString("member_id")); 
+					m.setMember_name(rset.getString("member_name"));
+					m.setMember_gender(rset.getString("member_gender"));
+					m.setMember_phone(rset.getString("member_phone"));
+					m.setMember_point(rset.getInt("member_point"));		
+					list.add(m);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DBCPTemplate.close(pstmt);
-			DBCPTemplate.close(rset);
+			return list;
 		}
-		return list;
-	}
+
+		//관리자가 회원전체 출력시 이름으로 검색
+		public ArrayList<MemberVo> searchKeywordName(Connection conn, String keyword) {
+
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = "select * from member where member_name like ?"; // ( ) 없어도 상관없음!!
+			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "%" + keyword + "%");
+				rset = pstmt.executeQuery();
+				while (rset.next()) {
+					MemberVo m = new MemberVo();
+					
+					m.setMember_name(rset.getString("member_name")); 
+
+					
+					list.add(m);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
+			}
+			return list;
+		}
 
 	// 회원정보수정
 	public int updateMember(Connection conn, MemberVo m) {

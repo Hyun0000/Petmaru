@@ -1,31 +1,29 @@
 package com.petmaru.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmaru.member.model.service.MemberService;
-import com.petmaru.member.model.vo.MemberVo;
+import com.petmaru.notice.dao.NoticeDao;
+import com.petmaru.notice.vo.NoticeVo;
 
 
 
 /**
- * Servlet implementation class SearchKeywordServlet
+ * Servlet implementation class NoticeDetailController
  */
-@WebServlet("/searchKeyword")
-public class AdminMemberSearchServlet extends HttpServlet {
+@WebServlet("/detail")
+public class NoticeDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberSearchServlet() {
+    public NoticeDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +32,21 @@ public class AdminMemberSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=UTF-8");
-		//2. 변수저장
-		String type = request.getParameter("type");
-		String keyword = request.getParameter("keyword");
+		// TODO Auto-generated method stub
+//		int Notice_no = Integer.parseInt(request.getParameter("member_id"));
+//		NoticeService service = new NoticeService();	
+//		
+//		service.NoticeDetail(Notice_no);
+//		request.getRequestDispatcher("/WEB-INF/member/NoticeList.jsp").forward(request, response);
+//	}
+		int id = Integer.parseInt(request.getParameter("id")); 
 		
-		MemberService service = new MemberService();
-		ArrayList<MemberVo> list = service.searchKeyword(type,keyword);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/member/MemberList.jsp");
-		request.setAttribute("memberList", list);
-		rd.forward(request, response);
-	}
+		NoticeDao dao = new NoticeDao();
+		NoticeVo notice = dao.getNotice(id);
+		request.setAttribute("n",notice);
 
+		request.getRequestDispatcher("WEB-INF/notice/NoticeDetail.jsp").forward(request, response);
+}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
