@@ -33,7 +33,8 @@ public class MemberLogoutServlet extends HttpServlet {
 		// 만약 세션이 null이 아니라면 해당 세션을 만료 시켜 세션 정보를 없앤다.
 		if(session != null) session.invalidate();
 		//response.sendRedirect("/WEB-INF/index.jsp");
-		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		response.sendRedirect("/Petmaru/mainpage");
+		// request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 	
 

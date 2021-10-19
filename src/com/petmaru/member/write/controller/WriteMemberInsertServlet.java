@@ -112,6 +112,6 @@ public class WriteMemberInsertServlet extends HttpServlet {
 		else {System.out.println("후기글 작성 실패");}
 		
 		// 후기 작성후 해당 상품의 상세페이지로 다시 이동
-		response.sendRedirect("/PetmaruNeo/productdetail?pno=" + pno + "&c=" + category);
+		response.sendRedirect("/Petmaru/productdetail?pno=" + pno + "&c=" + category);
 	}
 }

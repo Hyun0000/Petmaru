@@ -71,7 +71,8 @@ public class MemberLoginservlet extends HttpServlet {
 					System.out.println("memberSessionName : " + memberVo.getMember_name());
 					System.out.println("memberSessionPhone : " + memberVo.getMember_phone());
 					System.out.println(id + "로그인 성공했다");
-					 request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+					response.sendRedirect("/Petmaru/mainpage");
+					// request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 				 }else {
 					System.out.println(result);
 					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
