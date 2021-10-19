@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="/Petmaru/css/main.css" />
         <link rel="stylesheet" type="text/css" href="/Petmaru/css/login.css" />
         <link rel="stylesheet" type="text/css" href="/Petmaru/css/info_find.css" />
+        <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_footer.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
         <title>member_info_find</title>
@@ -131,5 +132,6 @@
          		}
          		
         </script>
+          <%@ include file="../template_footer.jsp" %>
         </body>
 </html>
