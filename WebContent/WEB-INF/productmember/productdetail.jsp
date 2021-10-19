@@ -1,3 +1,10 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>>/css/writememberupdate.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productdetail.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
 <%@page import="com.petmaru.member.write.model.vo.WriteMemberReviewVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.petmaru.product.member.model.vo.ProductMemberVo"%>
@@ -16,13 +23,6 @@
 <head>
 <meta charset="UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/writememberupdate.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productdetail.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <script src="<%=context_root %>/js/template_header.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Petmaru</title>
@@ -359,7 +359,130 @@
             insertFrm.action = "writememberinsertview";
             insertFrm.submit();
         }
-		// ======================================================================
+	// ======================================================================
+	// 옵션 선택
+/* 	// class 생성용 변수
+    let optNumOne = 1;
+
+    // 색깔 select 노드 생성
+    let colorSelectEle = document.createElement('select');
+
+    // 사이즈 select 담는 size_div
+    let size_div = document.getElementById('size_div');
+
+    // 사이즈 select
+    let sizeSelect = document.getElementById('size_select');
+    // let sizeValue = sizeSelect.value; // cf) 얘는 그냥 String이다. dom이 아니다.
+
+    // 색깔 select 담는 color_div
+    let color_div = document.getElementById('color_div');
+
+    // li를 담는 ul
+    let opt_table = document.getElementById('productChoiceTable');
+
+    // 상품 가격
+    const price = document.getElementById('price').innerText;
+
+    // 상품 가격 담은 <h3> 태그
+    let priceEle = document.getElementById('price');
+
+    
+    function show() {
+        if (sizeSelect.value == "SM" || sizeSelect.value == "M" || sizeSelect.value == "L" || sizeSelect.value == "XL") {
+            // 색깔 select 노드 생성
+            colorSelectEle.setAttribute('class', 'color_select_same color_select_' + optNumOne);
+
+            // 색깔 select에 option 추가
+            colorSelectEle.innerHTML = '<option value="">Select Option</option>';
+            colorSelectEle.innerHTML += '<option value="">------------------------</option>';
+            colorSelectEle.innerHTML += '<option value="RED">RED</option>';
+            colorSelectEle.innerHTML += '<option value="BLUE">BLUE</option>';
+            colorSelectEle.innerHTML += '<option value="GREEN">GREEN</option>';
+            colorSelectEle.innerHTML += '<option value="NAVY">NAVY</option>';
+            color_div.appendChild(colorSelectEle);
+
+            trMake();
+        } else {
+            console.log('오류가 났다.');
+        }
+    }
+//====================================================================================
+        // 사이즈 & 색상 선택 완료시 <li> 태그 하나씩 추가
+        function trMake() {
+            var colorSelectVal = document.querySelector('.color_select_' + optNumOne);
+            var colorSelectValBefore = document.querySelector('.color_select_' + (optNumOne - 1));
+
+            colorSelectVal.onchange = function() {
+                if (colorSelectVal.value != "") {
+
+                    // 사이즈를 선택하지 않고 색상 선택시 옵션 선택 금지
+                    if (sizeSelect.value.length == 0) {
+                        alert('사이즈를 선택해주세요');
+                        return false;
+                    }
+
+                    // 사이즈, 색상, 수량을 담은 tr 생성
+                    var trEle = document.createElement('tr');
+
+                    trEle.setAttribute('class', 'opt_tr_same opt_tr_' + optNumOne);
+                    trEle.innerHTML += "<td class=size_opt>" + sizeSelect.value + "</td>";
+                    trEle.innerHTML += "<td class=color_opt>" + colorSelectVal.value + "</td>";
+                    opt_table.appendChild(trEle);
+
+                    let numInputEle = document.createElement('input');
+
+                    numInputEle.setAttribute('type', 'number');
+                    numInputEle.setAttribute('min', 1); // 최소 표시 숫자 지정
+                    numInputEle.setAttribute('max', 99999); // 최대 표시 숫자 지정
+                    numInputEle.setAttribute('step', 1); // 숫자 간격 지정
+                    numInputEle.setAttribute('value', 1); // 초기 표현값
+                    numInputEle.setAttribute('class', 'count_class_same count_class_' + optNumOne);
+                    numInputEle.setAttribute('id', 'count_' + optNumOne);
+                    trEle.appendChild(numInputEle);
+                    trEle.innerHTML += '<td><button class="close_same ' + 'close_'+ optNumOne + '">&times;</button></td>';
+
+                    // x를 누르면 해당 옵션줄(tr)울 삭제
+                    // 삭제된 옵션줄의 가격도 총 가격에서 자동으로 minus
+                    var closeEle = document.getElementsByClassName('close_same');
+                    for (let i = 0; i < closeEle.length; i++) {
+                        closeEle[i].onclick = function () {
+                            // 옵션 줄 삭제
+                            this.parentElement.parentElement.remove();
+                            // 가격 자동 minus
+                            priceEle.innerText = priceEle.innerText - this.parentElement.previousElementSibling.value * price;
+                        }
+                    }
+
+                    optNumOne++;
+                    // 같은 사이즈의 다른 색깔을 선택하는 경우를 대비해 사이즈 선택 <select>의 value를 ""로 초기화
+                    sizeSelect.value = "";
+                    firstPrice();
+                }
+            }
+        }
+//====================================================================================
+        // <tr> 태그 하나씩 추가될때마다 숫자 증량칸(<input>) 생성
+        // & 주문 수량에 따른 실시간 총 가격 변화
+            function firstPrice() {
+                var priceCnt = document.getElementsByClassName('count_class_same');
+                var priceAll = 0;
+                
+                // 증감 안 했을때 총 가격(모든 옵션을 딱 1개씩만 주문할 때)
+                for (let i = 0; i < priceCnt.length; i++) {
+                    priceAll += priceCnt[i].value * price;
+                    priceEle.innerText = priceAll;
+                }
+                console.log("priceAll 전전 : " + priceAll);
+                console.log("priceAll 후후 : " + priceAll);
+                
+                // 상품 수량 증가에 맞춰 총 가격도 증가하는 이벤트
+                for (let j = 0; j < priceCnt.length; j++) {
+                    priceCnt[j].onchange = function () {
+                        priceAll = priceAll * 1 + price * 1;
+                        priceEle.innerText = priceAll;
+                    }
+                }
+        } */
     </script>
 </body>
 </html>

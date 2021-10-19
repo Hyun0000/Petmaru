@@ -1,3 +1,9 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productlist.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
 <%@page import="com.petmaru.product.member.model.vo.ProductMemberVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -15,12 +21,6 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productlist.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
 <script src="<%=context_root %>/js/template_header.js"></script>
 <title>Petmaru</title>
 </head>
