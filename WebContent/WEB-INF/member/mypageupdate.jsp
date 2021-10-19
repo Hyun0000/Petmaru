@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import= "com.petmaru.member.model.vo.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
 <body>
+
 <%@ include file="../template_header.jsp" %>
     <br>
     <br>
@@ -49,43 +51,48 @@
             <table class="myinfo_table">
                 <tr class ="tr">
                     <th class="font">아이디</th>
-                    <td><input type="text" name="memberId" class="textset"
-                        value="id" readonly></td>
+                    <td><input type="text" name="id" class="textset"
+                        value="<%=m.getMember_id() %>" readonly></td>
                 </tr>
                 <tr>
                     <th class="font">비밀번호</th>
-                    <td><input type="password" name="memberPw" class="textset"
-                        value="pwd"></td>
+                    <td><input type="text" name="pwd" class="textset"
+                        value="<%=m.getMember_pwd() %>"></td>
                 </tr>
                 <tr>
                     <th class="font">비밀번호 확인</th>
-                    <td><input type="password" name="memberPw" class="textset"
-                        value="pwd2"></td>
+                    <td><input type="password" name="pwd2" class="textset"
+                        value="<%=m.getMember_pwd() %>"></td>
                 </tr>
                 <tr>
                     <th class="font">이름</th>
-                    <td><input type="text" name="memberName" class="textset"
-                        value="name"></td>
-                </tr>
-                <tr>
-                    <th class="font">나이</th>
-                    <td><input type="text" name="age" class="textset"
-                        value="age"></td>
+                    <td><input type="text" name="name" class="textset"
+                        value="<%=m.getMember_name()%>"></td>
                 </tr>
                 <tr>
                     <th class="font">이메일</th>
                     <td><input type="text" name="email" class="textset"
-                        value="email"></td>
+                        value="<%=m.getMember_email()%>"></td>
                 </tr>
                 <tr>
                     <th class="font">연락처</th>
                     <td><input type="text" name="phone" class="textset"
-                        value="1111"></td>
+                        value="<%=m.getMember_phone()%>"></td>
                 </tr>
+                 <tr>
+                    <th class="font">성별</th>
+                    <td><input type="text" name="gender" class="textset"
+                        value="<%=m.getMember_gender()%>" readonly></td>
+                </tr> 
                 <tr>
                     <th class="font">가입일</th>
-                    <td><input type="text" name="enrollDate" class="textset"
-                        value="11" readonly></td>
+                    <td><input type="text" name="regdate" class="textset"
+                        value="<%=m.getMember_regdate() %>" readonly></td>
+                </tr>
+                 <tr>
+                    <th class="font">포인트</th>
+                    <td><input type="text" name="point" class="textset"
+                        value="<%=m.getMember_point()%>" readonly></td>
                 </tr>
                 <tr>
                     <th colspan="2" >
@@ -100,5 +107,10 @@
             </table>
         </form>
         </section>
+        
+          <%@ include file="../template_footer.jsp" %>
+        <script type="text/javascript">
+
+        </script>
 </body>
 </html>

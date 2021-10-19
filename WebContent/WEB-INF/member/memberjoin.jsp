@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css" />
     <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css" />
     <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_footer.css" />
     <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/join.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -102,7 +103,7 @@
         </div>
     </form>
     <div id=login_bottom_line></div>
-
+  <%@ include file="../template_footer.jsp" %>
     <script >
          function joinbtn_click(){
             var id = document.getElementById("id").value;

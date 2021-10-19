@@ -3,7 +3,7 @@
     position: relative;
     border-radius: 10px;
     background:rgb(213, 216, 213);
-    width: 200px;
+    width: 205px;
     height: 70px;
     clear: both;
     margin-top: 10px;
@@ -26,6 +26,9 @@
 }
 .menuBtn:hover{
     background-color: rgb(226, 221, 221);
+}
+#menu{
+    margin-left: 0%;
 }
 #menutable{
     margin-top: -1px;
