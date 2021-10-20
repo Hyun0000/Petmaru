@@ -4,7 +4,9 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="errorpage.jsp" isErrorPage="false"%>
+<!-- errorPage="errorpage.jsp" 에러가 발생했을때 보여질 에러페이지를 설정 -->
+<!-- isErrorPage="false"로 설정해야 에러페이지로 이동(기본값이기에 굳이 작성하지 않아도 된다.) -->
 <% String context_root = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>

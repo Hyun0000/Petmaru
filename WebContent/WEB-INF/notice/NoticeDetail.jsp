@@ -1,3 +1,7 @@
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_footer.css"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -12,10 +16,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 	  	<meta charset="UTF-8">
 	    <title>게시글</title>	 
 	    <%@ include file="../template_header.jsp" %>

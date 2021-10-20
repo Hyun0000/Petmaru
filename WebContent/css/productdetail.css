@@ -1,87 +1,99 @@
 @charset "UTF-8";
-section {
+#detail_section {
     width: 1300px;
     margin: 0px auto;
     font-size: 1.1rem;
 }
 
+#detail_div_box {
+    width: 1100px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
 /* 상품 사진 담는 div 크기 조절*/
-section > #product_img {
-    display: block;
-    float: left;
-    margin-left: 80px;
+section#detail_section #product_img {
+    box-sizing: border-box;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 /* 상품 사진 크기 조절 */
-section > #product_img > img {
+#detail_section #product_img > img {
 	width: 500px;
 	height: 500px;
 }
 
-/* 상품명, 가격, 버튼을 감싸는 전체 div 크기 설정 */
+/* 오른쪽 div 스타일 지정 */
 #product_write_icon {
-    width: 500px;
-    height: 500px;
-    /* border: 1px solid red; */
-    float: right;
-    margin-right: 100px;
-    padding: 20px;
-    position: relative;
-}
-
-/* 상품명과 회사명 위치 */
-#product_write_icon #write{
-    position: absolute;
-    top: 50px;
-    line-height: 2;
-}
-
-/* 회사명 위치 */
-#product_write_icon #write h4 {
-	margin-top: 30px;
-}
-
-/* 가격 위치 */
-#product_write_icon #price{
-	text-align: right;
-    position: absolute;
-    top: 250px; right: 50px;
-    margin: 0px 5px;
-}
-
-/* 후기 등록 버튼 스타일 및 위치 지정 */
-/* #product_write_icon #insertBtn{
-	width: 100px; height: 50px;
-    background-color: black;
-    color: white;
-    border: none;
     box-sizing: border-box;
-    margin-top: 50px;
-} */
+    padding: 30px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* 상품명 스타일 지정 */
+#product_write_icon > #write > h1 {
+    line-height: 2;
+    font-size: 2rem;
+}
+
+/* 회사명 스타일 지정 */
+#product_write_icon > #write > h4 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+}
+
+/* 옵션선택 select창 위치 지정 */
+#product_write_icon > #option {
+    margin-top: 60px;
+}
+
+/* 가격 div 스타일 및 위치 지정 */
+#product_write_icon > #price_div {
+    margin: 50px 0px;
+    text-align: right;
+    font-size: 1.5rem;
+}
+
+/* 가격에 붙는 '원 ' 위치 지정 */
+#product_write_icon #price-span {
+	margin-right: 50px;
+}
+
+/* 가격 위치 지정 */
+#product_write_icon > #price_div > #price {
+	/* margin-right: 50px; */
+	display: inline;
+}
 
 /* 후기 등록 버튼의 링크 스타일 및 위치 지정 */
-#product_write_icon #insertA {
-	text-align: center;
-	display: block;
+#insertA {
 	width: 100px; height: 50px;
 	line-height: 50px;
     background-color: black;
     color: white;
     border: none;
     box-sizing: border-box;
-    margin-top: 20px;
 	text-decoration: none;
 	color: white;
+	margin-right: 50px;
+	margin-top: 20px;
 }
 
-/* 구매&장바구니 버튼 위치 */
-#product_write_icon #icon{
+/* 구매 & 장바구니 버튼 담은 div 스타일 및 위치 지정 */
+#product_write_icon > #buy_cart_btn {
+    margin-top: 50px;
     text-align: center;
-    top: 400px;
 }
 
-/* 구매&장바구니 버튼 디테일 */
-#product_write_icon #icon a {
+/* 구매 & 장바구니 버튼의 <a> 태그 스타일 지정 */
+#product_write_icon #buy_cart_btn a {
     display: inline-block;
     width: 200px;
     height: 50px;
@@ -91,13 +103,130 @@ section > #product_img > img {
     color: white;
     border: none;
     text-decoration: none;
+    font-size: 1.1rem;
 }
 
-/* 구매&장바구니 버튼 클릭시 효과 */
-#product_write_icon #icon a:hover {
+/* 구매 버튼의 <form> 스타일 지정  */
+#buy_cart_btn #buy_form {
+	display: inline;
+}
+
+/* 구매 & 장바구니 버튼의 <button> 태그 스타일 지정 */
+#product_write_icon #buy_cart_btn button {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    margin: 0 10px;
+    line-height: 50px;
+    background-color: black;
+    color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* 구매 & 장바구니 버튼의 <a> 태그 hover시 스타일 지정 */
+#product_write_icon #buy_cart_btn a:hover {
     border: 1px solid black;
     background-color: white;
     color: black;
+}
+
+/* 구매 & 장바구니 버튼의 <button> 태그 hover시 스타일 지정 */
+#product_write_icon #buy_cart_btn button:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+}
+/* 옵션 스타일 지정 *//* 옵션 스타일 지정 *//* 옵션 스타일 지정 *//* 옵션 스타일 지정 *//* 옵션 스타일 지정 */
+/* 옵션 스타일 지정 *//* 옵션 스타일 지정 *//* 옵션 스타일 지정 *//* 옵션 스타일 지정 *//* 옵션 스타일 지정 */
+/* 사이즈 지정 옵션 칸 */
+#size_select {
+    width: 400px;
+    height: 40px;
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+/* 색깔 지정 옵션 칸 */
+.color_select_same {
+    margin-top: 10px;
+    width: 400px;
+    height: 40px;
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+/* 옵션(사이즈, 색상) 선택칸 클릭시 스타일 지정 */
+#size_select:focus, .color_select_same:focus {
+    outline: none;
+}
+
+/* 옵션(사이즈, 색상) 선택칸 위치 지정 */
+#size_div, #color_div {
+    text-align: center;
+}
+
+/* 옵션 table 위치 및 스타일 지정 */
+#detail_section #productChoiceTable {
+    margin-top: 5px;
+    margin-top: 20px;
+    background-color: #e7e7e7;
+    text-align: center;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 400px;
+    border-spacing: 30px 15px;
+    padding: 20px;
+}
+
+/* 사이즈 & 옵션 칸 밑줄 넣기(td) */
+#detail_section td.size_opt, #detail_section td.color_opt {
+    border-bottom: 1px solid black;
+}
+
+/* 'X' 버튼 스타일 지정 */
+button.close_same {
+    border: none;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+    background-color: #e7e7e7;
+}
+
+/* 'X' 버튼 hover시 스타일 지정 */
+button.close_same:hover {
+	color: red;
+}
+
+/* 수량 입력칸 스타일 지정 */
+input[type=text].count_class_same {
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 50px;
+}
+
+/* 수량 입력칸 focus시 스타일 지정 */
+input[type=text].count_class_same:focus {
+    outline: none;
+}
+
+/* 수량 입력칸 & 위, 아래 버튼 스타일 지정 */
+.count_span_same {
+    display: flex;
+    margin-top: 5px;
+}
+
+/* 위, 아래 버튼 클릭시 스타일 지정 */
+.count_span_same img:active {
+    background-color: white;
 }
 /* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 */
 /* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 *//* 후기 */

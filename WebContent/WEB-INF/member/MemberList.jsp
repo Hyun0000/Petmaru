@@ -1,3 +1,8 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,11 +18,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>

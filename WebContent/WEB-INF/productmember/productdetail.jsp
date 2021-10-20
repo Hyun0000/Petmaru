@@ -28,35 +28,62 @@
 <title>Petmaru</title>
 </head>
 <body>
-
 <%@ include file="../template_header.jsp" %>
-       <section>
-        <div id="product_img">
-            <img src="<%=product.getProductImgUrl() %>">
-        </div>
+       <section id="detail_section">
+       	<div id="detail_div_box">
+	        <div id="product_img">
+	            <img src="<%=product.getProductImgUrl() %>">
+	        </div>
+	
+	        <div id="product_write_icon">
+	            <div id="write">
+	                <h1><%=product.getProductName() %></h1>
+	                <h4><%=product.getCom() %></h4>
+	            </div>
+	            
+	            <div id="option">
+                    <div id="size_div">
+                        <select name="size" id="size_select" onchange="show();">
+                            <option value="">Select Option</option>
+                            <option value="">------------------------</option>
+                            <option value="SM">SM</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
 
-        <div id="product_write_icon">
-            <div id="write">
-                <h1><%=product.getProductName() %></h1>
-                <h4><%=product.getCom() %></h4>
-            </div>
+                    <!-- 색깔 & 수량을 담는 div -->
+                    <div id="color_div"></div>
+                    
+                    <!-- 선택완료된 전체 옵션을 담는 table -->
+                    <table id="productChoiceTable">
+                    	<tr id="option_introduce"><td>옵션을 선택해주세요</td></tr>
+                    </table>
+                    <!-- <ul id="productChoiceList"></ul> -->
+                </div>
 
-            <div id="price">
-                <h2><%=product.getPrice() %>원</h2>
-                <c:if test="${payYN == 'Y'}">
-	                <!-- 특정 조건이 맞아야 후기 작성 버튼이 보이도록 수정 필요 -->
-	                <!-- JSON을 이용해 data 전송 -->
-	                <form id="insertForm">
-	                <input type="hidden" id="test" name="test">
-	                <button id="insertA">후기작성</button>
-	              	</form>
-              	</c:if>
-            </div>
-
-            <div id="icon">
-                <a href="<%=context_root%>/productbuy?pno=<%=product.getProductNo() %>" id="purchase">BUY</a>
-                <a href="#" id="cart">CART</a>
-            </div>
+                <div id="price_div">
+                    <h3 id="price"><%=product.getPrice() %></h3><span id="price-span">원</span>
+                    <c:if test="${payYN == 'Y'}">
+		                <!-- 특정 조건이 맞아야 후기 작성 버튼이 보이도록 수정 필요 -->
+		                <!-- JSON을 이용해 data 전송 -->
+		                <form id="insertForm">
+		                <input type="hidden" id="test" name="test">
+		                <button id="insertA">후기작성</button>
+		              	</form>
+	              	</c:if>
+                </div>
+	
+	            <div id="buy_cart_btn">
+	                <%-- <a href="<%=context_root%>/productbuy?pno=<%=product.getProductNo() %>" id="purchase">BUY</a> --%>
+	                <form id="buy_form">
+	                <button id="purchase">BUY</button>
+	                <input type="hidden" id="buy_json" name="buy_json">
+	                </form>
+	                <a href="#" id="cart">CART</a>
+	            </div>
+	        </div>
         </div>
     </section>
     
@@ -83,13 +110,8 @@
 		                            </div>
 		                            <div class="btns btns_${k}" style="display: none;">
 		                            	<!-- 로그인한 회원의 id와 후기 작성자의 id가 일치할때만 수정 삭제 버튼이 보인다.  style="display: none;"-->
-			                            <%-- <c:if test="${memberLoginInfo == productMemberReview.reviewWriter}"> --%>
-			                            <%-- <c:if test="${!empty memberLoginInfo}"> --%>
 			                            	<button class="review_update_same review_update_${k}">수정</button>
 			                            	<button class="review_delete_same review_delete_${k}">삭제</button>
-				                            <%-- <a class="review_update_same review_update_${k}">수정</a> --%>
-				                            <%-- <a onclick="deleteAlert();" class="review_delete_same review_delete_${k}">삭제</a> --%>
-			                            <%-- </c:if> --%>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -154,11 +176,11 @@
 					$.ajax({
 		                type : "POST",
 		                url : "writememberreviewview",
+		                dataType : "json",
 		                data : {
 		                	cateGory : "<%=product.getProductCategory()%>",
 		                    reviewpage : $(this).text()
 		                },
-		                dataType : "json",
 		                success : function (data) {
 		                	console.log("success 시작");
 		                	if (data != null) {
@@ -271,6 +293,9 @@
 				var originTitle = $(this).parents('#review_box').find(".review_title_same").text();
 				
 				$('#update_btn').on('click', function () {
+					console.log("originTitle : " + originTitle);
+					console.log("updateTitle.value : " + updateTitle.value);
+					console.log("updateContent.value : " + updateContent.value);
 			        // 제목 & 내용 글자 수 유효성 검사
 			        // 후기 수정 버튼(제출) 이벤트 등록
 		            // 1. 제목(1~20자 사이만 입력가능, 공백포함)
@@ -340,74 +365,164 @@
 			}
 		// ======================================================================
 		// 후기 작성용 data 전달 by JSON
-        document.getElementById('insertA').onclick = function() {
-            var insertFrm = document.getElementById('insertForm');
-
-            let jsData = {
-                category : "<%=product.getProductCategory() %>",
-                pno : "<%=product.getProductNo() %>",
-                url : "<%=product.getProductImgUrl() %>",
-               	pname : "<%=product.getProductName() %>"
-            }
-            
-            let jsonData = JSON.stringify(jsData);
-
-            $('#test').val(jsonData);
-            console.log(JSON.stringify(jsData));
-
-            insertFrm.method = "post";
-            insertFrm.action = "writememberinsertview";
-            insertFrm.submit();
-        }
-	// ======================================================================
-	// 옵션 선택
-/* 	// class 생성용 변수
-    let optNumOne = 1;
-
-    // 색깔 select 노드 생성
-    let colorSelectEle = document.createElement('select');
-
-    // 사이즈 select 담는 size_div
-    let size_div = document.getElementById('size_div');
-
-    // 사이즈 select
-    let sizeSelect = document.getElementById('size_select');
-    // let sizeValue = sizeSelect.value; // cf) 얘는 그냥 String이다. dom이 아니다.
-
-    // 색깔 select 담는 color_div
-    let color_div = document.getElementById('color_div');
-
-    // li를 담는 ul
-    let opt_table = document.getElementById('productChoiceTable');
-
-    // 상품 가격
-    const price = document.getElementById('price').innerText;
-
-    // 상품 가격 담은 <h3> 태그
-    let priceEle = document.getElementById('price');
-
-    
-    function show() {
-        if (sizeSelect.value == "SM" || sizeSelect.value == "M" || sizeSelect.value == "L" || sizeSelect.value == "XL") {
-            // 색깔 select 노드 생성
-            colorSelectEle.setAttribute('class', 'color_select_same color_select_' + optNumOne);
-
-            // 색깔 select에 option 추가
-            colorSelectEle.innerHTML = '<option value="">Select Option</option>';
-            colorSelectEle.innerHTML += '<option value="">------------------------</option>';
-            colorSelectEle.innerHTML += '<option value="RED">RED</option>';
-            colorSelectEle.innerHTML += '<option value="BLUE">BLUE</option>';
-            colorSelectEle.innerHTML += '<option value="GREEN">GREEN</option>';
-            colorSelectEle.innerHTML += '<option value="NAVY">NAVY</option>';
-            color_div.appendChild(colorSelectEle);
-
-            trMake();
-        } else {
-            console.log('오류가 났다.');
-        }
-    }
-//====================================================================================
-        // 사이즈 & 색상 선택 완료시 <li> 태그 하나씩 추가
+		if (${payYN == 'Y'}) {
+	        document.getElementById('insertA').onclick = function() {
+	            var insertFrm = document.getElementById('insertForm');
+	
+	            let jsData = {
+	                category : "<%=product.getProductCategory() %>",
+	                pno : "<%=product.getProductNo() %>",
+	                url : "<%=product.getProductImgUrl() %>",
+	               	pname : "<%=product.getProductName() %>"
+	            }
+	            
+	            let jsonData = JSON.stringify(jsData);
+				console.log(jsonData);
+	            $('#test').val(jsonData);
+	            console.log(JSON.stringify(jsData));
+	
+	            insertFrm.method = "post";
+	            insertFrm.action = "writememberinsertview";
+	            insertFrm.submit();
+	        }
+		}
+		// ======================================================================
+		// 구매 페이지 이돟 data 전달 by JSON
+ 	        document.getElementById('purchase').onclick = function() {
+	            var buyFrm = document.getElementById('buy_form');
+            	
+	            // 사이즈 정보 담기
+                var size_buy_opt = document.getElementsByClassName('size_opt');
+                var size_text = "";
+                for (let i = 0; i < size_buy_opt.length; i++) {
+                    if (i + 1 == size_buy_opt.length) {
+                        size_text += size_buy_opt[i].innerText;
+                    } else {
+                        size_text += size_buy_opt[i].innerText + ", ";
+                    }
+                }
+                
+             	// 색상 정보 담기
+                var color_buy_opt = document.getElementsByClassName('color_opt');
+                var color_text = "";
+                for (let i = 0; i < color_buy_opt.length; i++) {
+                    if (i + 1 == color_buy_opt.length) {
+                        color_text += color_buy_opt[i].innerText;
+                    } else {
+                        color_text += color_buy_opt[i].innerText + ", ";
+                    }
+                }
+                
+                // 총 수량 담기
+                var count_opt = document.getElementsByClassName('count_class_same');
+                var count_text = "";
+                for (let i = 0; i < count_opt.length; i++) {
+                	if (i + 1 == count_opt.length) {
+                		count_text += count_opt[i].value;
+                    } else {
+                    	count_text += count_opt[i].value + ", ";
+                    }
+                }
+                console.log("count_text : " + count_text);
+                
+                // 총 가격
+               	var priceLast = document.getElementById('price').innerText;
+	
+	            let js_buy_Data = {
+	                pName : "<%=product.getProductName() %>",
+	                url : "<%=product.getProductImgUrl() %>",
+	                option_size : size_text,
+	                option_color : color_text,
+	                count : count_text,
+	                price : priceLast
+	            }
+	            
+				if(size_text == "" || color_text == "") {
+					alert("옵션을 모두 선택해주세요");
+					return false;
+				}
+	            
+	            let jsonBuyData = JSON.stringify(js_buy_Data);
+				console.log(jsonBuyData);
+	            $('#buy_json').val(jsonBuyData);
+	            console.log(JSON.stringify(js_buy_Data));
+	
+ 	            buyFrm.method = "post";
+	            buyFrm.action = "productbuy";
+	            
+	            buyFrm.submit();
+	        }
+		// ======================================================================
+		// 내용 없는 <li> 숨기는 이벤트
+		/* var imgEle = document.getElementsByClassName('img_same');
+		document.getElementById('page').onclick = function() {
+			for (let i = 0; i < imgEle.length; i++) {
+				console.log(imgEle[i]);
+				console.log(imgEle[i].getAttribute('src'));
+	            if (imgEle[i].hasAttribute('src')) {
+	            	console.log("제발 좀 되라.");	
+				}
+	            
+	            if (imgEle[i].getAttribute('src') == null) {
+					$('.review_li_' + (i + 1)).css('display', 'none');
+				} else {
+					$('.review_li_' + (i + 1)).css('display', 'block');
+				}
+			}
+        } */
+	        // hasAttribute(“src”)
+    	// ======================================================================
+  		// 옵션 선택
+ 		// class 생성용 변수
+	    let optNumOne = 1;
+	
+	    // 색깔 select 노드 생성
+	    let colorSelectEle = document.createElement('select');
+	
+	    // 사이즈 select 담는 size_div
+	    let size_div = document.getElementById('size_div');
+	
+	    // 사이즈 select
+	    let sizeSelect = document.getElementById('size_select');
+	    // let sizeValue = sizeSelect.value; // cf) 얘는 그냥 String이다. dom이 아니다.
+	
+	    // 색깔 select 담는 color_div
+	    let color_div = document.getElementById('color_div');
+	
+	    // li를 담는 ul
+	    let opt_table = document.getElementById('productChoiceTable');
+	
+	    // 상품 가격
+	    const price = document.getElementById('price').innerText;
+	
+	    // 상품 가격 담은 <h3> 태그
+	    let priceEle = document.getElementById('price');
+	
+	    function show() {
+	        if (sizeSelect.value == "SM" || sizeSelect.value == "M" || sizeSelect.value == "L" || sizeSelect.value == "XL") {
+	        	
+	        	// "옵션을 선택해주세요" 문구 숨기기
+	        	document.getElementById('option_introduce').style.display = 'none';
+	        	
+	            // 색깔 select 노드 생성
+	            colorSelectEle.setAttribute('class', 'color_select_same color_select_' + optNumOne);
+	
+	            // 색깔 select에 option 추가
+	            colorSelectEle.innerHTML = '<option value="">Select Option</option>';
+	            colorSelectEle.innerHTML += '<option value="">------------------------</option>';
+	            colorSelectEle.innerHTML += '<option value="RED">RED</option>';
+	            colorSelectEle.innerHTML += '<option value="BLUE">BLUE</option>';
+	            colorSelectEle.innerHTML += '<option value="GREEN">GREEN</option>';
+	            colorSelectEle.innerHTML += '<option value="NAVY">NAVY</option>';
+	            color_div.appendChild(colorSelectEle);
+	
+	            trMake();
+	        } else {
+	            console.log('오류가 났다.');
+	        }
+	    }
+	//====================================================================================
+		// 사이즈 & 색상 선택 완료시 <tr> 태그 하나씩 추가
         function trMake() {
             var colorSelectVal = document.querySelector('.color_select_' + optNumOne);
             var colorSelectValBefore = document.querySelector('.color_select_' + (optNumOne - 1));
@@ -421,6 +536,14 @@
                         return false;
                     }
 
+                    var trLength = document.getElementsByClassName('size_opt');
+                    for (let i = 0; i < trLength.length; i++) {
+                        if (document.getElementsByClassName('size_opt')[i].innerText == sizeSelect.value && document.getElementsByClassName('color_opt')[i].innerText == colorSelectVal.value) {
+                            alert("이미 같은 옵션이 있습니다.");
+                            return false;
+                        }
+                    }
+
                     // 사이즈, 색상, 수량을 담은 tr 생성
                     var trEle = document.createElement('tr');
 
@@ -429,16 +552,33 @@
                     trEle.innerHTML += "<td class=color_opt>" + colorSelectVal.value + "</td>";
                     opt_table.appendChild(trEle);
 
-                    let numInputEle = document.createElement('input');
+                    let spanEle = document.createElement('span');
+                    spanEle.setAttribute('class', 'count_span_same count_span_' + optNumOne);
 
-                    numInputEle.setAttribute('type', 'number');
-                    numInputEle.setAttribute('min', 1); // 최소 표시 숫자 지정
-                    numInputEle.setAttribute('max', 99999); // 최대 표시 숫자 지정
-                    numInputEle.setAttribute('step', 1); // 숫자 간격 지정
-                    numInputEle.setAttribute('value', 1); // 초기 표현값
+                    let numInputEle = document.createElement('input');
+                    numInputEle.setAttribute('type', 'text');
+                    numInputEle.setAttribute('value', '1');
+                    numInputEle.setAttribute('readonly', 'readonly');
                     numInputEle.setAttribute('class', 'count_class_same count_class_' + optNumOne);
                     numInputEle.setAttribute('id', 'count_' + optNumOne);
-                    trEle.appendChild(numInputEle);
+
+                    let upArrow = document.createElement('img');
+                    upArrow.setAttribute('class', "arrow_up_same arrow_up_" + optNumOne);
+                    upArrow.setAttribute('src', "<%=request.getContextPath() %>/image/outline_arrow_drop_up_black_24dp.png");
+                    
+                    let downArrow = document.createElement('img');
+                    downArrow.setAttribute('class', "arrow_down_same arrow_down_" + optNumOne);
+                    downArrow.setAttribute('src', "<%=request.getContextPath() %>/image/outline_arrow_drop_down_black_24dp.png");
+
+                    // span에 수량 입력칸 & 위아래 화살표 담기
+                    spanEle.appendChild(numInputEle);
+                    spanEle.appendChild(upArrow);
+                    spanEle.appendChild(downArrow);
+
+                    // 위의 span을 tr에 담기
+                    trEle.appendChild(spanEle);
+
+                    // 'X' 마크 추가
                     trEle.innerHTML += '<td><button class="close_same ' + 'close_'+ optNumOne + '">&times;</button></td>';
 
                     // x를 누르면 해당 옵션줄(tr)울 삭제
@@ -449,40 +589,65 @@
                             // 옵션 줄 삭제
                             this.parentElement.parentElement.remove();
                             // 가격 자동 minus
-                            priceEle.innerText = priceEle.innerText - this.parentElement.previousElementSibling.value * price;
+                            priceEle.innerText = priceEle.innerText - $(this).parent().prev().find('input').val() * price;
+                            
+                            // 가격이 0원이 되면 다시 옵션 선택 문구 출력
+                            if (priceEle.innerText == 0) {
+                                document.getElementById('option_introduce').style.display = 'inline-block';
+                            }
                         }
                     }
 
                     optNumOne++;
                     // 같은 사이즈의 다른 색깔을 선택하는 경우를 대비해 사이즈 선택 <select>의 value를 ""로 초기화
                     sizeSelect.value = "";
-                    firstPrice();
+                    countPrice();
                 }
             }
         }
 //====================================================================================
         // <tr> 태그 하나씩 추가될때마다 숫자 증량칸(<input>) 생성
         // & 주문 수량에 따른 실시간 총 가격 변화
-            function firstPrice() {
-                var priceCnt = document.getElementsByClassName('count_class_same');
-                var priceAll = 0;
-                
-                // 증감 안 했을때 총 가격(모든 옵션을 딱 1개씩만 주문할 때)
-                for (let i = 0; i < priceCnt.length; i++) {
-                    priceAll += priceCnt[i].value * price;
+        function countPrice() {
+            var priceCnt = document.getElementsByClassName('count_class_same');
+            var priceAll = 0;
+            
+            // 증감 안 했을때 총 가격(모든 옵션을 딱 1개씩만 주문할 때)
+            for (let i = 0; i < priceCnt.length; i++) {
+            	console.log("priceCnt[i].value : " + priceCnt[i].value);
+            	console.log("price 전 : " + price);
+                priceAll += priceCnt[i].value * price;
+                console.log("price 후 : " + price);
+                console.log("priceAll : " + priceAll);
+                priceEle.innerText = priceAll;
+            }
+
+            // 증가 버튼 눌렀을때 가격 변화
+            let upArrow = document.getElementsByClassName('arrow_up_same');
+            for (let i = 0; i < upArrow.length; i++) {
+                upArrow[i].onclick = function () {
+                    this.previousElementSibling.value++;
+                    priceAll = priceAll * 1 + price * 1;
                     priceEle.innerText = priceAll;
                 }
-                console.log("priceAll 전전 : " + priceAll);
-                console.log("priceAll 후후 : " + priceAll);
                 
-                // 상품 수량 증가에 맞춰 총 가격도 증가하는 이벤트
-                for (let j = 0; j < priceCnt.length; j++) {
-                    priceCnt[j].onchange = function () {
-                        priceAll = priceAll * 1 + price * 1;
-                        priceEle.innerText = priceAll;
+            }
+
+            // 감소 버튼 눌렀을때 가격 변화
+            let downArrow = document.getElementsByClassName('arrow_down_same');
+            for (let j = 0; j < downArrow.length; j++) {
+                downArrow[j].onclick = function() {
+                    if (this.previousElementSibling.previousElementSibling.value <= 1) {
+                        alert('최소 수량은 1개입니다.');
+                        this.previousElementSibling.previousElementSibling.value = 1;
+                        return false;
                     }
+                    this.previousElementSibling.previousElementSibling.value--;
+                    priceAll = priceAll * 1 - price * 1;
+                    priceEle.innerText = priceAll;
                 }
-        } */
+            }
+        }
     </script>
 </body>
 </html>

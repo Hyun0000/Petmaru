@@ -1,9 +1,9 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_footer.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/productbuy.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productbuy.css"/>
 <%@page import="com.petmaru.product.member.model.vo.ProductMemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -66,7 +66,7 @@
             </div>
             
             <div id="consumer_input">
-                <table>
+                <table id="consumer_input_table">
                     <tr>
                         <td><h1>구매자 정보</h1></td>
                     </tr>
@@ -93,37 +93,39 @@
             <h1>상품 정보</h1>
             <hr id="product_info_hr">
 
-            <div id="product_info_img">
-                <img src="<%=product.getProductImgUrl()%>">
-            </div>
-
-            <div id="product_info_input">
-                <table>
-                    <tr>
-                        <td class="product_info_input_span"><span>상품명</span></td>
-                        <td>
-                            <div id="product_name"><%=product.getProductName()%></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="product_info_input_span"><span>옵션</span></td>
-                        <td>                            
-                            <div id="product_opt"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="product_info_input_span"><label for="product_count">수량</label></td>
-                        <td>
-                            <input type="text" id="product_count">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="product_info_input_span"><span>가격</span></td>
-                        <td>
-                            <div id="product_price"><%=product.getPrice()%></div>
-                        </td>
-                    </tr>
-                </table>
+			<div id="product_info_box">
+	            <div id="product_info_img">
+	                <img src="${url}">
+	                <%-- <img src="<%=product.getProductImgUrl()%>"> --%>
+	            </div>
+	
+	            <div id="product_info_input">
+	                <table>
+	                    <tr>
+	                        <td class="product_info_first_td product_info_input_span"><span>상품명</span></td>
+	                        <td class="product_info_second_td">
+	                            <div id="product_name" class="info_frame_div">${pName}</div>
+	                        </td>
+	                    </tr>
+	                    
+	                    <tr>
+	                        <td class="product_info_first_td product_info_input_span"><span>옵션 & 수량</span></td>
+	                        	<c:forEach var="i" begin="0" end="${sizeArrWidth - 1}" step="1">
+	                        <td class="product_info_second_td product_info_second_td_flex">
+		                        		<div class="product_opt_flex_div">${sizeArr[i]}</div>
+		                        		<div class="product_opt_flex_div">${colorArr[i]}</div>
+		                        		<div class="product_opt_flex_div">${countArr[i]}</div>
+	                        </td>
+	                       		</c:forEach>
+	                    </tr>
+	                    <tr>
+	                        <td class="product_info_first_td product_info_input_span"><span>가격</span></td>
+	                        <td class="product_info_second_td">
+	                            <div id="product_price" class="info_frame_div">${price}원</div>
+	                        </td>
+	                    </tr>
+	                </table>
+	            </div>
             </div>
         </article>
 <!-- 결제 및 포인트 정보 구역 --><!-- 결제 및 포인트 정보 구역 --><!-- 결제 및 포인트 정보 구역 --><!-- 결제 및 포인트 정보 구역 -->
@@ -216,7 +218,7 @@
 	    		   console.log("ajax시작");
 	    	   $.ajax({
 	    		   type : "POST",
-	    		   url : "productbuy",
+	    		   url : "productbuyajax",
 	    		   data : {
 	    			   id : "${memberLoginInfo}"
 	    		   },
@@ -239,7 +241,7 @@
 					}
 				},
 					error : function () {
-						alert('먼저 로그인을 해주세요');
+						alert('로그인을 먼저 진행해주세요');
 						document.getElementById("info_same").checked = false;
 					}
     		   })
@@ -256,7 +258,7 @@
 	   		   console.log("ajax시작");
 	   	   $.ajax({
 	   		   type : "POST",
-	   		   url : "productbuy",
+	   		   url : "productbuyajax",
 	   		   data : {
 	   			   id : "${memberLoginInfo}"
 	   		   },
@@ -270,7 +272,7 @@
 				}
 			},
 				error : function () {
-					alert('로그인을 해야 포인트 정보를 가져올 수 있습니다.');
+					alert('로그인을 먼저 진행해주세요');
 					document.getElementById("use_whole_point").checked = false;
 				}
 	  	   })
@@ -282,7 +284,7 @@
 	   		   console.log("ajax시작");
 	   	   $.ajax({
 	   		   type : "POST",
-	   		   url : "productbuy",
+	   		   url : "productbuyajax",
 	   		   data : {
 	   			   id : "${memberLoginInfo}"
 	   		   },
@@ -296,7 +298,7 @@
 				}
 			},
 				error : function () {
-					alert('데이터 못 가져옴');
+					alert('로그인을 먼저 진행해주세요');
 					document.getElementById("cash_receipt_y").checked = false;
 					document.getElementById("cash_receipt_n").checked = true;
 					document.getElementById('cash_receipt_phone').style.display = 'none';
@@ -304,10 +306,7 @@
 	  	   })
 		})
 		//============================================================================
-		//============================================================================
-		//============================================================================
 		// 유효성 검사
-		
         // 요청사항을 textarea로 변경하는 event
         // css로 위치 수정 필요
         var textareaEle = document.getElementById('need_textarea');

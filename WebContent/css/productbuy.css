@@ -27,8 +27,8 @@ section hr{
     background-color: cadetblue;
     height: 10px;
 }
-/* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 */
-/* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 */
+/* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 */
+/* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 *//* 각 article 별 개별 설정 시작 */
 /* (배송지 정보) 구역 설정 */
 
 /* hr과 table의 간격 조정 */
@@ -128,7 +128,7 @@ section hr{
 }
 
 /* #consumer_input table margin 설정 */
-#consumer_input table {
+#consumer_input table#consumer_input_table {
     margin-right: 110px;
 }
 
@@ -137,45 +137,28 @@ section hr{
     outline: none;
 }
 
-/* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 */
-/* product_info article 전체 설정 */
+/* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 */
+/* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 *//* (상품 정보) 구역 설정 */
+/* product_info article(상품 정보) 전체 설정 */
 #product_info {
     clear: both;
 }
 
+/* 사진과 주문 상품 정보를 담는 전체 div */
+#product_info_box {
+	display: flex;
+	justify-content: space-between;
+}
+
 /* image가 들어있는 div 설정 */
 #product_info_img {
-    padding: 50px;
-    margin-left: 50px;
-    width: 400px;
-    float: left;
-}
-
-/* 상품정보가 들어있는 div 설정 */
-#product_info_input{
-    /* border: 1px solid black; */
-    box-sizing: border-box;
-    padding: 50px;
+	/* border: 1px solid black; */
+    margin: 0 auto;
     margin-top: 50px;
-    float: right;
-    width: 700px;
-    height: 400px;
-    box-sizing: border-box;
-}
-
-/* 각각의 상품정보가 들어있는 div display, 크기 설정 */
-#product_info_input div {
-    display: inline-block;
-    box-sizing: border-box;
-    width: 430px;
-    height: 45px;
-    border-bottom: 1px solid black;
-    margin-left: 50px;
-    line-height: 45px;
-    /* background-color: red; */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 /* 상품 이미지 크기 설정 */
@@ -184,43 +167,80 @@ section hr{
 	height: 400px;
 }
 
+/* 상품정보 전체가 담겨있는 div 설정 */
+#product_info_input{
+   	/* border: 1px solid black; */
+    box-sizing: border-box;
+    padding: 30px;
+    margin-top: 50px;
+    width: 700px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 /* 상품정보 table 위치 및 간격, 사이즈 설정 */
 #product_info_input table {
+   	/* border: 1px solid black; */
     box-sizing: border-box;
     margin: 0 auto;
     /* 좌우, 위아래 */
     border-spacing:10px 20px;
-    width: 590px;
-    height: 295px;
-}
-
-/* 상품정보 table의 각 항목 글자 정렬 */
-#product_info_input .product_info_input_span{
-    text-align: center;
-}
-
-/* 상품정보 table의 옵션 선택 항목 */
-#product_info_input td input {
-    width: 430px;
-    height: 45px;
-    margin-left: 50px;
-    border: none;
-    border-bottom: 1px solid black;
-    /* background-color: red; */
-}
-
-/* 상품정보 table의 옵션 선택 항목 클릭시 이벤트 지정*/
-#product_info_input td input:focus {
-    outline: none;
+    border-radius: 30px;
+    background: #e7e7e7;
+    padding: 30px;
 }
 
 /* 상품정보가 들어간 div의 padding 조정 */
 #product_info_input div {
-	padding: 0px 20px;
+	padding: 10px 20px;
 }
 
+/* 각각의 상품정보가 들어있는 div display, 크기 설정 */
+#product_info_input .info_frame_div {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 350px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid black;
+    margin: 0 auto;
+	text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 
-/* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 */
+/* table의 첫번째 td 스타일지정 */
+#product_info_input .product_info_first_td {
+	width: 100px;
+	text-align: center;
+}
+
+/* table의 두번째 td 스타일지정 */
+#product_info_input .product_info_second_td {
+	/* width: 500px; */
+	width: 450px;
+	margin: 0 auto;
+	text-align: center;
+	/* border: 1px solid black; */
+	box-sizing: border-box;
+}
+
+/* 각종 옵션 정보를 담고있는  div 스타일 지정 */
+.product_info_second_td_flex {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 350px;
+	padding: 0 70px;
+	
+}
+/* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 */
+/* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 *//* (결제 및 포인트 정보) 구역 설정 */
 /* #pay_info article 전체 위치 설정 */
 #pay_info{
     clear: both;
@@ -249,7 +269,7 @@ section hr{
 /* 결제 방식 각 div에 flex 지정 */
 #pay_choice {
     display: flex;
-    font: ;
+    font-size: 1.3rem;
 }
 
 /* 각 결제 방식의 label 사이즈 및 글자 정렬 지정 */

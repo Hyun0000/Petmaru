@@ -19,8 +19,11 @@ public class PetmaruFilter implements Filter {
 		
 		response.setContentType("text/html; charset = UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		System.out.println("[doFilter 작동]");
+		
 		chain.doFilter(request, response);
 	}
 	

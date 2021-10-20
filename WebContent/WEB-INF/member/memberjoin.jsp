@@ -1,19 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
- pageEncoding="UTF-8" %>
- <%String context_root = request.getContextPath();  
-%> 
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productlist.css" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_footer.css" />
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/join.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%String context_root = request.getContextPath();%> 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/productlist.css" />
-    <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css" />
-    <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/login.css" />
-    <link rel="stylesheet" type="text/css" href="/Petmaru/css/template_footer.css" />
-    <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/join.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <title>memberjoin</title>
 
 </head>

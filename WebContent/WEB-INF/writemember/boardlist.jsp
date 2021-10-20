@@ -1,3 +1,8 @@
+<link rel="stylesheet" href="css/template_header.css">
+<link rel="stylesheet" href="css/template_footer.css">
+<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.petmaru.member.write.model.vo.WriteMemberBoardVo"%>
@@ -13,13 +18,6 @@ int pageCount = (int) request.getAttribute("pageCount");
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/template_header.css">
-<link rel="stylesheet" href="css/template_footer.css">
-<link rel="stylesheet" href="css/main.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
 <title>Petmaru BoardList</title>
 </head>
 <body>
