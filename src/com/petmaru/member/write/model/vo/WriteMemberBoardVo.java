@@ -10,7 +10,9 @@ public class WriteMemberBoardVo {
 	private Date board_date;
 	private int board_comment;
 	private int board_hit;
+	private int board_available;
 	
+
 	public WriteMemberBoardVo() {
 	}
 
@@ -18,9 +20,16 @@ public class WriteMemberBoardVo {
 	public String toString() {
 		return "WriteMemberBoardVo [board_no=" + board_no + ", board_title=" + board_title + ", board_content="
 				+ board_content + ", board_writer=" + board_writer + ", board_date=" + board_date + ", board_comment="
-				+ board_comment + ", board_hit=" + board_hit + "]";
+				+ board_comment + ", board_hit=" + board_hit + ", board_available=" + board_available + "]";
 	}
 
+	public int getBoard_available() {
+		return board_available;
+	}
+	
+	public void setBoard_available(int board_available) {
+		this.board_available = board_available;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}
