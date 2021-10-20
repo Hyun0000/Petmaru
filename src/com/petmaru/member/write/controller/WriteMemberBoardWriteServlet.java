@@ -31,14 +31,7 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setContentType("text/html; charset = UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		request.getRequestDispatcher("/WEB-INF/wirtemember/boardwrite.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/writemember/boardwrite.jsp").forward(request, response);
 	}
 
 	/**
@@ -47,10 +40,7 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		request.setCharacterEncoding("UTF-8");
-//		response.setContentType("text/html;charset=UTF-8");
+
 		  String board_title = request.getParameter("board_title"); 
 		  String board_content = request.getParameter("board_content"); 
 		  String board_writer = null; 
@@ -61,11 +51,19 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 		 
 		WriteMemberBoardVo vo = new WriteMemberBoardVo();
 		vo.setBoard_title(board_title);
+		//실패 //vo.setBoard_title(null);
 		vo.setBoard_content(board_content);
 		vo.setBoard_writer(board_writer);
 		
 		int result = new WriteMemberBoardService().boardwirte(vo);
-		System.out.println(result);
+		System.out.println("WriteMemberBoardService().boardwirte result: "+ result);
+		
+		if(result > 0) {
+			response.sendRedirect("boardlist");
+		} else {
+			request.setAttribute("errMsg", "등록에 실패했습니다. 작성한 글을 다시 확인해 주세요.");
+			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		}
 	}
 
 }

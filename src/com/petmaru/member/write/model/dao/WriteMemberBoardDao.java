@@ -85,8 +85,8 @@ public class WriteMemberBoardDao {
 		ArrayList<WriteMemberBoardVo> volist = null;
 
 		String sql = "SELECT * from "
-				+ " (SELECT * FROM board ORDER BY board_no DESC)"
-				+ " WHERE board_no BETWEEN ? AND ?";
+				+ " (select rownum rnum, t1.* from (SELECT * FROM board ORDER BY board_no DESC) t1 ) t2"
+				+ " WHERE rnum BETWEEN ? AND ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

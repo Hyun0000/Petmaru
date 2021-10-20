@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/Petmaru/WebContent/css/boardwrite.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% String board_no = request.getParameter("board_no"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,6 @@
 </head>
 <body>
 	<form method="post" action="boardwrite">
-		<input type="hidden" name="board_no" value="<%=board_no %>" readonly>
-		
 		<table id="table">
 			<tr id="title">
 				<td>제목</td>
@@ -25,5 +23,7 @@
 		</table>
 		<input id="btn" type="submit" value="등록">
 	</form>
+	<a href="<%=request.getContextPath() %>/boardlist">목록보기</a>
+
 </body>
 </html>
