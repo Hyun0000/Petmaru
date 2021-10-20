@@ -1,7 +1,6 @@
 package com.petmaru.member.write.model.service;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 
 import com.petmaru.common.DBCPTemplate;
 import com.petmaru.member.write.model.dao.WriteMemberBoardDao;
@@ -19,29 +18,4 @@ public class WriteMemberBoardService {
 		return result;
 	}
 	
-	public WriteMemberBoardVo getBoard(int bno) {
-		WriteMemberBoardVo vo = null;
-		Connection conn = DBCPTemplate.getConnection();
-		vo = new WriteMemberBoardDao().getBoard(conn, bno);
-		DBCPTemplate.close(conn);
-		return vo;
-	}
-	
-	public int getBoardCount(){
-		int result = 0;
-		Connection conn = DBCPTemplate.getConnection();
-		result = new WriteMemberBoardDao().getBoardCount(conn);
-		DBCPTemplate.close(conn);
-		return result;
-	}
-	
-	public ArrayList<WriteMemberBoardVo> selectBoardList(int start, int end){
-		ArrayList<WriteMemberBoardVo> volist = null;
-		Connection conn = DBCPTemplate.getConnection();
-		
-		volist = new WriteMemberBoardDao().selectBoardList(conn, start, end);
-		
-		DBCPTemplate.close(conn);
-		return volist;
-	}
 }
