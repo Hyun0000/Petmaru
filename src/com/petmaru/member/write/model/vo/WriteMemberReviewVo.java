@@ -1,15 +1,6 @@
 package com.petmaru.member.write.model.vo;
 
 public class WriteMemberReviewVo {
-	// REVIEW_NO 				NUMBER 			PRIMARY KEY,
-	// REVIEW_PRODUCT_CATEGORY 	CHAR(1) 		CHECK(REVIEW_PRODUCT_CATEGORY IN ('C', 'A', 'T', 'H', 'B', 'F')),
-	// REVIEW_PRODUCT_NO 		NUMBER 			REFERENCES PRODUCT(PRODUCT_NO),
-	// REVIEW_TITLE 			VARCHAR2(300) 	NOT NULL,
-	// REVIEW_CONTENT 			VARCHAR2(2000) 	NOT NULL,
-	// REVIEW_DATE 				TIMESTAMP 		DEFAULT SYSDATE,
-	// REVIEW_WRITER 			VARCHAR2(500) 	REFERENCES MEMBER(MEMBER_ID),
-	// REVIEW_BUY 				CHAR(1) 		CHECK(REVIEW_BUY IN('Y','N'))
-	// REVIEW_IMAGE_URL 		VARCHAR2(500) 	UNIQUE
 	private int reviewNo; 
 	private char reviewProductCategoey;
 	private int reviewProductNo;
@@ -18,14 +9,13 @@ public class WriteMemberReviewVo {
 	private String reviewDate;//String, to_Date(). to_character
 	private String reviewWriter;
 	private char reviewBuy;
-	private String reviewImageUrl;
 	
 	@Override
 	public String toString() {
 		return "WriteMemberReviewVo [reviewNo=" + reviewNo + ", reviewProductCategoey=" + reviewProductCategoey
 				+ ", reviewProductNo=" + reviewProductNo + ", reviewTitle=" + reviewTitle + ", reviewContent="
 				+ reviewContent + ", reviewDate=" + reviewDate + ", reviewWriter=" + reviewWriter + ", reviewBuy="
-				+ reviewBuy + ", reviewImageUrl=" + reviewImageUrl + "]";
+				+ reviewBuy + "]";
 	}
 
 	public WriteMemberReviewVo() {
@@ -94,13 +84,5 @@ public class WriteMemberReviewVo {
 
 	public void setReviewBuy(char reviewBuy) {
 		this.reviewBuy = reviewBuy;
-	}
-
-	public String getReviewImageUrl() {
-		return reviewImageUrl;
-	}
-
-	public void setReviewImageUrl(String reviewImageUrl) {
-		this.reviewImageUrl = reviewImageUrl;
 	}
 }
