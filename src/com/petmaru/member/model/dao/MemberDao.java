@@ -123,31 +123,34 @@ public class MemberDao {
 			return list;
 		}
 
-	// 회원정보수정
-	public int updateMember(Connection conn, MemberVo m) {
+		// 회원정보수정
+		public int updateMember(Connection conn,String id,String name, String pwd, String phone,String address,String gender,int point,String email) {
+			System.out.println("받아온 dao값: " + id+ name + pwd+ phone+  address+ gender+ point+email);
+			PreparedStatement pstmt = null;
+			String query = "update member set member_name=?,member_pw=?,  member_email=?, member_phone=?, MEMBER_ADDRESS=? where member_id=?";
+			int result = -1;
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1,name);
+				pstmt.setString(2,pwd);
+				pstmt.setString(3,email);
+				pstmt.setString(4,phone);
+				pstmt.setString(5,address);
+				pstmt.setString(6,id);
+				
+				result = pstmt.executeUpdate();
+				System.out.println("변경된 데이터: " + result);
+				System.out.println("변경된 데이터: " + id+ name + pwd+ phone+  address+ gender+ point+email);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBCPTemplate.close(pstmt);
+			}
+			return result;
 
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String query = "update member set member_name=?, member_gender=?, member_email=?, member_phone=?, member_Point=Point+? where member_id=?";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, m.getMember_name());
-			pstmt.setString(2, m.getMember_gender());
-			pstmt.setString(3, m.getMember_email());
-			pstmt.setString(4, m.getMember_phone());
-			pstmt.setInt(5, m.getMember_point());
-			pstmt.setString(6, m.getMember_id());
-
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBCPTemplate.close(pstmt);
 		}
-		return result;
-
-	}
 
 	public int deleteMember(Connection conn, String id) {
 
@@ -358,4 +361,37 @@ public class MemberDao {
 			return memberVo;
 		}
 	//======
+		
+		public MemberVo getMember(Connection conn, String id) { //수정된 회원정보 불러오기
+			MemberVo member = new MemberVo();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from member where MEMBER_ID = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member.setMember_id(rs.getString("MEMBER_ID"));
+					member.setMember_name(rs.getString("MEMBER_NAME"));
+					member.setMember_pwd(rs.getString("MEMBER_PW"));
+					member.setMember_phone(rs.getString("MEMBER_PHONE"));
+					member.setMember_address(rs.getString("MEMBER_ADDRESS"));
+					member.setMember_email(rs.getString("MEMBER_EMAIL"));
+					member.setMember_gender(rs.getString("MEMBER_GENDER"));
+					member.setMember_point(rs.getInt("MEMBER_POINT"));
+					member.setMember_regdate(rs.getDate("MEMBER_REGDATE"));
+					System.out.println("변경한dao get:"+ member);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return member;
+		}
 }

@@ -121,4 +121,22 @@ public class MemberService {
 			DBCPTemplate.close(conn);
 			return memberVo;
 		}
+		//회원 정보 수정
+		public int updateMember(String id,String name, String pwd, String phone,String address,String gender,int point,String email) {
+			int result = -1;
+		   System.out.println("service  "+ id+ name + pwd+ phone+  address+ gender+ point+email);
+			Connection conn = DBCPTemplate.getConnection();
+			result = new MemberDao().updateMember(conn, id,name,pwd, phone, address, gender, point,email);
+			DBCPTemplate.close(conn);
+			return result;
+		}
+		
+		public MemberVo getMember(String id) { //수정한 정보 가져오기
+			MemberVo memberVo = null;
+		   System.out.println("service  "+ id);
+			Connection conn = DBCPTemplate.getConnection();
+			memberVo = new MemberDao().getMember(conn, id);
+			DBCPTemplate.close(conn);
+			return memberVo;
+		}
 }
