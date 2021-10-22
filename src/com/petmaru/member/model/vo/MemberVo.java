@@ -118,7 +118,16 @@ public class MemberVo {
 		this.member_point = member_point;
 		this.member_email = member_email;
 	}
-
+	public MemberVo(String member_id, String member_name, String member_pwd, String member_phone, String member_address,
+			String member_email) {
+		super();
+		this.member_id = member_id;
+		this.member_name = member_name;
+		this.member_pwd = member_pwd;
+		this.member_phone = member_phone;
+		this.member_address = member_address;
+		this.member_email = member_email;
+	}
 
 	public MemberVo() {
 		// TODO Auto-generated constructor stub

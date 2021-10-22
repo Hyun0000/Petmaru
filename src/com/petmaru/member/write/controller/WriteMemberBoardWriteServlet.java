@@ -31,6 +31,9 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html; charset = UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		request.getRequestDispatcher("/WEB-INF/writemember/boardwrite.jsp").forward(request, response);
 	}
 
@@ -40,7 +43,9 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		response.setContentType("text/html; charset = UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		  String board_title = request.getParameter("board_title"); 
 		  String board_content = request.getParameter("board_content"); 
 		  String board_writer = null; 

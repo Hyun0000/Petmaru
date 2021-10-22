@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.petmaru.member.write.model.vo.WriteMemberBoardVo"%>
+<% WriteMemberBoardVo vo = (WriteMemberBoardVo)request.getAttribute("boardvo"); %>
 
 <!DOCTYPE html>
 <html>
@@ -19,27 +22,26 @@
 <body>
 <%@ include file="../template_header.jsp"%>
 
-<h2>자유게시판 글쓰기</h2>
-<form method="post" action="boardwrite">
-	<table id="table">
+	<table border="1">
 		<tr>
-			<td><input type="text" name="board_title" id="title" placeholder="제목을 입력해 주세요" required></td>
+			<td><%=vo.getBoard_title()%></td>
 		</tr>
 		<tr>
-			<td colspan="2">
-				<textarea name="board_content" id="content" placeholder="내용을 입력해 주세요" style="resize: none;"></textarea>
-			</td>
+			<td><%=vo.getBoard_writer()%></td>
 		</tr>
-	</table>
-
-	<table id="btn_area">
 		<tr>
-			<td id="btn_list"><a href="<%=request.getContextPath() %>/boardlist">목록보기</a></td>
-			<td id="btn_submit"><input id="btn" type="submit" value="등록"></td>
+			<td><%=vo.getBoard_date()%></td>
 		</tr>
 	</table>
-</form>
-
+	<table>
+		<tr>
+			<td><%=vo.getBoard_content()%></td>
+		</tr>
+	</table>
+	
+	<form>
+		
+	</form>
 <%@ include file="../template_footer.jsp"%>
 </body>
 </html>
