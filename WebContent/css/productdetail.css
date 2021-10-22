@@ -346,3 +346,41 @@ input[type=text].count_class_same:focus {
 #page button:hover {
 	text-decoration: underline;
 }
+/* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 */
+/* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 *//* 다른 카테고리 옵션 선택 */
+/* 수량 선택칸 제일 바깥 div */
+#other_category_count_div {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    background: #e7e7e7;
+    padding: 20px;
+    padding-right: 30px;
+    margin-bottom: 20px;
+    border-radius: 100px;
+    border: 3px solid black;
+}
+
+/* 수량이 입력되는 input 스타일 지정 */
+#other_category_count_input {
+    width: 60px; height: 40px;
+    text-align: right;
+    padding-right: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 7px;
+    margin: 0 10px;
+}
+
+/* 수량이 입력되는 input 클릭시 스타일 지정 */
+#other_category_count_input:focus {
+    outline: none;
+}
+
+/* +, - 이미지 스타일지정 */
+.count_icon {
+    display: inline-block;
+    border: none;
+    width: 35px;
+    height: 35px;
+}

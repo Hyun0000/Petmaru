@@ -110,6 +110,8 @@
 	                    
 	                    <tr>
 	                        <td class="product_info_first_td product_info_input_span"><span>옵션 & 수량</span></td>
+	                        	<c:choose>
+	                        	<c:when test="${category == 'C' }">
 	                        	<c:forEach var="i" begin="0" end="${sizeArrWidth - 1}" step="1">
 	                        <td class="product_info_second_td product_info_second_td_flex">
 		                        		<div class="product_opt_flex_div">${sizeArr[i]}</div>
@@ -117,6 +119,13 @@
 		                        		<div class="product_opt_flex_div">${countArr[i]}</div>
 	                        </td>
 	                       		</c:forEach>
+	                        	</c:when>
+	                        	<c:when test="${category != 'C' }">
+                       		<td class="product_info_second_td product_info_second_td_flex">
+                       			<div class="product_opt_flex_div">${count_opt_not_c}</div>
+                       		</td>
+	                        	</c:when>
+	                       		</c:choose>
 	                    </tr>
 	                    <tr>
 	                        <td class="product_info_first_td product_info_input_span"><span>가격</span></td>

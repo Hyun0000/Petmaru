@@ -25,18 +25,22 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 <title>Petmaru</title>
 </head>
 <body>
-
 <%@ include file="../template_header.jsp" %>
 	<section id="productlist">
 		<div id="image">
 			<c:if test="${producClothestList != null}">
 					<c:forEach var="product" items="${producClothestList}">
-						<c:set var="category" value="${product.getProductCategory()}"></c:set>
+						<c:set var="category" value="${product.productCategory}"></c:set>
+						<%-- <c:set var="category" value="${product.getProductCategory()}"></c:set> --%>
 						<!-- c:set : 페이지 링크에 카테고리 값을 넣어주기 위한 변수 설정 -->
 						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
-							<img src="${product.getProductImgUrl()}">
+						<%-- <a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}&pname=${product.productName}"> --%>
+							<img src="${product.productImgUrl}">
+							<br><span class="name">${product.productName}</span>
+							<br><span class="price">${product.price}원</span>
+<%-- 							<img src="${product.getProductImgUrl()}">
 							<br><span class="name">${product.getProductName()}</span>
-							<br><span class="price">${product.getPrice()}원</span>
+							<br><span class="price">${product.getPrice()}원</span> --%>
 						</a>
 					</c:forEach>
 			</c:if>
@@ -48,9 +52,19 @@ ArrayList<ProductMemberVo> producClothestList = (ArrayList<ProductMemberVo>)requ
 				<c:when test="${selectPage > endPageLink }">마지막 보다 더 큰수</c:when>
 				<c:when test="${selectPage < startPageLink }">처음보다 더 작은수</c:when>
 				<c:when test="${selectPage != 0 }">
+				
+					<c:if test="${selectPage > 1 }">
+						<a class="page_arrow" href="<%=context_root%>/produclist?category=${category}&page=${selectPage - 1}"> << </a>
+					 </c:if>
+					
 					<c:forEach begin="${startPageLink}" end="${endPageLink}" step="1" var="i">
 						<a id="pageLink" href="<%=context_root%>/produclist?category=${category}&page=${i}">${i}</a>
 					</c:forEach>
+					
+					<c:if test="${selectPage != totalPageLink }">
+						<a class="page_arrow" href="<%=context_root%>/produclist?category=${category}&page=${selectPage + 1}"> >> </a>
+					</c:if>
+					
 				</c:when>
 			</c:choose>
 		</div>

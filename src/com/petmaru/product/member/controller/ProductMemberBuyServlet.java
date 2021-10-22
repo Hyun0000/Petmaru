@@ -69,10 +69,12 @@ public class ProductMemberBuyServlet extends HttpServlet {
 		String[] countArr = count.split(", ");
 		
 		System.out.println("jsonObject : " + jsonObject);
+		System.out.println("jsonObject.get(category) : " + jsonObject.get("category"));
 		System.out.println("jsonObject.get(pName) : " + jsonObject.get("pName"));
 		System.out.println("jsonObject.get(option_size) : " + jsonObject.get("option_size"));
 		System.out.println("jsonObject.get(price) : " + jsonObject.get("price"));
 		System.out.println("jsonObject.get(count) : " + jsonObject.get("count"));
+		System.out.println("jsonObject.get(count_opt_not_c) : " + jsonObject.get("count_opt_not_c"));
 		System.out.println("jsonObject.get(option_color) : " + jsonObject.get("option_color"));
 		System.out.println("jsonObject.get(url) : " + jsonObject.get("url"));
 		System.out.println("size : " + size);
@@ -83,10 +85,12 @@ public class ProductMemberBuyServlet extends HttpServlet {
 			System.out.println("countArr[" + i + "] : " + countArr[i]);
 		}
 		
+		request.setAttribute("category", jsonObject.get("category"));
 		request.setAttribute("pName", jsonObject.get("pName"));
 		request.setAttribute("sizeArrWidth", sizeArr.length);
 		request.setAttribute("sizeArr", sizeArr);
 		request.setAttribute("price", jsonObject.get("price"));
+		request.setAttribute("count_opt_not_c", jsonObject.get("count_opt_not_c"));
 		request.setAttribute("countArr", countArr);
 		request.setAttribute("colorArr", colorArr);
 		request.setAttribute("url", jsonObject.get("url"));

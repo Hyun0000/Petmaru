@@ -106,6 +106,7 @@ public class ProductMemberDetailServlet extends HttpServlet {
 		if (endPageLink > totalPageLink) { endPageLink = totalPageLink; }
 		
 		request.setAttribute("payYN", payYN);
+		request.setAttribute("PAGE_SIZE", PAGE_SIZE);
 		request.setAttribute("totalPageLink", totalPageLink);
 		request.setAttribute("startPageLink", startPageLink);
 		request.setAttribute("endPageLink", endPageLink);

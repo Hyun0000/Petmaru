@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_carousel.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_mainad.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/index.css"/>
 <%@page import="com.petmaru.product.member.model.vo.ProductMemberVo"%>
@@ -27,62 +28,64 @@
 	<section id="carousel_container">
 		<c:forEach var="product" items="${mainsubcarousel}">
 			<c:choose>
-				<c:when test="${product.getProductCategory().equals('C') }">
+				<c:when test="${product.productCategory.equals('C') }">
 						<c:set var="k" value="${1+k}"></c:set>
 						<div id="first_box_${k}" class="first_box_all">
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-						<img class="first" src="${product.getProductImgUrl()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+						<img class="first" src="${product.productImgUrl}">
 						</a>
 						</div>
 				</c:when>
 				
-				<c:when test="${product.getProductCategory().equals('A') }">
+				<c:when test="${product.productCategory.equals('A') }">
 						<c:set var="i" value="${1+i}"></c:set>
 						<div id="second_box_${i}" class="second_box_all">
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-						<img src="${product.getProductImgUrl()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+						<img src="${product.productImgUrl}">
 						</a>
 						</div>
 				</c:when>
 			</c:choose>
 		</c:forEach>
-		
-		<div id="center_banner">중간광고 TODO</div>
-		
+
+  		<!-- <div id="center_banner"> -->
+			<%@ include file="./template_mainad.jsp" %>
+		<!-- </div> -->
+				
 		<c:forEach var="product" items="${mainsubcarousel}">
 			<c:choose>
-				<c:when test="${product.getProductCategory().equals('F') }">
+				<c:when test="${product.productCategory.equals('F') }">
 						<c:set var="j" value="${1+j}"></c:set>
 						<div id="third_box_${j}" class="third_box_all">
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-						<img src="${product.getProductImgUrl()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+						<img src="${product.productImgUrl}">
 						</a>
 						</div>
 				</c:when>
 				
-				<c:when test="${product.getProductCategory().equals('B') }">
+				<c:when test="${product.productCategory.equals('B') }">
 						<c:set var="u" value="${1+u}"></c:set>
 						<div id="four_box_${u}" class="four_box_all">
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-						<img src="${product.getProductImgUrl()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+						<img src="${product.productImgUrl}">
 						</a>
 						</div>
 				</c:when>
 				
-				<c:when test="${product.getProductCategory().equals('T') }">
+				<c:when test="${product.productCategory.equals('T') }">
 						<c:set var="o" value="${1+o}"></c:set>
 						<div id="five_box_${o}" class="five_box_all">
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-						<img src="${product.getProductImgUrl()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+						<img src="${product.productImgUrl}">
 						</a>
 						</div>
 				</c:when>
 				
-				<c:when test="${product.getProductCategory().equals('H') }">
+				<c:when test="${product.productCategory.equals('H') }">
 						<c:set var="t" value="${1+t}"></c:set>
 						<div id="six_box_${t}" class="six_box_all">
-						<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-						<img src="${product.getProductImgUrl()}">
+						<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+						<img src="${product.productImgUrl}">
 						</a>
 						</div>
 				</c:when>
@@ -108,7 +111,7 @@
 		$('.slide_2').prepend(idEle);
 	}
 	//================================================================
-	var centerDiv = document.getElementById('center_banner');
+	var centerDiv = document.getElementById('mainad_sec');
 	document.querySelector('#carousel_container').appendChild(centerDiv);
 	//================================================================
 	var divEle = document.createElement('div');

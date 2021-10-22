@@ -1,28 +1,57 @@
 @charset "UTF-8";
-* {margin:0;padding:0;}
-
-#mainad {
-    width: 1300px;
+/* 중간 광고 전체 section */
+#mainad_sec {
+    /* width: 1300px; */
+    width: 100vw;
+    margin: 80px auto;
+    background-color: #ffecb3;
+    /* border: 1px solid black; */
 }
 
-#mainad a, img{
-    width: 500px;
-    margin-left: 100px;
+/* 사진, 내용 담는 div */
+#mainad_box {
+    width: 1100px;
+    /* border: 7px solid black; */
+    /* border-radius: 50px; */
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#mainad_text{
-    float: right;
-    height: 300px;
-    width: 500px;
-    margin-right: 25px;
-    padding-top: 90px;
+/* 광고 사진 크기 설정 */
+#ad_img img {
+    width: 450px;
+    height: 450px;
 }
 
-#mainad_text h1{
-    padding-bottom: 30px;
+/* 광고 문구 <div> style 지정 */
+#ad_write {
+    border: 5px double black;
+    padding: 20px;
+    margin-left: 50px;
 }
 
-#mainad_text p {
+/* 광고 문구 <h1> style 지정 */
+#ad_write h1 {
+	font-size: 2.8rem;
+    padding-bottom: 50px;
+}
+
+/* 광고 문구 <p> style 지정 */
+#ad_write p {
     color: #7e7e7e;
-    font-size: 20px;
+    font-size: 1.5rem;
+    line-height: 3;
+}
+
+/* <a> 태그 style 지정 */
+#ad_link {
+    text-decoration: none;
+    color: black;
+}
+
+#ad_link:visited {
+    color: black;
 }
