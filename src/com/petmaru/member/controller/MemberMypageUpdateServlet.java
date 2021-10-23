@@ -43,8 +43,8 @@ public class MemberMypageUpdateServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset-UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
 		String id = request.getParameter("id");
+		//String deleteid = request.getParameter("id");
 		String pwd = request.getParameter("pwd");		
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
@@ -52,20 +52,22 @@ public class MemberMypageUpdateServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String gender = request.getParameter("gender");
 		String regdate = request.getParameter("regdate");
-		int point = Integer.parseInt(request.getParameter("point"));
+		int point = Integer.parseInt(request.getParameter("point"));			
 		MemberService service = new MemberService();
 		//MemberVo m = new MemberVo(id,name,pwd, phone, address, gender, point,email);
 		System.out.println("받아온 데이타들 " + id + email+ pwd + address);
-		
 		if(id!= null) {
+			String deleteid = (String) request.getAttribute("deleteid");	
 		int update = service.updateMember(id,name,pwd, phone, address, gender, point,email);
 		System.out.println("변경하러감");
 		System.out.println("회원정보 수정입력후 받아온 데이터" + update);
-		request.getSession().setAttribute("msg", "회원정보가 변경되었습니다.");
-		response.sendRedirect("/Petmaru/mainpage");
+		System.out.println("삭제할데이터 : "+ deleteid);
 		}
-		else
+		String deleteid = (String) request.getAttribute("deleteid");
+		System.out.println("삭제할데이터 : "+ deleteid);
 		request.getRequestDispatcher("/WEB-INF/member/mypageupdate.jsp").forward(request, response);
+		
 	}
+	
 
 }

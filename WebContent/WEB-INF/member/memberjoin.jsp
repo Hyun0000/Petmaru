@@ -32,7 +32,7 @@
                 <tr>
                     <td style="font-size: 25px;">아이디</td>
                     <td><input type="text" name = "id" id="id" class="input"></td>
-                    <td><input type="button" value="중복확인" id="id_check"></td>
+                    <!-- <td><input type="button" value="중복확인" id="id_check"></td> -->
 
                 </tr>
                 <tr>

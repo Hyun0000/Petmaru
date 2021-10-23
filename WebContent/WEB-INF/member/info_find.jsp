@@ -129,6 +129,7 @@
          			}
          		else if(searchedPwd ==""){
          			alert("정보가 없습니다."); 
+         		
          		}
          		
         </script>

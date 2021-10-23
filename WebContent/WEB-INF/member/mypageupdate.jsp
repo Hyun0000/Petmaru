@@ -16,10 +16,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>mypageupdate</title>
 </head>
 <body>
-
 <%@ include file="../template_header.jsp" %>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -28,6 +28,7 @@
 		id =(String)session.getAttribute("memberLoginInfo");
 	}
 	 m = new MemberService().getMember(id);
+	 String deleteid = null;
 %>
     <br>
     <br>
@@ -113,7 +114,7 @@
                     <th colspan="2" >
                       <button class="btnset" type="button" name="modifybtn" onclick="modify_click()">수정하기</button>
                    
-                        <button class="btnset" type="button"
+                     <button class="btnset" type="button"
                            onclick="member_deleteclick()">회원탈퇴</button>
            
                     </th>
@@ -125,6 +126,7 @@
         
           <%@ include file="../template_footer.jsp" %>
         <script type="text/javascript">
+        
         var f = document.modify;
         function  modify_click(){        	
 
@@ -167,17 +169,18 @@
  	 		
             alert("회원 정보가 수정되었습니다.");
  	 	}
+
        
-        function member_deleteclick() {
-        	<% String deleteid = null;
-        	deleteid =(String)session.getAttribute("memberLoginInfo");%>
+  function member_deleteclick() {
             if (!confirm("정말 탈퇴 하시겠습니까?")) {
-                alert("취소(아니오)를 누르셨습니다.");
-            } else {
-                alert("회원이 탈퇴되었습니다.");
-                <%-- <% deleteid = request.setAttribute("deleteid", id);%> --%>
+                alert("탈퇴가 취소 되었습니다.");
+                	return false;
+            } else {		
+            	location.href="/Petmaru/memberdelete";
+ 
             }
-        }      
+        }     
+
         </script>
 </body>
 </html>
