@@ -1,3 +1,6 @@
+<%@page import="com.petmaru.notice.vo.NoticeVo"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <% String context_root = request.getContextPath();%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,61 +10,67 @@
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
 <link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<%@page import = "com.petmaru.member.model.vo.MemberVo" %>
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>공지사항</title>
 <%@ include file="../admin_header.jsp" %>
 </head>
 <body>
    <main class="main">
-      <h2 class="main title">회원정보</h2>
+      <h2 class="main title">공지사항</h2>
 
       <div class="search-form margin-top first align-right">
-         <h3 class="hidden">회원 검색폼</h3>
+         <h3 class="hidden">공지사항 검색폼</h3>
          <form class="table-form">
             <fieldset>
-               <legend class="hidden">회원정보 검색 필드</legend>
+               <legend class="hidden">공지사항 검색 필드</legend>
                <label class="hidden">검색분류</label> <select name="f">
-                  <option value="member_name">이름</option>
-                  <option value="member_id">아이디</option>
+                  <option value="title">제목</option>
+                  
                </select> <label class="hidden">검색어</label> <input type="text" name="q" value="" /> <input class="btn btn-search" type="submit" value="검색" />
             </fieldset>
          </form>
       </div>
 
-		<form action = "MemberList" method ="post">
+
+		<form action = "adminNoticelist" method ="post">
 			<div class="notice margin-top">
-				<h3 class="hidden">회원 목록</h3>
+				<h3 class="hidden">공지사항 목록</h3>
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="w60">아이디</th>
-							<th class="expand">이름</th>
-							<th class="w100">성별</th>
-							<th class="w100">가입일</th>
-							<th class="w60">적립금</th>
-							<!-- <th class="w40">탈퇴</th> -->
+							<th class="w60">번호</th>
+							<th class="expand">제목</th>
+							<th class="w100">작성자</th>
+							<th class="w100">작성일</th>
+							<th class="w60">조회수</th>
+							<th class="w40">공개</th>
+							<th class="w40">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
-							<c:forEach var="n" items="${list}">
+					
+						<c:forEach var="n" items="${list}">
+							<c:set var="open" value="" />
+							<c:if test="${n.pub}">
+								<c:set var="open" value="checked" />
+							</c:if>
 							<tr>
-								<td>${n.member_id}</td>
-								<td>${n.member_name}</td>
-								<td>${n.member_gender}</td>
-								<td>${n.member_regdate}</td>
-								<td>${n.member_point}</td>
-								<td><button type = "submit" class = "btn btn-outline-info btn-sm" onclick="location.href='/deleteMember?member_id=${n.member_id}'">탈퇴</button></td>
+								<td>${n.id}</td>
+								<td><a href="Admindetail?id=${n.id} ">${n.title}</a></td>
+								<td>${n.writerId}</td>
+								<td><fmt:formatDate pattern="yyyy/MM/dd" value="${n.regdate}" /></td>
+								<td><fmt:formatNumber value="${n.hit}" /></td>
+
+								<td><input type="checkbox" name="open-id" ${open} value="${n.id}"></td>
+								<td><input type="checkbox" name="del-id" value="${n.id}"></td>
 							</tr>
-					</c:forEach>
+
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -80,6 +89,14 @@
 		
 		<div class="text-align-right margin-top">
 		
+		<c:set var = "ids" value="" />
+		<c:forEach var = "n" items = "${list}">
+			<c:set var = "ids" value="${ids} ${n.id}" />	
+		</c:forEach>
+		<input type = "hidden" name = "ids" value = "${ids}">
+         <input type="submit" class="btn-text btn-default" name = "cmd" value="일괄공개">
+         <input type="submit" class="btn-text btn-default" name = "cmd" value="일괄삭제">
+         <a class="btn-text btn-default" href="AdminNoticeRegServlet">글쓰기</a>
       </div>
 		</form>
       <div class = "margin-top align-center pager">
@@ -111,5 +128,5 @@
    </div>
    </main>
 </body>
-   <%@ include file="../template_footer.jsp" %>
+    <%@ include file="../template_footer.jsp" %>  
 </html>

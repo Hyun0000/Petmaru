@@ -1,23 +1,25 @@
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_footer.css"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
-<% String context_root = request.getContextPath(); %>
-<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+
+<% String context_root = request.getContextPath();%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <!DOCTYPE html>
 <html>
 	<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 	  	<meta charset="UTF-8">
-	    <title>게시글</title>	 
+	    <title>공지사항 상세정보</title>	 
 	    <%@ include file="../template_header.jsp" %>
 	</head>  
     <body>		
@@ -44,11 +46,12 @@
 						<th>첨부파일</th>
 						<td colspan="3">
 							<c:forTokens var= "fileName" items="${n.files}" delims="," varStatus="st">
+								
 								<c:set var = "style" value = ""/>
 								<c:if test="${fn:endsWith(fileName , '.zip')}">
 									<c:set var = "style" value = "font-weight: bold; color:red;" />
 								</c:if>							
-								<a href = "${fileName}" style = "${style}" >${fn:toUpperCase(fileName)}</a>
+								<a download href = "./upload/${fileName}" style = "${style}" >${fn:toUpperCase(fileName)}</a>
 								<c:if test="${!st.last}">
 								/
 								</c:if>

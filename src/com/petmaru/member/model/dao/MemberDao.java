@@ -2,6 +2,7 @@ package com.petmaru.member.model.dao;
 
 import static com.petmaru.common.DBCPTemplate.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,113 +18,246 @@ public class MemberDao {
 
 	}
 
-	public ArrayList<MemberVo> selectList(Connection conn, int start, int end) {
 
-		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		MemberVo m = null;
-		String sql = "select * from (select Rownum r, t1.* from (select * from member order by member_id desc) t1 ) where r between ? and ?";
-//		String sql = "select member_id,member_name,member_gender,member_phone,member_regdate,member_point from member";
+	public ArrayList<MemberVo> getMemberList(){
+		return getMemberList("member_name", "", 1);
+	}
+	public ArrayList<MemberVo> getMemberList(int page){
+		return getMemberList("member_name","",page);
+	}
+	public ArrayList<MemberVo> getMemberList(String field, String query, int page){
+		
+		ArrayList<MemberVo> list = new ArrayList<>();
+		
+		String sql = "SELECT * FROM ( " + 
+				"    SELECT ROWNUM NUM, N.* " + 
+				"    FROM (SELECT * FROM MEMBER WHERE "+field+" LIKE ? ORDER BY MEMBER_REGDATE DESC) N" +
+				")" + "WHERE NUM BETWEEN ? AND ?";
 
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				m = new MemberVo();
-				m.setMember_id(rset.getString("member_id")); 
-				m.setMember_name(rset.getString("member_name"));
-				m.setMember_gender(rset.getString("member_gender"));
-				m.setMember_phone(rset.getString("member_phone"));
-				m.setMember_point(rset.getInt("member_point"));				
-				list.add(m);
-			}
+		Connection conn = DBCPTemplate.getConnection();
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		
+		try {			
+		    pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1,"%"+query+"%");
+		    pstmt.setInt(2, 1+(page-1)*10);
+		    pstmt.setInt(3, page*10);
+		    
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){ 	
+			String memberid = rs.getString("member_id");
+			String membername = rs.getString("member_name");	
+			String membergender = rs.getString("member_gender"); 
+			Date memberregdate = rs.getDate("member_regdate");
+			int memberpoint = rs.getInt("member_point");
+			String memberphone = rs.getString("member_phone"); 
+			String memberpw = rs.getString("member_pw"); 
+			String memberaddress = rs.getString("member_address"); 
+			String memberemail = rs.getString("member_email"); 
+			
+			MemberVo member = new MemberVo(memberid, membername, memberpw, memberphone, memberaddress, memberregdate, membergender,memberpoint,memberemail);	
+			list.add(member);
+			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rset);
+		}
+		finally {
+			try {
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			    if(conn !=null) conn.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}		
+		
 		}
 		return list;
 	}
-	public int getBoardCount(Connection conn) {
-		int result = 0;
-		String sql = "select count(member_id) from member";
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			if (rset.next()) {
-				result = rset.getInt(1);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBCPTemplate.close(rset);
-			DBCPTemplate.close(pstmt);
-		}
-		return result;
+	public int getMemberCount() {
+		return getMemberCount("member_name", "");	
 	}
-	//관리자가 회원전체 출력시 아이디로 검색
-		public ArrayList<MemberVo> searchKeywordId(Connection conn, String keyword) {
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			String query = "select * from member where member_id=?";
-			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-			try {
-				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, keyword);
-				rset = pstmt.executeQuery();
-				while (rset.next()) {
-					MemberVo m = new MemberVo();
-					m.setMember_id(rset.getString("member_id")); 
-					m.setMember_name(rset.getString("member_name"));
-					m.setMember_gender(rset.getString("member_gender"));
-					m.setMember_phone(rset.getString("member_phone"));
-					m.setMember_point(rset.getInt("member_point"));		
-					list.add(m);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-				close(rset);
-			}
-			return list;
+	
+	public int getMemberCount(String field, String query) {
+		
+		int count = 0;
+		
+		String sql = "SELECT COUNT(MEMBER_ID) COUNT FROM (" + 
+				"    SELECT ROWNUM NUM, MEMBER.* " + 
+				"    FROM MEMBER WHERE "+field+" LIKE ? ORDER BY MEMBER_REGDATE DESC " + 				
+				"    ) " ;
+		
+		Connection conn = DBCPTemplate.getConnection();
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		
+		try {			
+		    pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1,"%"+query+"%");		   
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			count =rs.getInt("count");
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
-		//관리자가 회원전체 출력시 이름으로 검색
-		public ArrayList<MemberVo> searchKeywordName(Connection conn, String keyword) {
-
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			String sql = "select * from member where member_name like ?"; // ( ) 없어도 상관없음!!
-			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
+		finally {
 			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "%" + keyword + "%");
-				rset = pstmt.executeQuery();
-				while (rset.next()) {
-					MemberVo m = new MemberVo();
-					
-					m.setMember_name(rset.getString("member_name")); 
-
-					
-					list.add(m);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			    if(conn !=null) conn.close();
+			}catch (Exception e) {
 				e.printStackTrace();
-			} finally {
-				close(pstmt);
-				close(rset);
-			}
-			return list;
+			}			
+		}		
+		return count;	
+	}	
+
+	
+	
+	public MemberVo getMember(String memberid) {
+		MemberVo list = null;
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID =?";
+		
+		Connection conn = DBCPTemplate.getConnection();
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		
+		try {
+			
+		    pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1, memberid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){ 	
+				
+				String memberids = rs.getString("member_id");
+				String membername = rs.getString("member_name");		
+				String memberpwd = rs.getString("member_pwd"); 
+				String memberphone = rs.getString("member_phone"); 
+				String memberaddress = rs.getString("member_address"); 
+				Date memberregdate = rs.getDate("member_regdate"); 	
+				String membergender = rs.getString("member_gender"); 
+				int memberpoint = rs.getInt("member_point");
+				String memberemail = rs.getString("member_email"); 
+				
+				MemberVo member = new MemberVo(memberids, membername, memberpwd, memberphone, memberaddress, memberregdate, membergender,memberpoint,memberemail);	
+			} 
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		finally {
+			try {
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			    if(conn !=null) conn.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}		
+		
+		}
+		return list;
+	}
+	
+	public MemberVo getNextMember(String memberid) {
+		MemberVo member = null;
+
+		String sql ="SELECT * FROM MEMBER " + 
+				"    WHERE ID = (  " + 
+				"    SELECT ID FROM MEMBER " + 
+				"    WHERE MEMBER_REGDATE >(SELECT MEMBER_REGDATE FROM MEMBER WHERE MEMBER_ID = ?) " + 
+				"    AND ROWNUM =1 " + 
+				")";
+
+		Connection conn = DBCPTemplate.getConnection();
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		
+		try {
+			
+		    pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1, memberid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){ 	
+				
+				String memberids = rs.getString("member_id");
+				String membername = rs.getString("member_name");		
+				String memberpw = rs.getString("member_pw"); 
+				String memberphone = rs.getString("member_phone"); 
+				String memberaddress = rs.getString("member_address"); 
+				Date memberregdate = rs.getDate("member_regdate"); 	
+				String membergender = rs.getString("member_gender"); 
+				int memberpoint = rs.getInt("member_point");
+				String memberemail = rs.getString("member_email"); 
+				
+				member = new MemberVo(memberid, membername, memberpw, memberphone, memberaddress, memberregdate, membergender,memberpoint,memberemail);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			    if(conn !=null) conn.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}		
+		
+		}
+		
+		
+		return member;
+	}
+	public MemberVo getPrevMember(String memberid) {
+		MemberVo member = null;
+		String sql ="SELECT MEMBER_ID FROM (SELECT * FROM MEMBER ORDER BY MEMBER_REGDATE DESC)" + 
+				"  WHERE MEMBER_REGDATE < (SELECT MEMBER_REGDATE FROM MEMBER WHERE MEMBER_ID = ?) " + 
+				"  AND ROWNUM =1 ";
+
+		Connection conn = DBCPTemplate.getConnection();
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		
+		try {
+		
+		    pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1, memberid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){ 	
+				
+				String memberids = rs.getString("member_id");
+				String membername = rs.getString("member_name");		
+				String memberpw = rs.getString("member_pw"); 
+				String memberphone = rs.getString("member_phone"); 
+				String memberaddress = rs.getString("member_address"); 
+				Date memberregdate = rs.getDate("member_regdate"); 	
+				String membergender = rs.getString("member_gender"); 
+				int memberpoint = rs.getInt("member_point");
+				String memberemail = rs.getString("member_email"); 
+				
+			member = new MemberVo(memberid, membername, memberpw, memberphone, memberaddress, memberregdate, membergender,memberpoint,memberemail);	
+			} 
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs !=null) rs.close();
+				if(pstmt !=null) pstmt.close();
+			    if(conn !=null) conn.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}				
+		}
+		return member;
+	}
 
 		// 회원정보수정
 		public int updateMember(Connection conn,String id,String name, String pwd, String phone,String address,String gender,int point,String email) {

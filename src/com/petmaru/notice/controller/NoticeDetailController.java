@@ -1,4 +1,4 @@
-package com.petmaru.admin.controller;
+package com.petmaru.notice.controller;
 
 import java.io.IOException;
 
@@ -33,13 +33,7 @@ public class NoticeDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		int Notice_no = Integer.parseInt(request.getParameter("member_id"));
-//		NoticeService service = new NoticeService();	
-//		
-//		service.NoticeDetail(Notice_no);
-//		request.getRequestDispatcher("/WEB-INF/member/NoticeList.jsp").forward(request, response);
-//	}
+		
 		int id = Integer.parseInt(request.getParameter("id")); 
 		
 		NoticeService service = new NoticeService();

@@ -60,39 +60,49 @@ public class MemberService {
 		return result;// 오류발생:-1, 가입성공:1, 가입실패:0, 기존회원있으면:2,가장큰수0xFF
 	}
 	
-	// 회원목록 출력
-	public ArrayList<MemberVo> selectList(int start, int end) {
-		Connection conn = DBCPTemplate.getConnection();
-		MemberDao dao = new MemberDao();
-		ArrayList<MemberVo> list = dao.selectList(conn, start, end);
-
-		return list;
-	}
-
-	public int getBoardCount() {
-		int result = 0;
-		Connection conn = DBCPTemplate.getConnection();
-		result = new MemberDao().getBoardCount(conn);
-		DBCPTemplate.close(conn);
-		return result;
-	}
-
-	// 회원정보 검색
-	public ArrayList<MemberVo> searchKeyword(String type, String keyword) {
-
-		Connection conn = DBCPTemplate.getConnection();
+	//회원 리스트출력
+	public ArrayList<MemberVo> getMemberList(String field, String query, int page) {
 		ArrayList<MemberVo> list = null;
-		MemberDao dao = new MemberDao();
-		switch (type) {
-		case "Member_id":
-			list = dao.searchKeywordId(conn, keyword);
-			break;
-		case "Member_name":
-			list = dao.searchKeywordName(conn, keyword);
-			break;
-		}
+		Connection conn = DBCPTemplate.getConnection();
+		list = new MemberDao().getMemberList(field, query, page);
 		DBCPTemplate.close(conn);
 		return list;
+	}
+	
+	//회원 수 카운트
+	public int getMemberCount(String field, String query) {
+		int count = 0;
+		Connection conn = DBCPTemplate.getConnection();
+		count = new MemberDao().getMemberCount(field, query);
+		DBCPTemplate.close(conn);
+		return count;
+
+	}
+	
+	// 회원 전체
+	public MemberVo getMembers(String memberid) {
+		MemberVo list = null;
+		Connection conn = DBCPTemplate.getConnection();
+		list = new MemberDao().getMember(memberid);
+		DBCPTemplate.close(conn);
+		return list;
+	}
+	
+	
+	public MemberVo getNextMember(String memberid) {
+		MemberVo member = null;
+		Connection conn = DBCPTemplate.getConnection();
+		member = new MemberDao().getNextMember(memberid);
+		DBCPTemplate.close(conn);
+		return member;
+	}
+	
+	public MemberVo getPrevMember(String memberid) {
+		MemberVo member = null;
+		Connection conn = DBCPTemplate.getConnection();
+		member = new MemberDao().getPrevMember(memberid);
+		DBCPTemplate.close(conn);
+		return member;
 	}
     //회원탈퇴
 	public int deleteMember(String id) {

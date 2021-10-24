@@ -10,7 +10,7 @@ import= "com.petmaru.admin.model.vo.*"%>
                 <li><a href="/Petmaru/mainpage">회원 페이지</a></li>
         <% } else { %> 
                 <li><a href="#"><%=admin.getAdmin_name()%>관리자님의 마이페이지</a></li>
-                <li><a href="#">회원 관리</a></li>
+                <li><a href="/Petmaru/MemberList">회원 관리</a></li>
                 <li><a href="/Petmaru/adminLogout">로그아웃</a></li>
             </ul>
 <% } %> 
@@ -43,8 +43,8 @@ import= "com.petmaru.admin.model.vo.*"%>
 
             <table id="right_icon">
                 <tr style = cursor:pointer;>
-                    <td><a href="#"><span class="material-icons">article</span><br><span class="icon_text">자유게시판 등록</span></td></a>
-                    <td><a href="#"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항 등록</span></td></a>
+                    <td><a href="#"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
+                    <td><a href="/Petmaru/adminNoticelist"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
                 </tr>
             </table>
         </div>

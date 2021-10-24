@@ -10,11 +10,14 @@ public class NoticeVo {
 	private String hit;
 	private String files;
 	private String content;
+	private boolean pub;
 	
 	public NoticeVo() {} //기본 생성자 생성
 
 	//오버로드 생성자 생성
-	public NoticeVo(int id, String title, String writerId, Date regdate, String hit, String files, String content) {
+	public NoticeVo(int id, String title, String writerId, Date regdate, String hit, String files, String content,
+			boolean pub) {
+
 		this.id = id;
 		this.title = title;
 		this.writerId = writerId;
@@ -22,6 +25,7 @@ public class NoticeVo {
 		this.hit = hit;
 		this.files = files;
 		this.content = content;
+		this.pub = pub;
 	}
 
 	public int getId() {
@@ -72,12 +76,6 @@ public class NoticeVo {
 		this.files = files;
 	}
 
-	@Override
-	public String toString() {
-		return "NoticeVo [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regdate=" + regdate + ", hit="
-				+ hit + ", files=" + files + ", content=" + content + "]";
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -85,5 +83,22 @@ public class NoticeVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public boolean getPub() {
+		return pub;
+	}
+
+	public void setPub(boolean pub) {
+		this.pub = pub;
+	}
+
+	@Override
+	public String toString() {
+		return "NoticeVo [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regdate=" + regdate + ", hit="
+				+ hit + ", files=" + files + ", content=" + content + ", pub=" + pub + "]";
+	}
+	
+
+
 }
 

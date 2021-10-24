@@ -17,7 +17,7 @@ import com.petmaru.member.model.service.MemberService;
 /**
  * Servlet implementation class DeleteServlet
  */
-@WebServlet("/deleteMember")
+@WebServlet("/delete")
 public class AdminMemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,15 +40,14 @@ public class AdminMemberDeleteServlet extends HttpServlet {
 		
 		 service.deleteMember(member_id);
 		
-	
+		 request.getRequestDispatcher("/WEB-INF/member/MemberList.jsp").forward(request, response);
 	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
 	}
 
 }

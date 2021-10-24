@@ -1,20 +1,25 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
 <%@page import="com.petmaru.notice.vo.NoticeVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% String context_root = request.getContextPath(); %>	
+<% String context_root = request.getContextPath();%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <!DOCTYPE html>
 <html>
 	<head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 <title>공지사항</title>
 <%@ include file="../template_header.jsp" %>
 
@@ -28,8 +33,7 @@
 				<legend>글 검색 필드</legend>
 				<label>검색분류</label> <select name="f">
 					<option ${(param.f == "title")? "selected" : ""} value="title">제목</option>
-					<option ${(param.f == "writer_id")? "selected" : ""}
-						value="writer_id">작성자</option>
+					<option ${(param.f == "writer_id")? "selected" : ""}value="writer_id">작성자</option>
 				</select> <label>검색어</label> <input type="text" name="q" value="${param.q}" />
 				<input type="submit" value="검색">
 			</fieldset>
