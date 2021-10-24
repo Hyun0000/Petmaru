@@ -1,0 +1,51 @@
+@charset "UTF-8";
+#ordertop_line{
+    position: relative;
+    border-radius: 10px;
+    background-color: rgb(55, 63, 71);
+    width: 900px;
+    height: 5px;
+    text-align: center;
+    margin: 0 50px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    vertical-align: middle;
+    margin-left: 300px;
+}
+#table1_section{
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 300px;
+    font-size: 20px;
+}
+#table1 {
+    width: 800px; margin: 0 auto;
+}
+#order_header{
+margin-top: -150px;
+margin-left: 300px;
+}
+
+
+#myselect_top_line{
+    position: relative;
+    border-radius: 10px;
+    background-color: rgb(55, 63, 71);
+    width: 900px;
+    height: 5px;
+    text-align: center;
+    margin: 0 50px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    vertical-align: middle;
+    margin-left: 300px;
+}
+#table2 {
+    width: 800px; margin: 0 500px;
+}
+#myselect_header{
+margin-left: 300px;
+}
+#table2_section{
+    margin-top: 100px;
+}

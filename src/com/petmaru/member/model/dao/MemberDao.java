@@ -175,7 +175,7 @@ public class MemberDao {
 
 	public int insertMember(Connection conn, MemberVo vo) { // 회원가입
 		int result = -1;
-		String sqlInsert = "INSERT INTO" + " MEMBER" + " VALUES (?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
+		String sqlInsert = "INSERT INTO" + " MEMBER" + " VALUES (?, ?, ?, ?, ?, sysdate,? , ?, ?)";
 		PreparedStatement pstmt = null;
 		System.out.println("dao: " + vo);
 		try {
@@ -189,6 +189,33 @@ public class MemberDao {
 			pstmt.setString(6, vo.getMember_gender());
 			pstmt.setInt(7, vo.getMember_point());
 			pstmt.setString(8, vo.getMember_email());
+
+			result = pstmt.executeUpdate();
+			DBCPTemplate.commit(conn);
+			System.out.println(result);
+			System.out.println("입력 성공: " + vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 여기 -1
+		} finally {
+			DBCPTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertAdmin(Connection conn, AdminVo vo) { //관리자 회원가입
+		int result = -1;
+		String sqlInsert = "INSERT INTO" + " admin_member" + " VALUES (?, ?, ?, ?, ?)";
+		PreparedStatement pstmt = null;
+		System.out.println("dao: " + vo);
+		try {
+
+			pstmt = conn.prepareStatement(sqlInsert);
+			pstmt.setString(1, vo.getAdmin_ID());
+			pstmt.setString(2, vo.getAdmin_pwd());
+			pstmt.setString(3, vo.getAdmin_name());
+			pstmt.setString(4, vo.getAdmin_Email());
+			pstmt.setString(5, vo.getAdmin_phone());
 
 			result = pstmt.executeUpdate();
 			DBCPTemplate.commit(conn);
@@ -282,6 +309,30 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMember_id());
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = 2; // 기존회원이 있으면
+			} else {
+				result = 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 여기 -1
+		} finally {
+			DBCPTemplate.close(rset);
+			DBCPTemplate.close(pstmt);
+		}
+		return result;
+	}
+	//관리자 중복확인
+	public int checkDuplicatedAdmin(Connection conn, AdminVo vo) {
+		int result = -1;
+		String sql = "select Admin_ID 	from admin_member where Admin_ID=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getAdmin_ID());
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = 2; // 기존회원이 있으면

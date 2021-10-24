@@ -43,12 +43,12 @@
         <table id="menutable">
             <tr>
                  <td>
-                     <input type="button" value="회원정보 수정" class="menuBtn"> 
+                     <input onclick="location.href = '/Petmaru/mypageupdate';" type="button" value="회원정보 수정" class="menuBtn"> 
                 </td>                                
             </tr>
             <tr>
                 <td>
-                    <input type="button" value="주문 내역 조회" class="menuBtn">  
+                    <input onclick="location.href = '/Petmaru/membermypageorder';" type="button" value="주문 내역 조회" class="menuBtn">  
                 </td>
             </tr>
 

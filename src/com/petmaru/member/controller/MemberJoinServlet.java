@@ -101,7 +101,7 @@ public class MemberJoinServlet extends HttpServlet {
 		String phone3 = request.getParameter("phone3");
 		String address = request.getParameter("add");
 		String gender = request.getParameter("gender");
-		int point = 0;
+		int point = 10000;
 		String birth1 = request.getParameter("birth1");
 		String month = request.getParameter("month");
 		String birth2 = request.getParameter("birth2");	

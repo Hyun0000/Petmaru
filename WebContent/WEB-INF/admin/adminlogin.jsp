@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" sytle="text-align:center">
-                        <input type="button"  value="관리자 등록" onclick="location.href = 'http://127.0.0.1:5500/petmaru/join.html';" class="btn" id="joinbtn">
+                        <input type="button"  value="관리자 등록" onclick="location.href = '/Petmaru/adminjoin';" class="btn" id="joinbtn">
                         
                     </td>
                 </tr>

@@ -5,8 +5,8 @@ import= "com.petmaru.admin.model.vo.*"%>
         <div id="top_login">
         <%if (admin == null){ %> 
             <ul>
-                <li><a href="#">관리자로그인</a></li>
-                <li><a href="#">관리자 등록</a></li>
+                <li><a href="/Petmaru/adminlogin.do">관리자로그인</a></li>
+                <li><a href="/Petmaru/adminjoin">관리자 등록</a></li>
                 <li><a href="/Petmaru/mainpage">회원 페이지</a></li>
         <% } else { %> 
                 <li><a href="#"><%=admin.getAdmin_name()%>관리자님의 마이페이지</a></li>
@@ -17,7 +17,7 @@ import= "com.petmaru.admin.model.vo.*"%>
         </div>
         <div id="logo_search">
             <div id="logo">
-                <h1><a href="/Petmaru/mainpage">관리자 Petmaru</a></h1>
+                <h1><a href="/Petmaru/AdminMainpage">관리자 Petmaru</a></h1>
             </div>
 
             <div id="search">
