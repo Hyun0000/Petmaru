@@ -3,6 +3,7 @@ package com.petmaru.member.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.petmaru.admin.model.vo.AdminVo;
 import com.petmaru.common.DBCPTemplate;
 import com.petmaru.member.model.dao.MemberDao;
 import com.petmaru.member.model.vo.MemberVo;
@@ -94,6 +95,13 @@ public class MemberService {
 		DBCPTemplate.close(conn);
 		return result;
 	}
+	public int loginadmin(String id, String pwd) { //관리자 로그인
+		int result = -1;
+		Connection conn = DBCPTemplate.getConnection();		
+		result = new MemberDao().loginadmin(conn, id, pwd);
+		DBCPTemplate.close(conn);
+		return result;
+	}
 	
 	public String findId(String name, String email) { //아이디찾기
 		String result = null;
@@ -121,6 +129,16 @@ public class MemberService {
 			DBCPTemplate.close(conn);
 			return memberVo;
 		}
+		
+		//관리자 로그인
+		public AdminVo adminSession(String id) {
+			AdminVo adminVo = null;
+			Connection conn = DBCPTemplate.getConnection();
+			adminVo = new MemberDao().loginadmin(conn, id);
+			DBCPTemplate.close(conn);
+			return adminVo;
+		}
+		
 		//회원 정보 수정
 		public int updateMember(String id,String name, String pwd, String phone,String address,String gender,int point,String email) {
 			int result = -1;

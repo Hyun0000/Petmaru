@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.petmaru.admin.model.vo.AdminVo;
 import com.petmaru.common.DBCPTemplate;
 import com.petmaru.member.model.vo.MemberVo;
 
@@ -236,6 +238,41 @@ public class MemberDao {
 		return result;
 	}
 
+	
+	public int loginadmin(Connection conn, String id, String pwd) { //관리자 로그인
+		int result = -1;
+		String sql = "select admin_PWD from admin_member where admin_ID=? and admin_PWD =?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			rset = pstmt.executeQuery();
+			System.out.println("dao id : " + id);
+			System.out.println("dao pwd : " + pwd);
+
+			if (rset.next()) {
+				System.out.println("정보 가져오기 성공");
+				String dbPwd = rset.getString(1);
+				if (pwd.equals(dbPwd)) {
+					System.out.println("로그인 성공");
+					result = 1;
+				} else { // pwd 가 틀림
+					System.out.println("로그인 실패");
+					result = 0;
+				}
+			} else {
+				System.out.println("해당하는 id가 없다.");
+				result = 2;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBCPTemplate.close(pstmt);
+		}
+		return result;
+	}
 	// 중복확인
 	public int checkDuplicatedMember(Connection conn, MemberVo vo) {
 		int result = -1;
@@ -359,6 +396,35 @@ public class MemberDao {
 				close(pstmt);
 			}
 			return memberVo;
+		}
+		
+		public AdminVo loginadmin(Connection conn, String id) {
+			AdminVo adminVo = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from admin_member where admin_ID = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					adminVo = new AdminVo();
+					adminVo.setAdmin_ID(rs.getString("admin_ID"));
+					adminVo.setAdmin_pwd(rs.getString("admin_PWD"));
+					adminVo.setAdmin_name(rs.getString("admin_NAME"));
+					adminVo.setAdmin_Email(rs.getString("admin_EMAIL"));
+					adminVo.setAdmin_phone(rs.getString("admin_PHONE"));
+					System.out.println("관리자 정보 가져오기 & 담기 성공");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return adminVo;
 		}
 	//======
 		
