@@ -52,4 +52,12 @@ public class WriteMemberBoardService {
 		DBCPTemplate.close(conn);
 		return result;
 	}
+	
+	public int boardrewirte(WriteMemberBoardVo vo) {
+		int result = 0;
+		Connection conn = DBCPTemplate.getConnection();
+		result = new WriteMemberBoardDao().reWriteBoard(conn, vo);
+		DBCPTemplate.close(conn);
+		return result;
+	}
 }
