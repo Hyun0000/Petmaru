@@ -70,7 +70,7 @@ public class WriteMemberReviewViewServlet extends HttpServlet {
 		ArrayList<WriteMemberReviewVo> productMemberReviewAjax = null;
 		productMemberReviewAjax = new WriteMemberReviewService().productMemberReview(cateGory, startRown, endRown);
 		JSONArray jArray = new JSONArray(); // json 배열
-		JSONObject job = new JSONObject();
+		JSONObject job = new JSONObject(); // 최종 결과물 담을 JSONObject
 		String jsons = "";
 		// Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		if (productMemberReviewAjax != null) {

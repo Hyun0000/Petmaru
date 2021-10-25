@@ -97,18 +97,33 @@ public class WriteMemberReviewDao {
 		}
 	//====================================================================================================
 		// 리뷰 글 수정(ajax)
-		public int writeMemberUpdate(Connection conn, String title, String id, String upTitle, String content) {
+		public int writeMemberUpdate(Connection conn, String title, String id, String upTitle, String content, String fileName) {
 			int result = 0;
 			PreparedStatement pstmt = null;
-			String sql = "update REVIEW set REVIEW_TITLE = ?, REVIEW_CONTENT = ? where REVIEW_WRITER = ? and REVIEW_TITLE = ?";
-			
+			String sql = "";
+			if (fileName.equals("")) {
+				// 파일 수정없이 제목 & 내용만 수정
+				sql = "update REVIEW set REVIEW_TITLE = ?, REVIEW_CONTENT = ? where REVIEW_WRITER = ? and REVIEW_TITLE = ?";
+			} else {
+				// 파일까지 함께 수정
+				sql = "update REVIEW set REVIEW_TITLE = ?, REVIEW_CONTENT = ?, REVIEW_IMAGE_URL = ? where REVIEW_WRITER = ? and REVIEW_TITLE = ?";
+			}
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, upTitle);
-				pstmt.setString(2, content);
-				pstmt.setString(3, id);
-				pstmt.setString(4, title);
-				
+				if (fileName.equals("")) {
+					System.out.println("dao : 제목이랑 내용만 수정");
+					pstmt.setString(1, upTitle);
+					pstmt.setString(2, content);
+					pstmt.setString(3, id);
+					pstmt.setString(4, title);
+				} else {
+					System.out.println("dao : 파일까지 모두 수정");
+					pstmt.setString(1, upTitle);
+					pstmt.setString(2, content);
+					pstmt.setString(3, fileName);
+					pstmt.setString(4, id);
+					pstmt.setString(5, title);
+				}
 				result = pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -158,7 +173,37 @@ public class WriteMemberReviewDao {
 			return result;
 		}
 	//====================================================================================================
+		// 구매 후 해당 상품 리뷰 글 작성여부(ajax)
+		public int writemembercheckwriter(Connection conn, String id, String category) {
+			int result = -1;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			// SELECT REVIEW_WRITER FROM REVIEW WHERE REVIEW_WRITER = 'user01' AND REVIEW_PRODUCT_CATEGORY = 'C';
+			String sql = "SELECT REVIEW_WRITER FROM REVIEW WHERE REVIEW_WRITER = ? AND REVIEW_PRODUCT_CATEGORY = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, category);
+				
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					// 구매를 했으며 이미 후기를 작성
+					result = 1;
+				} else {
+					// 구매는 했지만 후기룰 작성하지 않았다.
+					result = 0;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
 	//====================================================================================================
 	//====================================================================================================
 	//====================================================================================================
-}
+		}

@@ -28,10 +28,10 @@
 			<c:when test="${productMemberSearch != null}">
 			<div id="product_ok">
 				<c:forEach var="product" items="${productMemberSearch}">
-				<a href="<%=context_root%>/productdetail?pno=${product.getProductNo()}&c=${product.getProductCategory()}">
-					<img src="${product.getProductImgUrl()}">
-					<br><span class="name">${product.getProductName()}</span>
-					<br><span class="price">${product.getPrice()}원</span>
+				<a href="<%=context_root%>/productdetail?pno=${product.productNo}&c=${product.productCategory}">
+					<img src="${product.productImgUrl}">
+					<br><span class="name">${product.productName}</span>
+					<br><span class="price">${product.price}원</span>
 				</a>
 				</c:forEach>
 			</div>
@@ -48,5 +48,7 @@
 		</c:if>
 	</section>
 	<%@ include file="../template_footer.jsp" %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<%=context_root %>/js/template_header.js"></script>
 </body>
 </html>

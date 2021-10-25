@@ -2,7 +2,7 @@
     <section id="mainad_sec">
         <div id="mainad_box">
             <div id="ad_img">
-                <a href="/PetmaruNeo/produclist?category=C" id="ad_link">
+                <a href="/Petmaru/produclist?category=C" id="ad_link">
                     <img src="https://marlonshop.com/web/upload/category/editor/2021/09/17/cac047be15e71ac39b8eec787b40e644.jpg">
             </div>
 

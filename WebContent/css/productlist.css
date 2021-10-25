@@ -56,3 +56,12 @@
 #page #pageLink:visited {
 	color: black;
 }
+
+#page .page_arrow {
+	text-decoration: none;
+	margin: 0 20px;
+}
+
+#page .page_arrow:visited {
+	color: black;
+}

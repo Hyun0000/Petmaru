@@ -1,15 +1,87 @@
 window.onload = function () {
-		//=====================================================================================================
-		let category = document.getElementById('category_js').value;
-		let productNo = document.getElementById('productNo_js').value;
-		let productImgUrl = document.getElementById('productImgUrl_js').value;
-		let productName = document.getElementById('productName_js').value;
-		let startPageLink = document.getElementById('startPageLink_js').value;
-		let endPageLink = document.getElementById('endPageLink_js').value;
-		let memberLoginInfo = document.getElementById('memberLoginInfo_js').value;
-		let PAGE_SIZE = document.getElementById('PAGE_SIZE_js').value;
-		let payYN = document.getElementById('payYN_js').value;
+	let category = document.getElementById('category_js').value;
+	let productNo = document.getElementById('productNo_js').value;
+	let productImgUrl = document.getElementById('productImgUrl_js').value;
+	let productName = document.getElementById('productName_js').value;
+	let startPageLink = document.getElementById('startPageLink_js').value;
+	let endPageLink = document.getElementById('endPageLink_js').value;
+	let memberLoginInfo = document.getElementById('memberLoginInfo_js').value;
+	let PAGE_SIZE = document.getElementById('PAGE_SIZE_js').value;
+	let payYN = document.getElementById('payYN_js').value;
+	//================================================================
+	//================================================================
+	// 처음 페이지 load시 1page 분량 후기 data를 ajax로 가져오기
+	$.ajax({
+        type : "POST",
+        url : "writememberreviewview",
+        dataType : "json", // 받아들이는 (success : function (data)) data의 모양
 		
+        data : {
+        	cateGory : category,
+            reviewpage : 1
+        },
+        success : function (data) {
+        	console.log("success 시작");
+        	if (data != null) {
+        		console.log("if 시작");
+    				// 삭제 & 수정 버튼에 적용된 스타일 숨기기
+        			$('.btns').css('display', 'none');
+        			// <ul id="review_list"> 아래의 모든 내용만 삭제(태그는 그대로 유지)
+					$('#review_list').find().empty();
+        			// 이미지 속성 제거
+        			$('.img_same').removeAttr("src");
+        		for (let i = 0; i < data.reviewInfo.length; i++) {
+        			console.log("for 시작 : " + data.reviewInfo.length);
+        			
+        			$('.review_li_' + (i + 1)).css('display', 'block');
+					/*$('.img_same_' + (i + 1)).attr("src", data.reviewInfo[i].reviewImageUrl);*/
+					
+					if(data.reviewInfo[i].reviewImageUrl.startsWith('http')) {
+            			$('.img_same_' + (i + 1)).attr("src", data.reviewInfo[i].reviewImageUrl);
+						console.log("http 경로로 사진 가져오기");
+						console.log(data.reviewInfo[i].reviewImageUrl);
+					} else {
+						console.log("물리경로");
+						console.log(data.reviewInfo[i].reviewImageUrl);
+						$('.img_same_' + (i + 1)).attr("src", "/Petmaru/upload/" + data.reviewInfo[i].reviewImageUrl);
+					}
+					
+					$('.review_title_' + (i + 1)).text(data.reviewInfo[i].reviewTitle);
+        			$('.review_write_content_' + (i + 1)).text(data.reviewInfo[i].reviewContent);
+        			$('.review_date_' + (i + 1)).text(data.reviewInfo[i].reviewDate);
+        			$('.review_writer_' + (i + 1)).text(data.reviewInfo[i].reviewWriter);
+        			
+        			// 로그인한 회원과 후기 작성자가 일치하면 수정&삭제 버튼 보이기
+   					if (memberLoginInfo == $('.review_writer_' + (i + 1)).text()) {
+   	   					$('.btns_' + (i + 1)).css('display', 'block');
+   						$('.review_update_same').text('수정');
+   						$('.review_delete_same').text('삭제');
+   					}
+        		}
+        			console.log("PAGE_SIZE 전 : " + PAGE_SIZE);
+        			console.log("data.reviewInfo.length 전 : " + data.reviewInfo.length);
+        			// 후기가 없는 부분을 임시적으로 숨기는 기능
+   					for (let m = 5; m > data.reviewInfo.length; m--) {
+   						console.log(123);
+						$('.review_li_' + m).css('display', 'none');
+						console.log(123);
+					}
+        			
+        			// console.log("해결책? : " + ${PAGE_SIZE} * 1 - data.reviewInfo.length * 1);
+        			console.log("해결책? : " + (PAGE_SIZE * 1 - data.reviewInfo.length * 1));
+        			console.log("PAGE_SIZE : " + PAGE_SIZE);
+        			console.log("data.reviewInfo.length : " + data.reviewInfo.length);
+			}
+		},
+		error : function(request,status,error) {
+        	console.log("false")
+            alert('후기가 없습니다.');
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+	})
+	//================================================================
+	//================================================================
+	//================================================================
 		// 후기 글을 가져오는 ajax
  			for (var i = startPageLink; i <= endPageLink; i++) {
  				console.log("pagelink 시작");
@@ -37,8 +109,19 @@ window.onload = function () {
 		                			console.log("for 시작 : " + data.reviewInfo.length);
 		                			
 		                			$('.review_li_' + (i + 1)).css('display', 'block');
-		                			$('.img_same_' + (i + 1)).attr("src", data.reviewInfo[i].reviewImageUrl);
-		                			$('.review_title_' + (i + 1)).text(data.reviewInfo[i].reviewTitle);
+									/*$('.img_same_' + (i + 1)).attr("src", data.reviewInfo[i].reviewImageUrl);*/
+									
+									if(data.reviewInfo[i].reviewImageUrl.startsWith('http')) {
+			                			$('.img_same_' + (i + 1)).attr("src", data.reviewInfo[i].reviewImageUrl);
+										console.log("http 경로로 사진 가져오기");
+										console.log(data.reviewInfo[i].reviewImageUrl);
+									} else {
+										console.log("물리경로");
+										console.log(data.reviewInfo[i].reviewImageUrl);
+										$('.img_same_' + (i + 1)).attr("src", "/Petmaru/upload/" + data.reviewInfo[i].reviewImageUrl);
+									}
+									
+									$('.review_title_' + (i + 1)).text(data.reviewInfo[i].reviewTitle);
 		                			$('.review_write_content_' + (i + 1)).text(data.reviewInfo[i].reviewContent);
 		                			$('.review_date_' + (i + 1)).text(data.reviewInfo[i].reviewDate);
 		                			$('.review_writer_' + (i + 1)).text(data.reviewInfo[i].reviewWriter);
@@ -78,6 +161,9 @@ window.onload = function () {
 			console.log("ajax 삭제 for 시작");
 			$('.review_delete_same').on('click',function() {
 				console.log(this);
+				console.log("title : " + $(this).parents('#review_box').find(".review_title_same").text());
+				console.log("writer : " + $(this).parents('#review_box').find(".review_writer_same").text());
+				console.log("imgSrc : " + $(this).parents('.review_li_same').find(".img_same").attr("src"));
 				// 삭제 여부를 묻는 팝업
 				let deleteBool = confirm('정말 삭제하시겠습니까?');
 				if (deleteBool == true) {
@@ -87,7 +173,8 @@ window.onload = function () {
 	                url : "writememberdelete",
 	                data : {
 	                	title : $(this).parents('#review_box').find(".review_title_same").text(),
-	                	writer : $(this).parents('#review_box').find(".review_writer_same").text()
+	                	writer : $(this).parents('#review_box').find(".review_writer_same").text(),
+						imgSrc : $(this).parents('.review_li_same').find(".img_same").attr("src")
 	                },
 	                dataType : "json",
 	                success : function (data) {
@@ -113,25 +200,52 @@ window.onload = function () {
 			})
 		// ======================================================================
 		// update 팝업 이벤트 및 수정
+		
+			// 수정할 후기 제목 <input>
 			let updateTitle = document.getElementById('update_title');
+			
+			// 수정할 후기 내용 <textarea>
 			let updateContent = document.getElementById('update_content');
+			
+			// 조건으로 사용될 기존 후기 제목 <input>
+			let updateTitleOrigin = document.getElementById('update_title_origin');
+			
+			// 후기 수정 modal blx
 			let updateBox = document.getElementById('update_box');
+			
+			// 기존 후기 사진 url 담을 <input>
+			let imgUrlInput = document.getElementById('update_imgUrl');
 			
 			var liEle = document.getElementsByClassName('review_li_same');
 			for (var i = 0; i < liEle.length; i++) {
   					
-			document.querySelector('.review_update_' + (i + 1)).addEventListener('click', function () {
-				console.log(this);
+			$('.btns_' + (i + 1)).find($('.review_update_' + (i + 1))).on('click', function () {
+				// 수정할 후기 제목
 				updateTitle.value = $(this).parents('#review_box').find(".review_title_same").text();
+				
+				// 수정할 후기 내용
 				updateContent.value = $(this).parents('#review_box').find(".review_write_content_same").text();
+				
+				// 조건으로 사용될 기존 후기 제목
+				updateTitleOrigin.value = updateTitle.value; // servlet에 sql의 where 조건으로 보낼 title 값 설정
+				
+				// 기존 후기 사진 url
+				imgUrlInput.value = $(this).parents('.review_li_same').find(".img_same").attr("src")
+				
+				// 수정 modal box 띄우기
 				updateBox.style.display = "block";
 				
+				console.log("updateTitleOrigin.value(조건으로 넘길 기존 제목) : " + updateTitleOrigin.value);
+				console.log("id(조건으로 넘길 user id) : " + document.getElementById('update_id').value);
+				console.log("기존 후기 사진 url : " + imgUrlInput.value);
+				// ==============================
 				// 팝업 컨트롤용 변수
 		        let popNumTitle = 1;
 
 		        document.getElementById('update_title').onclick = function () {
 		            if (popNumTitle == 1) {
 		                alert('제목은 1~20자 사이로만 입력해주세요(공백포함)');
+						// 팝업창이 딱 한 번만 보이게 하기위해 popNumTitle++ 설정
 		                popNumTitle++;
 		            }
 		        }
@@ -142,63 +256,39 @@ window.onload = function () {
 		        document.getElementById('update_content').onclick = function () {
 		            if (popNumContent == 1) {
 		                alert('내용은 1글자 이상 입력해주세요(공백포함)');
+						// 팝업창이 딱 한 번만 보이게 하기위해 popNumContent++ 설정
 		                popNumContent++;
 		            } 
 		        }
-				
-				// ajax용 기존 후기글 제목
-				var originTitle = $(this).parents('#review_box').find(".review_title_same").text();
-				
+				// ==============================
+		        // 후기 수정 버튼(제출) 이벤트 등록
 				$('#update_btn').on('click', function () {
-					console.log("originTitle : " + originTitle);
-					console.log("updateTitle.value : " + updateTitle.value);
-					console.log("updateContent.value : " + updateContent.value);
+					// 제출 버튼용 boolean
+					let updateBool = true;
+					
 			        // 제목 & 내용 글자 수 유효성 검사
-			        // 후기 수정 버튼(제출) 이벤트 등록
-		            // 1. 제목(1~20자 사이만 입력가능, 공백포함)
-		            var textEle = document.getElementById('update_title');
-
-		            // 2. 내용(최소 1글자 입력, 공백포함)
-		            var textAreaEle = document.getElementById('update_content');
-
-		            if (textEle.value.length > 20 || textEle.value.length == 0) {
+		            if (updateTitle.value.length > 20 || updateTitle.value.length < 1) {
+			            // 1. 제목(1~20자 사이만 입력가능, 공백포함)
 		                alert('제목의 글자수를 맞춰서 입력해주세요');
-						return false;
-		            } else if(textAreaEle.value.length == 0) {
+						updateBool = false;
+		            } else if(updateContent.value.length == 0) {
+			            // 2. 내용(최소 1글자 입력, 공백포함)
 		                alert('내용은 최소 1글자 이상 입력해주세요');
-						return false;
+						updateBool = false;
 		            }
-					console.log("update 시작");
-					$.ajax({
-						type : "post",
-						url : "writememberupdate",
-						data : {
-							title : originTitle,
-							update_title : updateTitle.value,
-							update_content : updateContent.value,
-							id : memberLoginInfo
-						},
-						dataType : "json",
-						success : function (data) {
-							console.log("success 시작");
-							if (data.result == 1) {
-								alert('수정을 완료했습니다.');
-								document.getElementById('update_box').style.display = "none";
-								location.reload();
-								// window.location.reload();
-							} else {
-								alert('수정이 되지 않았습니다.');
-							}
-						},
-						error : function(request,status,error) {
-		                	console.log("false 진입")
-		                    alert('수정 실패');
-		                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			                }
+
+					if(updateBool == true) {
+						console.log("update 시작");
+						let updateForm = document.getElementById('update_form');
+						updateForm.method = "post";
+						updateForm.action = "writememberupdate"
+						updateForm.submit();
+					}
 					})
 				})
-			})
-   				}
+				//}
+			/*})*/
+   			}
 		// ======================================================================
         // update 창 닫는 이벤트
 	        var modal = document.getElementById('update_box');
@@ -212,35 +302,59 @@ window.onload = function () {
 	        }
 		// ======================================================================
 		// 처음 페이지 로드 했을 때 삭제 / 수정 보이게 하기
-			window.onload = function () {
+			// window.onload = function () {
    				var liEle = document.getElementsByClassName('review_li_same');
    				for (var i = 0; i < liEle.length; i++) {
    					if (memberLoginInfo == $('.review_writer_' + (i + 1)).text()) {
    	   					$('.btns_' + (i + 1)).css('display', 'block');
    					}	
 				}
-			}
+			// }
 		// ======================================================================
 		// 후기 작성용 data 전달 by JSON
 		if (payYN == 'Y') {
 	        document.getElementById('insertA').onclick = function() {
-	            var insertFrm = document.getElementById('insertForm');
-	
-	            let jsData = {
-	                category : category,
-	                pno : productNo,
-	                url : productImgUrl,
-	               	pname : productName
-	            }
-	            
-	            let jsonData = JSON.stringify(jsData);
-				console.log(jsonData);
-	            $('#test').val(jsonData);
-	            console.log(JSON.stringify(jsData));
-	
-	            insertFrm.method = "post";
-	            insertFrm.action = "writememberinsertview";
-	            insertFrm.submit();
+				$.ajax({
+					type : "POST",
+					url : "writemembercheckwriter",
+					dataType : "json",
+					data : {
+						userId : memberLoginInfo,
+						category : category
+					},
+					success : function(data) {
+						console.log("success : " + data);
+						if(data.result == 0) {
+							// result = 0 --> 구매는 했지만 후기룰 작성하지 않았다.
+				            var insertFrm = document.getElementById('insertForm');
+
+				            let jsData = {
+				                category : category,
+				                pno : productNo,
+				                url : productImgUrl,
+				               	pname : productName
+				            }
+
+				            let jsonData = JSON.stringify(jsData);
+							console.log(jsonData);
+				            $('#test').val(jsonData);
+				            console.log(JSON.stringify(jsData));
+				
+				            insertFrm.method = "post";
+				            insertFrm.action = "writememberinsertview";
+				            insertFrm.submit();
+						} else if(data.result == 1) {
+							// result = 1 --> 구매를 했으며 이미 후기를 작성
+							alert("이미 후기를 작성하셨습니다.");
+						}
+					},
+					error : function(request,status,error) {
+		                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		                	console.log("false")
+		                    alert('후기가 없습니다.');
+							confirm("stop");
+		                } 
+				})
 	        }
 		}
 		// ======================================================================

@@ -36,10 +36,10 @@ public class WriteMemberReviewService {
 		}
 	//====================================================================================================
 		// 리뷰 글 수정(ajax)
-		public int writeMemberUpdate(String title, String id, String upTitle, String content) {
+		public int writeMemberUpdate(String title, String id, String upTitle, String content, String fileName) {
 			int result = 0;
 			Connection conn = getConnection();
-			result = new WriteMemberReviewDao().writeMemberUpdate(conn, title, id, upTitle, content);
+			result = new WriteMemberReviewDao().writeMemberUpdate(conn, title, id, upTitle, content, fileName);
 			close(conn);
 			return result;
 		}
@@ -53,6 +53,14 @@ public class WriteMemberReviewService {
 			return result;
 		}
 	//====================================================================================================
+		// 구매 후 해당 상품 리뷰 글 작성여부(ajax)
+		public int writemembercheckwriter(String id, String category) {
+			int result = -1;
+			Connection conn = getConnection();
+			result = new WriteMemberReviewDao().writemembercheckwriter(conn, id, category);
+			close(conn);
+			return result;
+		}
 	//====================================================================================================
 	//====================================================================================================
 	//====================================================================================================

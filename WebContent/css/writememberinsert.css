@@ -33,7 +33,14 @@
 
 /* 첫번째 div의 내용 스타일 지정 */
 .first_div p {
-    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+/* 상품 사진 크기 조정 */
+.first_div img {
+	width: 300px; height: 300px;
+	border: 2px solid black;
+	border-bottom: none;
 }
 
 /* 첫번째 div 중 사진 영역 스타일 지정 */
@@ -73,7 +80,7 @@ tr:first-child .first_div{
 }
 
 /* 후기 내용 부분 <textarea> 스타일 지정 */
-textarea#contnet {
+textarea#content {
     width: 100%;
     height: 100%;
     resize: none;
@@ -105,6 +112,13 @@ textarea:focus {
     padding: 10px 20px;
 }
 
+/* 파일 업로드 <label> 스타일 지정 */
+#file_label:hover {
+	border: 3px solid black;
+    background-color: white;
+    color: black;
+}
+
 /* 등록하기 버튼 div 스타일 지정 */
 #review_insert_div {
     text-align: center;
@@ -122,8 +136,8 @@ textarea:focus {
     border-radius: 30px;
 }
 
-/* 등록하기 버튼 클릭시 지정 */
-#review_insert_btn:active {
+/* 등록하기 버튼 hover 지정 */
+#review_insert_btn:hover {
     background-color: white;
     color: black;
 }

@@ -12,10 +12,6 @@
 <%
 	String context_root = request.getContextPath();
  	ArrayList<WriteMemberReviewVo> productMemberReview = (ArrayList<WriteMemberReviewVo>)request.getAttribute("productMemberReview");
-	int totalPageLink = (int)request.getAttribute("totalPageLink");
-	int startPageLink = (int)request.getAttribute("startPageLink");
-	int endPageLink = (int)request.getAttribute("endPageLink");
-	int selectPage = (int)request.getAttribute("selectPage"); 
 	ProductMemberVo product = (ProductMemberVo)request.getAttribute("product");
 %>
 <!DOCTYPE html>
@@ -29,16 +25,7 @@
 <title>Petmaru</title>
 </head>
 <body>
-<input type="hidden" value="${product.productCategory}" id="category_js">
-<input type="hidden" value="${product.productNo}" id="productNo_js">
-<input type="hidden" value="${product.productImgUrl}" id="productImgUrl_js">
-<input type="hidden" value="${product.productName}" id="productName_js">
-<input type="hidden" value="${startPageLink}" id="startPageLink_js">
-<input type="hidden" value="${endPageLink}" id="endPageLink_js">
-<input type="hidden" value="${memberLoginInfo}" id="memberLoginInfo_js">
-<input type="hidden" value="${PAGE_SIZE}" id="PAGE_SIZE_js">
-<input type="hidden" value="${payYN}" id="payYN_js">
-
+<%-- ${memberLoginInfo} --%>
 <%@ include file="../template_header.jsp" %>
        <section id="detail_section">
        	<div id="detail_div_box">
@@ -55,7 +42,6 @@
 	            <c:if test="${product.productCategory == 'C' }">
 	            <div id="option">
                     <div id="size_div">
-                        <!-- <select name="size" id="size_select" onchange="show();"> -->
                         <select name="size" id="size_select">
                             <option value="">Select Option</option>
                             <option value="">------------------------</option>
@@ -73,7 +59,6 @@
                     <table id="productChoiceTable">
                     	<tr id="option_introduce"><td>옵션을 선택해주세요</td></tr>
                     </table>
-                    <!-- <ul id="productChoiceList"></ul> -->
                 </div>
 				</c:if>
 				
@@ -87,7 +72,6 @@
 				  </c:if>
                     <h3 id="price"><%=product.getPrice() %></h3><span id="price-span">원</span>
                     <c:if test="${payYN == 'Y'}">
-		                <!-- 특정 조건이 맞아야 후기 작성 버튼이 보이도록 수정 필요 -->
 		                <!-- JSON을 이용해 data 전송 -->
 		                <form id="insertForm">
 		                <input type="hidden" id="test" name="test">
@@ -97,7 +81,6 @@
                 </div>
                 
 	            <div id="buy_cart_btn">
-	                <%-- <a href="<%=context_root%>/productbuy?pno=<%=product.getProductNo() %>" id="purchase">BUY</a> --%>
 	                <form id="buy_form">
 	                <button id="purchase">BUY</button>
 	                <input type="hidden" id="buy_json" name="buy_json">
@@ -112,27 +95,25 @@
        <div id="review_top_line"><h1>Review</h1></div>
 		<div id="review_content">
 	         <ul id="review_list">
-				<c:forEach var="productMemberReview" items="${productMemberReview}">
+	         	<c:forEach var="productMemberReview" items="${productMemberReview}">
 						<c:set var="k" value="${1+k}"></c:set>
 		                <li class="review_li_same review_li_${k}">
 		                    <div class="review_img_same review_img_${k}">
-		                        <img src="${productMemberReview.reviewImageUrl}" class="img_same img_same_${k}">
+		                        <img src="#" class="img_same img_same_${k}">
 		                    </div>
 		
 		                    <div id="review_box">
-			                    <!-- 처음에 page load시 1page의 후기들이 보이도록 설정 -->
-		                        <h5 class="review_title_same review_title_${k}">${productMemberReview.reviewTitle}</h5><br>
-		                        <p class="review_write_content_same review_write_content_${k}">${productMemberReview.reviewContent}</p><br>
+		                        <h5 class="review_title_same review_title_${k}"></h5><br>
+		                        <p class="review_write_content_same review_write_content_${k}"></p><br>
 		                    
 		                        <div class="review_write_info">
 		                        	<div class="review_writer_date">
-			                            <span class="review_writer_same review_writer_${k}">${productMemberReview.reviewWriter}</span>
-			                            <span class="review_date_same review_date_${k}">${productMemberReview.reviewDate}</span>
+			                            <span class="review_writer_same review_writer_${k}"></span>
+			                            <span class="review_date_same review_date_${k}"></span>
 		                            </div>
 		                            <div class="btns btns_${k}" style="display: none;">
-		                            	<!-- 로그인한 회원의 id와 후기 작성자의 id가 일치할때만 수정 삭제 버튼이 보인다.  style="display: none;"-->
-			                            	<button class="review_update_same review_update_${k}">수정</button>
-			                            	<button class="review_delete_same review_delete_${k}">삭제</button>
+				                            	<button class="review_update_same review_update_${k}">수정</button>
+				                            	<button class="review_delete_same review_delete_${k}">삭제</button>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -147,9 +128,7 @@
 				<c:when test="${selectPage < startPageLink }">리뷰가 존재하지 않습니다.</c:when>
 				<c:when test="${selectPage != 0 }">
 					<c:forEach begin="${startPageLink}" end="${endPageLink}" step="1" var="i">
-						<%-- <a class="pageLink_same pageLink_${i}">${i}</a> --%>
 						<button class="pageLink_same pageLink_${i}">${i}</button>
-						<%-- <a href="/PetmaruNeo/productdetail?reviewpage=${i}" class="pageLink_same pageLink_${i}">${i}</a> --%>
 					</c:forEach>
 				</c:when>
 			</c:choose>
@@ -159,12 +138,19 @@
 	<%@ include file="../template_footer.jsp" %>
 	
 		<!-- 후기 수정 창(모달창 형식) -->
-		<!-- 나중에  review_update_${k} 맞게 모달 팝업 이벤트 수정 필요 -->
        <div id="update_box">
+       		<form enctype="multipart/form-data" id="update_form">
                <table id="update_table">
                    <tr>
                        <td class="title_td">제목</td>
-                       <td class="content_td"><input id="update_title" name="update_title" type="text"></td>
+                       <td class="content_td">
+                       <input id="update_title" name="update_title" type="text">
+                       <input id="update_title_origin" name="update_title_origin" type="hidden">
+                       <input type="hidden" value="${memberLoginInfo}" id="update_id" name="update_id"> <!-- 조건으로 보낼 id -->
+                       <input type="hidden" value="${product.productCategory}" id="update_category" name="update_category">
+                       <input type="hidden" value="${product.productNo}" id="update_productNo" name="update_pno">
+                       <input type="hidden" id="update_imgUrl" name="update_imgUrl"> <!-- js를 이용해 value 설정 -->
+                       </td>
                    </tr>
 
                    <tr>
@@ -176,16 +162,30 @@
                        <td class="title_td">사진첨부</td>
                        <td class="content_td">
                            <label id="update_photo_label" for="update_photo">업로드</label>
-                           <!-- <td class="content_td"><input type="file" name="photo_file" id="photo_file"></td> -->
-                           <input type="file" id="update_photo" hidden>
+                           <input type="file" id="update_photo" hidden="hidden" name="update_photo">
                        </td>
                    </tr>
 
                    <tr>
-                       <!-- 유효성 검사하기 -->
                        <td colspan="2" id="btn_td"><button type="button" id="update_btn">후기 수정</button></td>
                    </tr> 
                </table>
+             </form>
          </div>
+
+<!-- js 데이터 전달용 input 태그들 -->         
+<input type="hidden" value="${product.productCategory}" id="category_js">
+<input type="hidden" value="${product.productNo}" id="productNo_js">
+<input type="hidden" value="${product.productImgUrl}" id="productImgUrl_js">
+<input type="hidden" value="${product.productName}" id="productName_js">
+<input type="hidden" value="${startPageLink}" id="startPageLink_js">
+<input type="hidden" value="${endPageLink}" id="endPageLink_js">
+<input type="hidden" value="${memberLoginInfo}" id="memberLoginInfo_js">
+<input type="hidden" value="${PAGE_SIZE}" id="PAGE_SIZE_js">
+<input type="hidden" value="${payYN}" id="payYN_js">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<%=context_root %>/js/template_header.js"></script>
+<script src="<%=context_root %>/js/productmember/productdetail.js"></script>
 </body>
 </html>
