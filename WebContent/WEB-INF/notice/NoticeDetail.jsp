@@ -20,25 +20,81 @@
 	    <title>공지사항 상세정보</title>	 
 	    <%@ include file="../template_header.jsp" %>
 	</head>  
+	<style>
+	   a:link { 
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+
+a:visited {
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+
+a:hover {
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+
+a:active {
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+#topmain{
+		width : 1000px;
+		text-align :center;
+		font-size: 40px;
+		
+}
+#d1{
+
+	}
+#detailinfo{
+		border : 1px solid;
+		position : relative;
+		left : 500px;
+}
+#dcontent{
+		border : 1px;
+		width : 500px;
+}
+.back{
+	position : relative;
+	left : 500px;
+}
+	</style>
     <body>		
-	    <div>
-	    	<table>
+    <h3 id="topmain">공지사항 상세보기</h3>
+    <main>
+	    <div class = "margin-top first">
+	    	<table id = "detailinfo">
 				<tbody>
-					<tr>				
+					<tr id = "d1">				
 						<th>제목</th>
 						<td colspan="3">${n.title}</td>
 					</tr>
 					<tr>
 						<th>작성일</th>
-						<td>
-							<fmt:formatDate pattern = "yyyy/MM/dd " value="${n.regdate}"/>
+						<td colspan="3"> <fmt:formatDate pattern = "yyyy/MM/dd " value="${n.regdate}"/>
 						</td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td>${n.writerId}</td>
+						<td colspan = "2">${n.writerId}</td>
 						<th>조회수</th>
-						<td><fmt:formatNumber value = "${n.hit}" /></td>
+						<td>${n.hit}</td>
 					</tr>
 					<tr>
 						<th>첨부파일</th>
@@ -56,15 +112,17 @@
 							</c:forTokens>
 						</td>
 					</tr>
-					<tr class="content">
+					<tr id="dcontent">
 						<td colspan="4">${n.content}</td>
 					</tr>
 				</tbody>
 			</table>	
 	    </div>	
-		<div>
+		<div class = "back">
+		
 			<a href="Noticelist">목록</a>
-		</div>				
+		</div>	
+		</main>			
     </body>  
     <%@ include file="../template_footer.jsp" %>  
 </html>

@@ -70,7 +70,10 @@ a:active {
 		border : 1px;
 		width : 500px;
 }
-
+.back{
+	position : relative;
+	left : 500px;
+}
     </style>
    <%@ include file="../admin_header.jsp" %>
 </head>
@@ -102,7 +105,7 @@ a:active {
 								<c:if test="${fn:endsWith(fileName , '.zip')}">
 									<c:set var="style" value="font-weight: bold; color:red;" />
 								</c:if>
-								<a href="/Petmaru/upload/${fileName}" download="123">${fileName}</a>
+								<a href="/Petmaru/upload/${fileName}" download="${fileName}"${fileName} style="${style}">${fn:toUpperCase(fileName)}</a>
 								<c:if test="${!st.last}">
 								/
 								</c:if>
@@ -115,8 +118,8 @@ a:active {
                     </table>
                 </div>
 
-                <div class="margin-top text-align-center">
-                    <a class="btn-text btn-cancel" href="adminNoticelist">목록</a>
+                <div class="back">
+                    <a href="adminNoticelist">목록</a>
                    <!--  <a class="btn-text btn-default" href="edit">수정</a>
                     <a class="btn-text btn-default" href="del">삭제</a> -->
                 </div>
