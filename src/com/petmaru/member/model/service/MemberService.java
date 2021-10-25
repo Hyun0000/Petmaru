@@ -181,6 +181,15 @@ public class MemberService {
 			DBCPTemplate.close(conn);
 			return result;
 		}
+		//관리자  정보 수정
+		public int updateAdmin(String id,String name, String pwd, String phone,String email) {
+			int result = -1;
+		   System.out.println("service  "+ id+ name + pwd+ phone+email);
+			Connection conn = DBCPTemplate.getConnection();
+			result = new MemberDao().updateAdmin(conn, id,name,pwd, phone,email);
+			DBCPTemplate.close(conn);
+			return result;
+		}
 		
 		public MemberVo getMember(String id) { //수정한 정보 가져오기
 			MemberVo memberVo = null;
@@ -189,5 +198,13 @@ public class MemberService {
 			memberVo = new MemberDao().getMember(conn, id);
 			DBCPTemplate.close(conn);
 			return memberVo;
+		}
+		public AdminVo getAdmin(String id) { //수정한 정보 가져오기
+			AdminVo adminVo = null;
+		   System.out.println("service  "+ id);
+			Connection conn = DBCPTemplate.getConnection();
+			adminVo = new MemberDao().getAdmin(conn, id);
+			DBCPTemplate.close(conn);
+			return adminVo;
 		}
 }

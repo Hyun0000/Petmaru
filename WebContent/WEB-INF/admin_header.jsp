@@ -9,7 +9,7 @@ import= "com.petmaru.admin.model.vo.*"%>
                 <li><a href="/Petmaru/adminjoin">관리자 등록</a></li>
                 <li><a href="/Petmaru/mainpage">회원 페이지</a></li>
         <% } else { %> 
-                <li><a href="#"><%=admin.getAdmin_name()%>관리자님의 마이페이지</a></li>
+                <li><a href="/Petmaru/adminmypage"><%=admin.getAdmin_name()%>관리자님의 마이페이지</a></li>
                 <li><a href="/Petmaru/MemberList">회원 관리</a></li>
                 <li><a href="/Petmaru/adminLogout">로그아웃</a></li>
             </ul>

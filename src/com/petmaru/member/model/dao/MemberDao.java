@@ -287,6 +287,34 @@ public class MemberDao {
 			return result;
 
 		}
+		//관리자 정보 수정
+		public int updateAdmin(Connection conn,String id,String name, String pwd, String phone,String email) {
+			System.out.println("받아온 dao값: " + id+ name + pwd+ phone+ email);
+			PreparedStatement pstmt = null;
+			String query = "update admin_member set Admin_Name=?,Admin_PWD=?,  Admin_Email=?, Admin_phone=?  where Admin_ID=?";
+			int result = -1;
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1,name);
+				pstmt.setString(2,pwd);
+				pstmt.setString(3,email);
+				pstmt.setString(4,phone);
+				pstmt.setString(5,id);
+				
+				result = pstmt.executeUpdate();
+				System.out.println("변경된 데이터: " + result);
+				System.out.println("변경된 데이터: " + id+ name + pwd+ phone +email);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBCPTemplate.close(pstmt);
+			}
+			return result;
+
+		}
+
 
 	public int deleteMember(Connection conn, String id) {
 
@@ -644,5 +672,35 @@ public class MemberDao {
 				close(pstmt);
 			}
 			return member;
+		}
+		
+		public AdminVo getAdmin(Connection conn, String id) { //수정된 관리자 정보 불러오기
+			AdminVo admin = new AdminVo();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from admin_member where admin_ID = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					admin.setAdmin_ID(rs.getString("Admin_ID"));
+					admin.setAdmin_pwd(rs.getString("Admin_PWD"));
+					admin.setAdmin_name(rs.getString("Admin_Name"));
+					admin.setAdmin_Email(rs.getString("Admin_Email"));
+					admin.setAdmin_phone(rs.getString("Admin_phone"));
+
+					System.out.println("변경한dao get:"+ admin);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return admin;
 		}
 }
