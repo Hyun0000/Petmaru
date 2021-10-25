@@ -35,13 +35,14 @@ public class WriteMemberBoardContentServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String board_no = request.getParameter("board_no");
+		String board_no = request.getParameter("no");
+		System.out.println("memberSession(member id) : " + (String)request.getSession().getAttribute("memberLoginInfo"));
 		// bno 를 가지고 DB에서 하나 읽어와야 함.  
 		int bno = Integer.parseInt(board_no);
 		// bno는 pk 로 결과는 Board 모양 1개일 것임.
 		WriteMemberBoardVo vo = new WriteMemberBoardService().getBoard(bno);
 		request.setAttribute("boardvo", vo);
-		request.getRequestDispatcher("boardcontent.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/writemember/boardcontent.jsp").forward(request, response);
 	}
 
 	/**

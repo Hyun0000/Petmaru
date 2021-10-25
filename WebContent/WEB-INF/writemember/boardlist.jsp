@@ -41,7 +41,7 @@ ArrayList<WriteMemberBoardVo> volist = (ArrayList<WriteMemberBoardVo>) request.g
 	
 	<tr>
 		<td><a href="boardcontent?no=<%=vo.getBoard_no()%>"> <%=vo.getBoard_no()%> </a></td>
-		<td><%=vo.getBoard_title()%></td>
+		<td><a href="boardcontent?no=<%=vo.getBoard_no()%>"><%=vo.getBoard_title()%> </a></td>
 		<td><%=vo.getBoard_writer()%></td>
 		<td><%=vo.getBoard_date()%></td>
 	</tr>

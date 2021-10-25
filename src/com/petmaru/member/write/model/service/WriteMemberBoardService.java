@@ -44,4 +44,12 @@ public class WriteMemberBoardService {
 		DBCPTemplate.close(conn);
 		return volist;
 	}
+	
+	public int deleteBoard(int board_no) {
+		int result = 0;
+		Connection conn = DBCPTemplate.getConnection();
+		result = new WriteMemberBoardDao().deleteBoard(conn, board_no);
+		DBCPTemplate.close(conn);
+		return result;
+	}
 }

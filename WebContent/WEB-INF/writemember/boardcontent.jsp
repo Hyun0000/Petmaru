@@ -3,12 +3,15 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardwrite.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardcontent.css"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.petmaru.member.write.model.vo.WriteMemberBoardVo"%>
-<% WriteMemberBoardVo vo = (WriteMemberBoardVo)request.getAttribute("boardvo"); %>
+<% 
+	WriteMemberBoardVo vo = (WriteMemberBoardVo)request.getAttribute("boardvo"); 
+	String writer = vo.getBoard_writer();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -16,32 +19,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
 <%@ include file="../template_header.jsp"%>
-
-	<table border="1">
+	
+	
+	<table id="container1">
 		<tr>
-			<td><%=vo.getBoard_title()%></td>
+			<td id="listlink"><a href="<%=request.getContextPath() %>/boardlist">자유게시판></a></td>
 		</tr>
 		<tr>
-			<td><%=vo.getBoard_writer()%></td>
+			<td id="title"><%=vo.getBoard_title()%></td>
 		</tr>
 		<tr>
-			<td><%=vo.getBoard_date()%></td>
+			<td id="writer"><%=vo.getBoard_writer()%></td>
 		</tr>
-	</table>
-	<table>
 		<tr>
-			<td><%=vo.getBoard_content()%></td>
+			<td id="date"><%=vo.getBoard_date()%></td>
 		</tr>
 	</table>
 	
-	<form>
-		
-	</form>
+	<table id="container2">
+		<tr>
+			<td id="content"><%=vo.getBoard_content()%></td>
+		</tr>
+	</table>
+	
+	<table id="delete">
+		<tr>
+			<td id="delBtn"><a href="<%=request.getContextPath()%>/boarddelete?no=<%=vo.getBoard_no()%>&uid=<%=writer %>" role="button">글삭제</a></td>
+		</tr>
+	</table>
+	
 <%@ include file="../template_footer.jsp"%>
 </body>
 </html>

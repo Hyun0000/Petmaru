@@ -117,4 +117,25 @@ public class WriteMemberBoardDao {
 		return volist;
 
 	}
+	
+	public int deleteBoard(Connection conn, int board_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "DELETE FROM board WHERE board_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_no);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBCPTemplate.close(rset);
+			DBCPTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 }
