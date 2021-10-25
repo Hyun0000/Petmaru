@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%String context_root = request.getContextPath();%> 
+<% String admininfo = (String)request.getAttribute("check");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,7 +101,6 @@
                 alert("4 자리 유효 조건에 맞게 입력해주세요");
                 return false;
             }
-            alert("회원가입 완료");
 
         }
      

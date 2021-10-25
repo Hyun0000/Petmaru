@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String adminlogininfo = (String)request.getAttribute("login");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
     <br><br>
     <div id=login_bottom_line></div>
     <div id="findinfo">
-        <a href="#" title="관리자 아이디 비밀번호 찾기">아이디/비밀번호 찾기</a>
+        <a href="/Petmaru/admininfofind" title="관리자 아이디 비밀번호 찾기">아이디/비밀번호 찾기</a>
     </div>
 
     
@@ -59,5 +60,13 @@
 
     </div>
      <%@ include file="../template_footer.jsp" %>
+     <script type="text/javascript">
+var logininfo = "<%=adminlogininfo%>";
+if(logininfo==""){
+	console.log("1");
+	alert("정보를 올바르게 입력하세요");
+	}
+	</script>
 </body>
+
 </html>

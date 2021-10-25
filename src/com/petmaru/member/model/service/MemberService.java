@@ -144,11 +144,26 @@ public class MemberService {
 		return result;
 	
 	}
+	public String adminfindId(String name, String email) { //관리자 아이디찾기
+		String result = null;
+		Connection conn = DBCPTemplate.getConnection();		
+		result = new MemberDao().adminfindId(conn, name, email);
+		DBCPTemplate.close(conn);
+		return result;
 	
+	}
 	public String findPwd(String id, String email) { //비밀번호찾기
 		String result = null;
 		Connection conn = DBCPTemplate.getConnection();		
 		result = new MemberDao().findPwd(conn, id, email);
+		DBCPTemplate.close(conn);
+		return result;
+	
+	}
+	public String adminfindPwd(String id, String email) { //관리자 비밀번호찾기
+		String result = null;
+		Connection conn = DBCPTemplate.getConnection();		
+		result = new MemberDao().adminfindPwd(conn, id, email);
 		DBCPTemplate.close(conn);
 		return result;
 	

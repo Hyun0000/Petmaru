@@ -75,7 +75,7 @@ public class MemberLoginservlet extends HttpServlet {
 					// request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 				 }else {
 					System.out.println(result);
-					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
+					System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");					
 					request.setAttribute("login","");
 					System.out.println("login: 없음");
 					json.put("result","fail");

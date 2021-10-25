@@ -539,6 +539,36 @@ public class MemberDao {
 		return id;
 	}
 	
+
+	public String adminfindId(Connection conn, String name, String email) { // 관리자 아이디찾기
+		int result = -1;
+		String id = null;
+		String sql = "select Admin_ID from admin_member where Admin_Name=? and Admin_Email =?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+			System.out.println("dao name : " + name);
+			System.out.println("dao : " + email);
+
+			if (rset.next()) {
+				System.out.println("id찾음: " + rset.getString("Admin_ID"));
+				id = rset.getString("Admin_ID");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBCPTemplate.close(pstmt);
+			DBCPTemplate.close(rset);
+		}
+		return id;
+	}
+	
+	
 	public String findPwd(Connection conn, String id, String email) { //비밀번호찾기
 		int result = -1;
 		String pwd = null;
@@ -556,6 +586,34 @@ public class MemberDao {
 			if (rset.next()) {
 				System.out.println("비번찾음: " + rset.getString("member_Pw"));
 				pwd = rset.getString("member_Pw");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBCPTemplate.close(pstmt);
+			DBCPTemplate.close(rset);
+		}
+		return pwd;
+	}
+	
+	public String adminfindPwd(Connection conn, String id, String email) { //관리자 비밀번호찾기
+		int result = -1;
+		String pwd = null;
+		String sql = "select Admin_PWD from admin_member where Admin_ID=? and Admin_Email =?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+			System.out.println("dao admin name : " + id);
+			System.out.println("dao : " + email);
+
+			if (rset.next()) {
+				System.out.println("비번찾음: " + rset.getString("Admin_PWD"));
+				pwd = rset.getString("Admin_PWD");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

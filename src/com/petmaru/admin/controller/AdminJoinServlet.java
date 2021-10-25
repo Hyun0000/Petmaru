@@ -1,6 +1,7 @@
 package com.petmaru.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,6 +43,7 @@ public class AdminJoinServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html;charset=UTF-8");
+    	PrintWriter writer = response.getWriter();
     	String id =request.getParameter("id");
 		String pwd = request.getParameter("pwd1");
 		String email = request.getParameter("email");
@@ -62,11 +64,14 @@ public class AdminJoinServlet extends HttpServlet {
 				 if(result ==  1 ) {
 						System.out.println(id+"님 가입되었습니다. 환영합니다.");
 						//out.println(id+"님 가입되었습니다. 환영합니다.");
-						response.sendRedirect("/Petmaru/AdminMainpage");
+						writer.println("<script>alert('관리자 등록 완료.'); location.href='"+"/Petmaru/AdminMainpage"+"';</script>");
+						writer.close();		
 					} else if(result == 2) {
 						System.out.println("기존회원 id가 존재합니다. ");
-						response.sendRedirect("/Petmaru/adminjoin");
 						request.setAttribute("check", "");
+						writer.println("<script>alert('기존 id가 존재합니다.'); location.href='"+"/Petmaru/adminjoin"+"';</script>");
+						//response.sendRedirect("/Petmaru/adminjoin");
+						writer.close();
 					} else {  // 오류발생:-1,그외 등등, 가입실패:0
 						System.out.println("예기치 못한 오류 발생. 다시 시도해 주세요. ");
 						response.sendRedirect("/Petmaru/adminjoin");
