@@ -47,7 +47,8 @@
 	
 	<table id="delete">
 		<tr>
-			<td id="delBtn"><a href="<%=request.getContextPath()%>/boarddelete?no=<%=vo.getBoard_no()%>&uid=<%=writer %>" role="button">글삭제</a></td>
+			<td id="delBtn"><a href="<%=request.getContextPath()%>/boarddelete?no=<%=vo.getBoard_no()%>&uid=<%=writer%>" role="button">글삭제</a></td>
+			<td id="reBtn"><a href="<%=request.getContextPath()%>/boardrewrite?no=<%=vo.getBoard_no()%>&uid=<%=writer%>" role="button">굴수정</a></td>
 		</tr>
 	</table>
 	

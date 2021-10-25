@@ -13,14 +13,14 @@ import com.petmaru.member.write.model.vo.*;
 /**
  * Servlet implementation class WriteMemberBoardWriteServlet
  */
-@WebServlet("/boardwrite")
-public class WriteMemberBoardWriteServlet extends HttpServlet {
+@WebServlet("/boardrewrite")
+public class WriteMemberBoardRewriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public WriteMemberBoardWriteServlet() {
+	public WriteMemberBoardRewriteServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -55,7 +55,6 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 		 
 		WriteMemberBoardVo vo = new WriteMemberBoardVo();
 		vo.setBoard_title(board_title);
-		//실패 //vo.setBoard_title(null);
 		vo.setBoard_content(board_content);
 		vo.setBoard_writer(board_writer);
 		
@@ -64,9 +63,6 @@ public class WriteMemberBoardWriteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			response.sendRedirect("boardlist");
-		} else if(board_writer == null){
-			request.setAttribute("errMsg", "로그인 후 이용해주세요.");
-			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errMsg", "등록에 실패했습니다. 작성한 글을 다시 확인해 주세요.");
 			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
