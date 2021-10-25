@@ -48,7 +48,7 @@ public class WriteMemberBoardRewriteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		  String board_title = request.getParameter("board_title"); 
 		  String board_content = request.getParameter("board_content"); 
-		  String board_writer = request.getParameter("board_writer"); 
+		  String board_writer = request.getParameter("board_writer");
 //		  if (board_writer == null) {
 //			  board_writer = "admin"; // 임시 user
 //		  }

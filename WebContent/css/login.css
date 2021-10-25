@@ -9,7 +9,7 @@
     /* font-family: 'Jua',sans-serif; */
     font-style: normal;
     font-size: 35px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     margin: 0 50px;
 }
 
@@ -22,17 +22,18 @@
     width: 800px;
     height: 10px;
     clear: both;
-     margin-left: 20%; 
+    margin-left: 20%; 
     margin-bottom: 30px;
     margin: 0 auto;
 }
 #login_section {
-     margin-left: 35%;  
+     width: 1300px;
+     margin: 0 auto;
 }
 
 
 #login_table{
-    margin-top: -40px;
+    margin: 0 auto;
 }
 
 
@@ -82,4 +83,13 @@
     font-size: 20px;
     margin-left: 45%;   
     text-decoration: none;
+}
+
+#findinfo a {
+	text-decoration: none;
+	color: black;
+}
+
+#findinfo a:visited {
+	color: black;
 }

@@ -52,7 +52,8 @@ public class AdminMypageServlet extends HttpServlet {
 		System.out.println("변경하러감");
 		System.out.println("회원정보 수정입력후 받아온 데이터" + update);
 		}
-		request.getRequestDispatcher("/WEB-INF/admin/admininfo.jsp").forward(request, response);
+		response.sendRedirect("/Petmaru/AdminMainpage");
+		// request.getRequestDispatcher("/WEB-INF/admin/admininfo.jsp").forward(request, response);
 	}
 
 }

@@ -3,16 +3,16 @@ import= "com.petmaru.member.model.vo.*"%>
  <% MemberVo m = (MemberVo)session.getAttribute("memberVo"); %> 
     <header>
         <div id="top_login">
-        <%if (m == null){ %> 
             <ul>
+        <%if (m == null){ %> 
                 <li><a href="/Petmaru/loginview">로그인</a></li>
                 <li><a href="/Petmaru/memberjoin">회원가입</a></li>
                 <li><a href="/Petmaru/adminlogin.do">관리자페이지</a></li>
         <% } else { %> 
                 <li><a href="/Petmaru/mypageupdate"><%=m.getMember_name()%>님의 마이페이지</a></li>
                 <li><a href="/Petmaru/MemberLogout">로그아웃</a></li>
-            </ul>
 <% } %> 
+            </ul>
         </div>
         <div id="logo_search">
             <div id="logo">
@@ -43,7 +43,7 @@ import= "com.petmaru.member.model.vo.*"%>
             <table id="right_icon">
                 <tr style = cursor:pointer;>
                     <td><a href="<%=request.getContextPath() %>/boardlist"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
-                    <td><a href="#"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
+                    <td><a href="/Petmaru/adminNoticelist"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
                 </tr>
             </table>
         </div>

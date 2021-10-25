@@ -15,7 +15,7 @@ import com.petmaru.product.member.model.vo.ProductMemberVo;
 /**
  * Servlet implementation class ProductMemberMainPageSubCarouselServlet
  */
-@WebServlet("/mainpage")
+@WebServlet("/")
 public class ProductMemberMainPageSubCarouselServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

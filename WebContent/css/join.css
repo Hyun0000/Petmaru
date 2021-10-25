@@ -12,10 +12,15 @@
     border-radius: 10px;
     border-color:silver; 
     font-size: 20px;
-
 }
 #join_section{
-    margin-left: 30%; 
+    /* margin-left: 30%; */
+    width: 1300px;
+    margin: 0 auto;
+}
+
+#login_table {
+	margin: 0 auto;
 }
 
 .phone2{

@@ -75,8 +75,6 @@
             </div>
         </form>
         <br><br>
-        <div id=login_bottom_line></div>
-        
                 <script>
                 var f = document.findID;
                 var f2 = document.findPwd;

@@ -12,13 +12,22 @@ public class MemberVo {
 	private String member_gender;   // vo -char, db-char(1)
 	private int member_point;
 	private String member_email;
-
+	private String member_birth;
+	
 	@Override
 	public String toString() {
-		return "Member [member_id=" + member_id + ", member_name=" + member_name + ", member_pwd=" + member_pwd
+		return "MemberVo [member_id=" + member_id + ", member_name=" + member_name + ", member_pwd=" + member_pwd
 				+ ", member_phone=" + member_phone + ", member_address=" + member_address + ", member_regdate="
 				+ member_regdate + ", member_gender=" + member_gender + ", member_point=" + member_point
-				+ ", member_email=" + member_email + "]";
+				+ ", member_email=" + member_email + ", member_birth=" + member_birth + "]";
+	}
+	
+	public String getMember_birth() {
+		return member_birth;
+	}
+
+	public void setMember_birth(String member_birth) {
+		this.member_birth = member_birth;
 	}
 
 	public String getMember_id() {

@@ -339,7 +339,7 @@ public class NoticeDao {
 	   public int insertNotice(NoticeVo notice){
 			int result = 0;
 
-			String sql ="INSERT INTO NOTICE (ID, TITLE, CONTENT, WRITER_ID, PUB, FILES) VALUES (58, ?, ?, ?, ?, ?)";
+			String sql ="INSERT INTO NOTICE (ID, TITLE, CONTENT, WRITER_ID, PUB, FILES) VALUES (600, ?, ?, ?, ?, ?)";
 			
 			try {
 				Connection conn = DBCPTemplate.getConnection();

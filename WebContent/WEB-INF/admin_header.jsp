@@ -7,7 +7,7 @@ import= "com.petmaru.admin.model.vo.*"%>
             <ul>
                 <li><a href="/Petmaru/adminlogin.do">관리자로그인</a></li>
                 <li><a href="/Petmaru/adminjoin">관리자 등록</a></li>
-                <li><a href="/Petmaru/mainpage">회원 페이지</a></li>
+                <li><a href="/Petmaru/">회원 페이지</a></li>
         <% } else { %> 
                 <li><a href="/Petmaru/adminmypage"><%=admin.getAdmin_name()%>관리자님의 마이페이지</a></li>
                 <li><a href="/Petmaru/MemberList">회원 관리</a></li>
@@ -32,18 +32,18 @@ import= "com.petmaru.admin.model.vo.*"%>
         <div id="icon">
             <table id="left_icon">
                 <tr style = cursor:pointer;>
-                    <td><a href="#"><span class="material-icons">checkroom </span><br><span class="icon_text">Clothes</span></a></td>
-                    <td><a href="#"><span class="material-icons">pets </span><br><span class="icon_text">Accessory</span></a></td>
-                    <td><a href="#"><span class="material-icons">restaurant </span><br><span class="icon_text">Food</span></a></td>
-                    <td><a href="#"><span class="material-icons">shower </span><br><span class="icon_text">Bath</span></a></td>
-                    <td><a href="#"><span class="material-icons">smart_toy </span><br><span class="icon_text">Toy</span></a></td>
-                    <td><a href="#"><span class="material-icons">house </span><br><span class="icon_text">House</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=C"><span class="material-icons">checkroom</span><br><span class="icon_text">Clothes</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=A"><span class="material-icons">pets</span><br><span class="icon_text">Accessory</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=F"><span class="material-icons">restaurant</span><br><span class="icon_text">Food</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=B"><span class="material-icons">shower</span><br><span class="icon_text">Bath</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=T"><span class="material-icons">smart_toy</span><br><span class="icon_text">Toy</span></a></td>
+                    <td><a href="/Petmaru/produclist?category=H"><span class="material-icons">house</span><br><span class="icon_text">House</span></a></td>
                 </tr>
             </table>
 
             <table id="right_icon">
                 <tr style = cursor:pointer;>
-                    <td><a href="#"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
+                    <td><a href="/Petmaru/boardlist"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
                     <td><a href="/Petmaru/adminNoticelist"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
                 </tr>
             </table>

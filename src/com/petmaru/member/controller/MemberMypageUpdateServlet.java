@@ -65,7 +65,8 @@ public class MemberMypageUpdateServlet extends HttpServlet {
 		}
 		String deleteid = (String) request.getAttribute("deleteid");
 		System.out.println("삭제할데이터 : "+ deleteid);
-		request.getRequestDispatcher("/WEB-INF/member/mypageupdate.jsp").forward(request, response);
+		response.sendRedirect("/Petmaru/");
+		// request.getRequestDispatcher("/WEB-INF/member/mypageupdate.jsp").forward(request, response);
 		
 	}
 	

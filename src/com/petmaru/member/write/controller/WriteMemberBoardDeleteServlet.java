@@ -36,45 +36,36 @@ public class WriteMemberBoardDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
-		JSONObject jsonObject = new JSONObject();
 		
 		String boardNo = request.getParameter("no");
-		String writerStr = request.getParameter("uid");
-		String title = "";
-		String writer = "";
+		String strID = (String)request.getSession().getAttribute("memberLoginInfo");
 		
 		int result = 0;
 		
-		System.out.println("writerStr : " +writerStr);
+		System.out.println("boardNo : " + boardNo);
 		
-		String strID = (String)request.getSession().getAttribute("memberLoginInfo");
 		
 		if (boardNo == null || boardNo.equals("")) { 
 			System.out.println("파라미터  전송에 문제가 있다."); 
 			request.setAttribute("errMsg", "bno 파라미터  전송에 문제가 있습니다. 작성한 글을 다시 확인해 주세요.");
-			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/confirm.jsp").forward(request, response);
 		}
-		else if (writerStr == null || writerStr.equals("")) { 
-			System.out.println("id 전송에 문제가 있다."); 
-			request.setAttribute("errMsg", "id 파라미터  전송에 문제가 있습니다. 작성한 글을 다시 확인해 주세요.");
-			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
-		}
-		else if (!writerStr.equals(strID)) { 
-			System.out.println("id 전송에 문제가 있다."); 
-			request.setAttribute("errMsg", "작성자와 아이디가 일치하지 않습니다. 작성한 글을 다시 확인해 주세요.");
-			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+		else if (strID == null || strID.equals("")) { 
+			System.out.println("id 전송에 문제가 있다. 1"); 
+			request.setAttribute("errMsg", "id 파라미터  전송에 문제가 있습니다. 작성한 글을 다시 확인해 주세요. 1");
+			request.getRequestDispatcher("/WEB-INF/confirm.jsp").forward(request, response);
 		}
 		else {
 			result = new WriteMemberBoardService().deleteBoard((int)Integer.parseInt(boardNo));
 			System.out.println("result : " + result);
 			
 			if (result > 0) {
-				request.setAttribute("Msg", "삭제되었습니다.");
+				request.setAttribute("errMsg", "삭제되었습니다.");
 				request.getRequestDispatcher("/WEB-INF/confirm.jsp").forward(request, response);
 			}
 			else {
 				request.setAttribute("errMsg", "글 삭제에 실패했습니다.");
-				request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/confirm.jsp").forward(request, response);
 			}
 		}
 		

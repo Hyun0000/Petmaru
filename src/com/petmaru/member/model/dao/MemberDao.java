@@ -337,20 +337,18 @@ public class MemberDao {
 
 	public int insertMember(Connection conn, MemberVo vo) { // 회원가입
 		int result = -1;
-		String sqlInsert = "INSERT INTO" + " MEMBER" + " VALUES (?, ?, ?, ?, ?, sysdate,? , ?, ?)";
+		String sqlInsert = "INSERT INTO MEMBER VALUES (?, ?, ?, ?, ?, 19951017, ?, ?, 0, sysdate)";
 		PreparedStatement pstmt = null;
 		System.out.println("dao: " + vo);
 		try {
-
 			pstmt = conn.prepareStatement(sqlInsert);
 			pstmt.setString(1, vo.getMember_id());
 			pstmt.setString(2, vo.getMember_name());
 			pstmt.setString(3, vo.getMember_pwd());
 			pstmt.setString(4, vo.getMember_phone());
 			pstmt.setString(5, vo.getMember_address());
-			pstmt.setString(6, vo.getMember_gender());
-			pstmt.setInt(7, vo.getMember_point());
-			pstmt.setString(8, vo.getMember_email());
+			pstmt.setString(6, vo.getMember_email());
+			pstmt.setString(7, vo.getMember_gender());
 
 			result = pstmt.executeUpdate();
 			DBCPTemplate.commit(conn);
@@ -512,9 +510,8 @@ public class MemberDao {
 	}
 
 	public String findId(Connection conn, String name, String email) { // 아이디찾기
-		int result = -1;
-		String id = null;
-		String sql = "select MEMBER_ID from MEMBER where MEMBER_NAME=? and MEMBER_Email =?";
+		String id = "";
+		String sql = "select MEMBER_ID from MEMBER where MEMBER_NAME=? and MEMBER_EMAIL = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -522,12 +519,15 @@ public class MemberDao {
 			pstmt.setString(1, name);
 			pstmt.setString(2, email);
 			rset = pstmt.executeQuery();
+			System.out.println(name + "dao name");
 			System.out.println("dao name : " + name);
 			System.out.println("dao : " + email);
 
 			if (rset.next()) {
 				System.out.println("id찾음: " + rset.getString("member_id"));
-				id = rset.getString("member_id");
+				id = rset.getString(1);
+			} else {
+				System.out.println("id없음");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

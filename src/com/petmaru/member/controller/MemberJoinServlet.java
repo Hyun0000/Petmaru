@@ -119,7 +119,7 @@ public class MemberJoinServlet extends HttpServlet {
 				 System.out.println(result);
 				 if(result ==  1 ) {
 						System.out.println(id+"님 가입되었습니다. 환영합니다.");
-						writer.println("<script>alert('회원가입 완료'); location.href='"+"/Petmaru/mainpage"+"';</script>");
+						writer.println("<script>alert('회원가입 완료'); location.href='"+"/Petmaru/"+"';</script>");
 						writer.close();	
 						//out.println(id+"님 가입되었습니다. 환영합니다.");
 						//response.sendRedirect("/Petmaru/mainpage");

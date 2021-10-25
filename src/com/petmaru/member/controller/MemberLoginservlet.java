@@ -71,7 +71,7 @@ public class MemberLoginservlet extends HttpServlet {
 					System.out.println("memberSessionName : " + memberVo.getMember_name());
 					System.out.println("memberSessionPhone : " + memberVo.getMember_phone());
 					System.out.println(id + "로그인 성공했다");
-					response.sendRedirect("/Petmaru/mainpage");
+					response.sendRedirect("/Petmaru/");
 					// request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 				 }else {
 					System.out.println(result);
