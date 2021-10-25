@@ -49,6 +49,9 @@ public class ProductMemberListServelt extends HttpServlet {
 		int selectPage = 0;
 		if (selectPageStr == null) { selectPage = 1; } else { selectPage = Integer.parseInt(selectPageStr);}
 		
+		// 사용자가 1보다 작은 페이지링크 선택시 무조건 1 페이지로 링크되도록 설정
+		if (selectPage < 1) { selectPage = 1; }
+		
 		int startRown = 1 + (selectPage - 1)*PAGE_SIZE; // 처음 rownum
 		int endRown = startRown + PAGE_SIZE - 1; // 마지막 rownum
 		
@@ -57,15 +60,25 @@ public class ProductMemberListServelt extends HttpServlet {
 		
 		 // 전체 페이지 링크 개수
 		int totalPageLink = totalProduct / PAGE_SIZE;
+		// 100 / 20 = 5
+		// 103 / 20 = 5.xxxxx
+		totalPageLink = (totalProduct % PAGE_SIZE == 0) ? totalPageLink : totalPageLink + 1;
 		
-		 // 가장 왼쪽 페이지 링크
-		int startPageLink = totalPageLink / PAGE_SIZE;
-		startPageLink = (totalPageLink % PAGE_SIZE == 0) ? startPageLink : startPageLink + 1;
+		// 가장 왼쪽 페이지 링크
+		// int startPageLink = PAGE_SIZE / totalPageLink;
+		int startPageLink = 0;
+		if (selectPage % PAGE_LINK == 0) {
+			startPageLink = (selectPage - PAGE_LINK) + 1;
+		} else {
+			startPageLink = (selectPage / PAGE_LINK)*PAGE_LINK + 1;
+		}
 		
-		 // 가장 오른쪽 페이지 링크
+		// startPageLink = (totalPageLink % PAGE_SIZE == 0) ? startPageLink : startPageLink + 1;
+		
+		// 가장 오른쪽 페이지 링크
 		int endPageLink = startPageLink + PAGE_LINK - 1;
 		
-		// 전체 페이지 링크수 보다 마지막 페이지 링크수가 더 크면 해당 링크수를 전체 페이지 링크수로 수정
+		// 전체 페이지 링크수 보다 마지막 페이지 링크수가 더 크면 마지막 페이지 링크수를 전체 페이지 링크수로 수정
 		if (endPageLink > totalPageLink) { endPageLink = totalPageLink; }
 		
 //		if (selectPage > 1) { out.print(" << "); }
