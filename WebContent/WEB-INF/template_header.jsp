@@ -7,6 +7,7 @@ import= "com.petmaru.member.model.vo.*"%>
             <ul>
                 <li><a href="/Petmaru/loginview">로그인</a></li>
                 <li><a href="/Petmaru/memberjoin">회원가입</a></li>
+                <li><a href="/Petmaru/adminlogin.do">관리자페이지</a></li>
         <% } else { %> 
                 <li><a href="/Petmaru/mypageupdate"><%=m.getMember_name()%>님의 마이페이지</a></li>
                 <li><a href="/Petmaru/MemberLogout">로그아웃</a></li>
