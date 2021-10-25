@@ -100,7 +100,7 @@ public class AdminNoticeRegServlet extends HttpServlet {
 		notice.setTitle(title);
 		notice.setContent(content);
 		notice.setPub(pub);
-		notice.setWriterId("Admin");
+		notice.setWriterId("admin01");
 		notice.setFiles(builder.toString());
 		
 		

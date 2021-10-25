@@ -339,16 +339,21 @@ public class NoticeDao {
 	   public int insertNotice(NoticeVo notice){
 			int result = 0;
 
-			String sql ="INSERT INTO NOTICE(TITLE,CONTENT,WRITER_ID,PUB,FILES) VALUES(?,?,?,?,?)";
+			String sql ="INSERT INTO NOTICE (ID, TITLE, CONTENT, WRITER_ID, PUB, FILES) VALUES (58, ?, ?, ?, ?, ?)";
 			
 			try {
 				Connection conn = DBCPTemplate.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1,notice.getTitle());
-				pstmt.setString(2,notice.getContent());
-				pstmt.setString(3,notice.getWriterId());
-				pstmt.setBoolean(4,notice.getPub());
-				pstmt.setNString(5,notice.getFiles());
+				System.out.println("getTitle() : " + notice.getTitle());
+				System.out.println("getContent() : " + notice.getContent());
+				System.out.println("getWriterId() : " + notice.getWriterId());
+				System.out.println("getPub() : " + notice.getPub());
+				System.out.println("getFiles() : " + notice.getFiles());
+				pstmt.setString(1, notice.getTitle());
+				pstmt.setString(2, notice.getContent());
+				pstmt.setString(3, notice.getWriterId());
+				pstmt.setBoolean(4, notice.getPub());
+				pstmt.setString(5, notice.getFiles());
 				result = pstmt.executeUpdate(); 
 				
 				pstmt.close();

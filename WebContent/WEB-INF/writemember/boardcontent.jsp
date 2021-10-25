@@ -1,3 +1,9 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardwrite.css"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,12 +15,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/boardwrite.css"/>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
