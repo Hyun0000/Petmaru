@@ -138,4 +138,24 @@ public class WriteMemberBoardDao {
 		return result;
 	}
 	
+	public int reWriteBoard(Connection conn, WriteMemberBoardVo vo) {
+		int result =0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "UPDATE board SET board_title = ?, board_content = ? where board_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBoard_title());
+			pstmt.setString(2, vo.getBoard_content());
+			pstmt.setString(3, vo.getBoard_writer());
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = 1; // 성공
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
