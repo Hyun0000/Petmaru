@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+a:link { 
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+
+a:visited {
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+
+a:hover {
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+
+a:active {
+
+ color: #58595b;
+
+ text-decoration: none;
+
+}
+.line{
+text-align:center;	
+height : 50px;
+}
+
+#list{
+	width : 60%;
+	height : 100px;
+	margin : auto;	
+	border-top : 1px solid;
+	border-collapse : separate;
+}
+#list ,#Value{
+		
+		border-top : 1px solid;
+		border-collapse : collapse;
+		border-bottom : 1px solid;
+		margin-left : auto;
+		margin-right : auto;
+		
+}
+#topmain{
+		width : 1000px;
+		text-align :center;
+		font-size: 40px;
+		
+}
+#searchValue{
+		width: 1520px;
+}
+#search{
+	
+	text-align : right;
+	
+}
+.pagenow{
+	width : 1520px;
+	text-align : right;
+}
+#toplist{
+	background-color : gray;
+}
+#countpage{
+	width : 1520px;
+	text-align : right;
+}
+.listpaging{
+	text-align : center;
+	width : 100px;
+	position : relative;
+	left : 900px;
+	bottom : 55px;
+}
+.btn.btn-prev{
+	position : relative;
+	left : 850px;
+	bottom : 25px;
+	color: #5f6368;
+	border: solid 1px #dadce0;
+	border-radius: 1vw;
+	display: inline-block;
+	padding: 6px 8px 6px 8px; 
+	/*padding: top right bottom left*/
+		cursor: pointer;
+}
+.btn.btn-next{
+	position : relative;
+	left : 1000px;
+	bottom : 83px;
+	color: #5f6368;
+	border: solid 1px #dadce0;
+	border-radius: 1vw;
+	display: inline-block;
+	padding: 6px 8px 6px 8px; 
+	/*padding: top right bottom left*/
+	cursor: pointer;
+}

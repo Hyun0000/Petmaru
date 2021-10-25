@@ -15,9 +15,7 @@
 <html>
 	<head>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
+
 	  	<meta charset="UTF-8">
 	    <title>공지사항 상세정보</title>	 
 	    <%@ include file="../template_header.jsp" %>
@@ -33,7 +31,7 @@
 					<tr>
 						<th>작성일</th>
 						<td>
-							<fmt:formatDate pattern = "yyyy/MM/dd hh:mm:ss" value="${n.regdate}"/>
+							<fmt:formatDate pattern = "yyyy/MM/dd " value="${n.regdate}"/>
 						</td>
 					</tr>
 					<tr>
