@@ -77,7 +77,7 @@ public class MemberDeleteServlet extends HttpServlet {
 		} else {
 			System.out.println(result);
 			System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인해라");
-			writer.println("<script>alert('아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인하세요.); location.href='"+"/Petmaru/memberdelete"+"';</script>");
+			writer.println("<script>alert('아이디 또는 비밀번호가 잘못 입력되었습니다. 다시 확인하세요.'); location.href='"+"/Petmaru/memberdelete"+"';</script>");
 			writer.close();	
 			System.out.println("login: 없음");
 		}
