@@ -41,7 +41,7 @@
 	
 		<c:if test="${productMemberSearch == null}">
 			<div id="product_no">
-			<p id="product_no_write">선생님<br>눈을 똑바로 떠보세요.</p>
+			<p id="product_no_write">이런</p>
 			<img src="https://img4.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202105/25/holapet/20210525041814981qduu.jpg">
 			<p>상품이 없습니다.</p>
 			</div>

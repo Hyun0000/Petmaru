@@ -149,7 +149,7 @@ window.onload = function() {
         function payFunction() {
         	// 결제 완료 팝업창 변수
         	let payBool = true;
-        	
+
             // nullCheck function
             function nullCheckC(e) {
                 if (e.value == "") {
@@ -168,9 +168,17 @@ window.onload = function() {
             // 3. 이름
             var nameEle = document.getElementById('name');
             
-            nullCheckC(addressEle);
-            nullCheckC(phoneEle);
-            nullCheckC(nameEle);
+			if(nullCheckC(addressEle) == false) {
+				return;
+			}
+			
+			if(nullCheckC(phoneEle) == false) {
+				return;
+			}
+			
+			if(nullCheckC(nameEle) == false) {
+				return;
+			}
             
             // 4. 요청사항(textarea)
             // textarea가 활성화 될때만 공백 체크

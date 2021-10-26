@@ -1,9 +1,9 @@
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/Notice.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/css/template_header.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/template_footer.css" />
- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/Notice.css" />
 <%@page import="com.petmaru.notice.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

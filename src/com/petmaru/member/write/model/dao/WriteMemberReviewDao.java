@@ -101,7 +101,7 @@ public class WriteMemberReviewDao {
 			int result = 0;
 			PreparedStatement pstmt = null;
 			String sql = "";
-			if (fileName.equals("")) {
+			if (fileName.endsWith("-")) {
 				// 파일 수정없이 제목 & 내용만 수정
 				sql = "update REVIEW set REVIEW_TITLE = ?, REVIEW_CONTENT = ? where REVIEW_WRITER = ? and REVIEW_TITLE = ?";
 			} else {
@@ -110,7 +110,7 @@ public class WriteMemberReviewDao {
 			}
 			try {
 				pstmt = conn.prepareStatement(sql);
-				if (fileName.equals("")) {
+				if (fileName.endsWith("-")) {
 					System.out.println("dao : 제목이랑 내용만 수정");
 					pstmt.setString(1, upTitle);
 					pstmt.setString(2, content);

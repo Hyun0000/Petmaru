@@ -68,9 +68,9 @@ ArrayList<WriteMemberBoardVo> volist = (ArrayList<WriteMemberBoardVo>) request.g
 			</c:forEach>
 		</td>
 		<td id="td3">
-			<c:if test="${endPage < pageCount}">
+<%-- 			<c:if test="${endPage < pageCount}">
 				<a href="boardlist?pageNum=${endPage+1}" class="btn btn-next">다음</a>
-			</c:if>
+			</c:if> --%>
 		</td>
 		<td id="td4">
 			<a href="<%=request.getContextPath() %>/boardwrite" role="button">글쓰기</a>

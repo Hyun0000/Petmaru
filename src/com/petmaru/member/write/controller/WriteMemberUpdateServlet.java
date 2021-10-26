@@ -99,7 +99,7 @@ public class WriteMemberUpdateServlet extends HttpServlet {
 		// 파일 저장 경로 완전체 만들기		
 		String fileSavePath = "";
 		
-		if (fileName.equals("")) { 
+		if (fileName.endsWith("-")) { 
 			System.out.println("파일 수정없이 제목 & 내용만 수정");
 		} else {
 			// 파일을 저장할 절대경로 얻기
