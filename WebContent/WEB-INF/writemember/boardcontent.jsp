@@ -48,7 +48,7 @@
 	<table id="delete">
 		<tr>
 			<td colspan="2" id="reBtn">
-			<a href="<%=request.getContextPath()%>/boardrewrite?no=<%=vo.getBoard_no()%>" role="button">글수정</a>
+			<a href="<%=request.getContextPath()%>/rewriteview?no=<%=vo.getBoard_no()%>" role="button">글수정</a>
 			<a href="<%=request.getContextPath()%>/boarddelete?no=<%=vo.getBoard_no()%>" role="button">글삭제</a>
 			</td>
 		</tr>

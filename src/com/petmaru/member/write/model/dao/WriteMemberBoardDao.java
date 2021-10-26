@@ -148,7 +148,7 @@ public class WriteMemberBoardDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBoard_title());
 			pstmt.setString(2, vo.getBoard_content());
-			pstmt.setString(3, vo.getBoard_writer());
+			pstmt.setInt(3, vo.getBoard_no());
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = 1; // 성공

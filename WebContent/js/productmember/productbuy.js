@@ -155,6 +155,7 @@ window.onload = function() {
                 if (e.value == "") {
                 	payBool = false;
                     alert('빈칸을 입력해주세요');
+					return false;
                     // e의 모습 예시 --> document.getElementById('address')
                 }
             }
@@ -184,6 +185,7 @@ window.onload = function() {
             if (!phoneRegExp.test(phoneEle.value)) {
             	payBool = false;
                 alert('핸드폰 번호를 올바르게 입력해주세요');
+				return false;
             }
 
             // 2. 이름
@@ -191,6 +193,7 @@ window.onload = function() {
             if (!nameRegExp.test(nameEle.value)) {
             	payBool = false;
                 alert('이름을 올바르게 입력해주세요');
+				return false;
             }
         //==============================결제 및 포인트 정보 부분==============================
             // (1). 포인트칸에 숫자만 입력되게(기호도 일절없이 오직 숫자만)
@@ -201,6 +204,7 @@ window.onload = function() {
             if (!pointRegExp.test(pointEle.value)) {
             	payBool = false;
                 alert('포인트 금액을 정확히 입력해주세요');
+				return false;
             }
 
             // (2). 현금영수증 번호 입력 정규식 검사
@@ -211,6 +215,7 @@ window.onload = function() {
                 if (!phoneRegExp.test(pointPhoneEleValue)) {
                 	payBool = false;
                     alert('핸드폰 번호를 올바르게 입력해주세요');
+					return false;
                 }
             }
         //=======================모든 유효성 검사 통과, 결제 성공 알림창======================

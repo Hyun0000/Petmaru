@@ -37,6 +37,7 @@ public class WriteMemberBoardContentServlet extends HttpServlet {
 		
 		String board_no = request.getParameter("no");
 		System.out.println("memberSession(member id) : " + (String)request.getSession().getAttribute("memberLoginInfo"));
+		System.out.println("no : " + board_no);
 		// bno 를 가지고 DB에서 하나 읽어와야 함.  
 		int bno = Integer.parseInt(board_no);
 		// bno는 pk 로 결과는 Board 모양 1개일 것임.

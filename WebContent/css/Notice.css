@@ -1,4 +1,11 @@
 @charset "UTF-8";
+#noticebox {
+	width: 1300px;
+}
+
+#noticebox_second{
+	margin: 0 auto;
+}
 
 a:link { 
 
@@ -31,19 +38,19 @@ a:active {
  text-decoration: none;
 
 }
-.line{
+#top_nitice .line{
 text-align:center;	
 height : 50px;
 }
 
-#list{
+#top_nitice #list{
 	width : 60%;
 	height : 100px;
 	margin : auto;	
 	border-top : 1px solid;
 	border-collapse : separate;
 }
-#list ,#Value{
+#top_nitice #list ,#Value{
 		
 		border-top : 1px solid;
 		border-collapse : collapse;
@@ -52,33 +59,41 @@ height : 50px;
 		margin-right : auto;
 		
 }
-#topmain{
-		width : 1000px;
+#top_nitice #topmain{
+		/* width : 1000px; */
 		text-align :center;
-		font-size: 40px;
+		font-size: 50px;
 		
 }
-#searchValue{
-		width: 1520px;
+#top_nitice #searchValue{
+		/* width: 1520px; */
 }
-#search{
-	
+
+#top_nitice #search #title {
+	width: 500px;
+}
+
+#top_nitice #search{
+	display: flex;
+	margin-bottom: 50px;
+	width: 1100px;
+	margin: 0 auto;
+	height: 100px;
+	justify-content: space-around;
+	align-items: center;
+}
+#top_nitice .pagenow{
+	/* width : 1520px; */
 	text-align : right;
-	
 }
-.pagenow{
-	width : 1520px;
-	text-align : right;
-}
-#toplist{
+#top_nitice #toplist{
 	background-color : gray;
 }
-#countpage{
-	width : 1520px;
+#top_nitice #countpage{
+	/* width : 1520px; */
 	text-align : right;
 }
-.listpaging{
-
+#top_nitice .listpaging{
 	text-align : center;
 	width : 100px;
 	position : relative;
@@ -108,4 +123,18 @@ height : 50px;
 	padding: 6px 8px 6px 8px; 
 	/*padding: top right bottom left*/
 	cursor: pointer;
+}
+
+.indexer{
+	/* border: 1px solid black; */
+	width: 1000px;
+	display: flex;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+#searchValue {
+/* 	width: 1300px;
+	borber: 1px solid red;
+	margin-bottom: 50px; */
 }

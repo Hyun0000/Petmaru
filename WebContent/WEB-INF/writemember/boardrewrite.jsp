@@ -9,6 +9,7 @@
 <%@ page import="com.petmaru.member.write.model.vo.WriteMemberBoardVo"%>
 <% 
 	WriteMemberBoardVo vo = (WriteMemberBoardVo)request.getAttribute("boardvo");
+	String no = (String)request.getParameter("no");
 %>
 <!DOCTYPE html>
 <html>
@@ -23,14 +24,17 @@
 <%@ include file="../template_header.jsp"%>
 
 <h2>자유게시판 글수정</h2>
-<form method="post" action="boardwrite">
+<form method="post" action="boardrewrite">
 	<table id="table">
 		<tr>
-			<td><input type="text" name="board_title" id="title" <%=vo.getBoard_title()%> required></td>
+			<td>
+				<input type="text" name="board_title" id="title" required>
+				<input type="hidden" name="no" id="no" value="<%=no %>" required>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<textarea name="board_content" id="content" <%=vo.getBoard_content()%> style="resize: none;"></textarea>
+				<textarea name="board_content" id="content" style="resize: none;"></textarea>
 			</td>
 		</tr>
 	</table>

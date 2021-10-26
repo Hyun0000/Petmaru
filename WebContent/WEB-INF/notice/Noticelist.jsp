@@ -1,3 +1,9 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/Notice.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_header.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/template_footer.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <%@page import="com.petmaru.notice.vo.NoticeVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,42 +12,36 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/Notice.css" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <!DOCTYPE html>
 <html>
 	<head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_header.css"/>
-<link rel="stylesheet" type="text/css" href="<%=context_root %>/css/template_footer.css"/>
 
 <title>공지사항</title>
-<%@ include file="../template_header.jsp" %>
 
 </head>
 <body>
-		<h3 id = "topmain">공지사항</h3>
-		<div id = "search">
-		<form>
-			 
-				<div id = "searchValue">
-				<label>검색분류</label> <select name="f">
-					<option ${(param.f == "title")? "selected" : ""} value="title">제목</option>
-					<option ${(param.f == "writer_id")? "selected" : ""}value="writer_id">작성자</option>
+<%@ include file="../template_header.jsp" %>
+	<div id="top_nitice">
+		<div id="search">
+			<div id="title">
+				<h3 id="topmain">공지사항</h3>
+			</div>
+			<form>
+				 
+			<div id = "searchValue">
+				<label>검색분류</label>
+				<select name="f">
+						<option ${(param.f == "title")? "selected" : ""} value="title">제목</option>
+						<option ${(param.f == "writer_id")? "selected" : ""}value="writer_id">작성자</option>
 				</select> 
-			<label>검색어</label>
-			 <input type="text" name="q" value="${param.q}" />
+				<label>검색어</label>
+				 <input type="text" name="q" value="${param.q}" />
 				<input type="submit" value="검색">
-				</div>
-		</form>
-	</div>
+			</div>
+			</form>
+		</div>
 
 		<table id = "list">
 			<thead>
@@ -78,16 +78,18 @@
 		<div class = "indexer margin-top align-right">
 		
 		 <div class="indexer margin-top align-right">
-		 <h3 class = "pagenow">현재페이지</h3>
-		 <div id = "countpage"><span class = "text-orange text-strong">${(empty param.p)?1:param.p }</span>/${lastNum }page</div>
+		 <%-- <h3 class = "pagenow">현재페이지</h3>
+		 <div id = "countpage"><span class = "text-orange text-strong">${(empty param.p)?1:param.p }</span>/${lastNum }page</div> --%>
 		</div>
 
-		<c:if test="${startNum > 1}">
+		<div>
+<%-- 		<c:if test="${startNum > 1}">
 			<a class="btn btn-prev" href="?p=${startNum-1}&t=&q=">이전</a>
 		</c:if>
 		<c:if test="${startNum <= 1}">
 			<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>
-		</c:if>
+		</c:if> --%>
+		</div>
 		
 		</div>
 		
@@ -99,15 +101,15 @@
 				</c:forEach>
 			</table>
 		<div>
-			<c:if test="${startNum+4<lastNum}">
+<%-- 			<c:if test="${startNum+4<lastNum}">
 				<a href="?p=${startNum+5}&t=&q=" class="btn btn-next">다음</a>
 			</c:if>
 			<c:if test="${startNum+4>=lastNum}">
 				<span class="btn btn-next" onclick="alert('다음 페이지가 없습니다.');">다음</span>
-			</c:if>
+			</c:if> --%>
 		</div>
 
-
-</body>
+	</div>
 	<%@ include file="../template_footer.jsp" %>
+</body>
 </html>

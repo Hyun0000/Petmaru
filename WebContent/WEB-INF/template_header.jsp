@@ -16,7 +16,7 @@ import= "com.petmaru.member.model.vo.*"%>
         </div>
         <div id="logo_search">
             <div id="logo">
-                <h1><a href="/Petmaru/mainpage">Petmaru</a></h1>
+                <h1><a href="/Petmaru/">Petmaru</a></h1>
             </div>
 
             <div id="search">
@@ -43,7 +43,7 @@ import= "com.petmaru.member.model.vo.*"%>
             <table id="right_icon">
                 <tr style = cursor:pointer;>
                     <td><a href="<%=request.getContextPath() %>/boardlist"><span class="material-icons">article</span><br><span class="icon_text">자유게시판</span></td></a>
-                    <td><a href="/Petmaru/adminNoticelist"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
+                    <td><a href="/Petmaru/Noticelist"><span class="material-icons">task_alt</span><br><span class="icon_text">공지사항</span></td></a>
                 </tr>
             </table>
         </div>

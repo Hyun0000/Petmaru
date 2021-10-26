@@ -25,52 +25,36 @@ public class WriteMemberBoardRewriteServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset = UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("/WEB-INF/writemember/boardwrite.jsp").forward(request, response);
-	}
+		String board_title = request.getParameter("board_title");
+		String board_content = request.getParameter("board_content");
+		String board_writer = (String)request.getSession().getAttribute("memberLoginInfo");
+		String noStr = (String)request.getParameter("no");
+		int no = Integer.parseInt(noStr);
+		System.out.println("no : "  + no);
+//	  if (board_writer == null) {
+//		  board_writer = "admin"; // 임시 user
+//	  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html; charset = UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		  String board_title = request.getParameter("board_title"); 
-		  String board_content = request.getParameter("board_content"); 
-<<<<<<< HEAD
-		  String board_writer = request.getParameter("board_writer");
-//		  if (board_writer == null) {
-//			  board_writer = "admin"; // 임시 user
-//		  }
-=======
-		  String board_writer = request.getParameter("board_writer"); 
->>>>>>> 91726ddd74d02f44b27152b5b0896e96f22dabd9
-		 
 		WriteMemberBoardVo vo = new WriteMemberBoardVo();
 		vo.setBoard_title(board_title);
 		vo.setBoard_content(board_content);
 		vo.setBoard_writer(board_writer);
-		
+		vo.setBoard_no(no);
+
 		int result = new WriteMemberBoardService().boardrewirte(vo);
-		System.out.println("WriteMemberBoardService().boardrewirte result: "+ result);
-		
-		if(result > 0) {
+		System.out.println("WriteMemberBoardService().boardrewirte result: " + result);
+
+		if (result > 0) {
 			response.sendRedirect("boardlist");
 		} else {
-			request.setAttribute("errMsg", "등록에 실패했습니다. 작성한 글을 다시 확인해 주세요.");
-			request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);
+			request.setAttribute("errMsg", "수정에 실패했습니다. 작성한 글을 다시 확인해 주세요.");
+			request.getRequestDispatcher("/WEB-INF/confirm.jsp").forward(request, response);
 		}
 	}
-
 }
